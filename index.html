@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart PetCare — Ultra Pro Max Platform</title>
+<title>Smart PetCare — One Smart Ecosystem for Every Pet Need</title>
+<meta name="description" content="Integrated pet healthcare, marketplace, GPS tracking, adoption & AI-powered guidance for pet owners, vets & vendors worldwide.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -314,60 +315,13 @@ img { max-width: 100%; }
 .grad7{background:var(--grad7);} .grad8{background:var(--grad8);} .grad9{background:var(--grad9);}
 .module-card h3 { font-size: 18px; color: var(--dark); margin-bottom: 10px; font-weight: 700; }
 .module-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
-
-/* DASHBOARD PREVIEW */
-.dashboard-preview {
-  background: var(--dark); border-radius: 32px; padding: 50px;
-  position: relative; overflow: hidden; box-shadow: var(--shadow-xl);
-  margin-top: 40px;
+.module-card .module-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--primary);
+  margin-top: 16px; transition: .3s;
 }
-.dashboard-preview::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(0,180,216,.2), transparent 55%), radial-gradient(circle at 80% 80%, rgba(79,172,254,.2), transparent 55%); }
-.dashboard-preview > * { position: relative; z-index: 2; }
-.dash-preview-grid { display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
-.dash-sidebar-preview { background: rgba(255,255,255,.05); border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,.1); }
-.dash-sidebar-preview h4 { color: #fff; font-size: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.dash-sidebar-preview h4 i { color: var(--accent); }
-.dash-sidebar-preview ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.dash-sidebar-preview li { padding: 10px 14px; border-radius: 10px; color: rgba(255,255,255,.7); font-size: 13px; display: flex; align-items: center; gap: 12px; transition: .3s; cursor: pointer; }
-.dash-sidebar-preview li:hover, .dash-sidebar-preview li.active { background: var(--grad-main); color: #fff; }
-.dash-content-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.dash-widget { background: rgba(255,255,255,.05); border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,.1); }
-.dash-widget h4 { color: #fff; font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-.dash-widget h4 i { color: var(--accent); }
-.mini-stat { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-.mini-stat i { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; }
-.mini-stat h5 { color: #fff; font-size: 18px; font-weight: 800; }
-.mini-stat p { color: rgba(255,255,255,.6); font-size: 12px; }
-
-/* GPS */
-.gps-section { background: var(--lighter); }
-[data-theme="dark"] .gps-section { background: var(--bg); }
-.gps-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: center; }
-.gps-info h3 { font-size: 28px; color: var(--dark); margin-bottom: 16px; font-weight: 800; }
-.gps-info p { color: var(--gray); margin-bottom: 24px; }
-.gps-list { display: flex; flex-direction: column; gap: 14px; }
-.gps-pet { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); transition: .3s; }
-.gps-pet:hover { transform: translateX(8px); border-color: var(--accent); box-shadow: var(--shadow); }
-.gps-pet .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--grad-main); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.gps-pet div h4 { font-size: 15px; color: var(--dark); }
-.gps-pet div p { font-size: 12px; color: var(--gray); }
-.gps-pet .status-live { margin-left: auto; padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; background: rgba(16,185,129,.15); color: var(--success); }
-.gps-map-container { height: 460px; border-radius: 24px; background: linear-gradient(135deg, #e0f7ff, #f0faff); position: relative; overflow: hidden; box-shadow: var(--shadow-xl); border: 1px solid var(--border); }
-[data-theme="dark"] .gps-map-container { background: linear-gradient(135deg, #0f172a, #1e293b); }
-.map-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,119,182,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,119,182,.1) 1px, transparent 1px); background-size: 40px 40px; }
-.map-roads { position: absolute; inset: 0; opacity: .3; }
-.map-roads path { stroke: var(--accent); stroke-width: 2; fill: none; }
-.map-pet-marker { position: absolute; font-size: 40px; animation: float2 2.5s infinite ease-in-out; z-index: 3; transition: all 1s ease; }
-.map-pulse { position: absolute; width: 90px; height: 90px; border-radius: 50%; background: rgba(0,180,216,.25); transform: translate(-50%,-50%); animation: pulseRing 2.5s infinite; z-index: 1; }
-.map-pulse.delay { animation-delay: 1s; }
-.map-pulse.delay2 { animation-delay: 2s; }
-@keyframes pulseRing { 0% { transform: translate(-50%,-50%) scale(.4); opacity: 1; } 100% { transform: translate(-50%,-50%) scale(2.5); opacity: 0; } }
-.map-tooltip { position: absolute; background: var(--card-bg); border-radius: 12px; padding: 10px 14px; box-shadow: var(--shadow-lg); font-size: 12px; z-index: 5; border: 1px solid var(--border); }
-.map-tooltip h5 { color: var(--dark); font-size: 13px; margin-bottom: 2px; }
-.map-tooltip p { color: var(--gray); font-size: 11px; }
-.map-controls { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 5; }
-.map-controls button { width: 40px; height: 40px; border-radius: 10px; background: var(--card-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); transition: .3s; }
-.map-controls button:hover { background: var(--primary); color: #fff; }
+.module-card:hover .module-cta { gap: 10px; }
+[data-theme="dark"] .module-card .module-cta { color: var(--accent); }
 
 /* FEATURES */
 .features-section { background: var(--lighter); }
@@ -395,81 +349,6 @@ img { max-width: 100%; }
 .stat-box i { font-size: 36px; background: var(--grad1); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 14px; display: block; }
 .stat-box h3 { font-size: 42px; font-weight: 800; margin-bottom: 6px; color: #fff; }
 .stat-box p { font-size: 14px; color: var(--gray-light); }
-
-/* PRODUCTS */
-.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
-.product-card { background: var(--card-bg); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-sm); transition: .4s; border: 1px solid var(--border); position: relative; }
-.product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-.product-badge { position: absolute; top: 14px; left: 14px; background: var(--danger); color: #fff; padding: 5px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; z-index: 2; letter-spacing: .5px; }
-.product-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--lighter); transition: .4s; }
-.product-card:hover .product-img { transform: scale(1.05); }
-.product-body { padding: 22px; }
-.product-body h4 { font-size: 16px; color: var(--dark); margin-bottom: 6px; font-weight: 700; }
-.product-rating { color: #fbbf24; font-size: 12px; margin-bottom: 10px; }
-.product-body .price { font-size: 20px; color: var(--primary); font-weight: 800; margin-bottom: 16px; }
-.product-body .price span { font-size: 13px; color: var(--gray-light); text-decoration: line-through; font-weight: 500; margin-left: 8px; }
-.product-body button { width: 100%; padding: 12px; border-radius: 12px; background: var(--grad-main); color: #fff; font-weight: 600; font-size: 14px; transition: .3s; }
-.product-body button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,119,182,.4); }
-
-/* BOOKING */
-.booking-section { background: var(--lighter); }
-[data-theme="dark"] .booking-section { background: var(--bg); }
-.booking-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
-.booking-info h3 { font-size: 30px; color: var(--dark); margin-bottom: 16px; font-weight: 800; }
-.booking-info p { color: var(--gray); margin-bottom: 26px; }
-.booking-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.booking-features li { display: flex; align-items: center; gap: 14px; font-size: 15px; }
-.booking-features li i { width: 34px; height: 34px; border-radius: 10px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; }
-.booking-form { background: var(--card-bg); border-radius: 26px; padding: 40px; box-shadow: var(--shadow-xl); border: 1px solid var(--border); }
-.booking-form h3 { font-size: 22px; color: var(--dark); margin-bottom: 8px; font-weight: 800; }
-.booking-form > p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
-.booking-form .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.booking-form .input-group { position: relative; margin-bottom: 14px; }
-.booking-form .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray-light); font-size: 15px; pointer-events: none; z-index: 2; }
-.booking-form .input-group input,
-.booking-form .input-group select { width: 100%; padding: 14px 48px 14px 46px; border: 1px solid var(--border); border-radius: 14px; outline: none; font-size: 14px; background: var(--card-bg); transition: .3s; color: var(--text); }
-.booking-form .input-group input:focus,
-.booking-form .input-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0,180,216,.1); }
-
-/* CHATBOT */
-.chatbot-section { background: var(--grad-main); position: relative; overflow: hidden; }
-.chatbot-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,.1), transparent 50%); }
-.chatbot-section .container { position: relative; z-index: 2; }
-.chatbot-section .badge { background: rgba(255,255,255,.2); color: #fff; border-color: transparent; }
-.chatbot-section .badge i { color: #fff; }
-.chatbot-section h2 { color: #fff; }
-.chatbot-section .section-head p { color: rgba(255,255,255,.85); }
-.chat-container { max-width: 780px; }
-.chatbox { background: var(--card-bg); border-radius: 26px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
-.chat-header { background: var(--grad-main); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 16px; }
-.chat-avatar { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.chat-header h4 { font-size: 17px; font-weight: 700; }
-.chat-header p { font-size: 12px; display: flex; align-items: center; gap: 6px; opacity: .9; }
-.chat-header .chat-status { margin-left: auto; display: flex; gap: 6px; }
-.chat-status span { width: 8px; height: 8px; border-radius: 50%; background: #43e97b; }
-.chat-status span:nth-child(2) { background: #fbbf24; animation: pulse 1.5s infinite; }
-.chat-status span:nth-child(3) { background: rgba(255,255,255,.4); }
-.dot { width: 8px; height: 8px; background: #43e97b; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-.chat-window { height: 360px; overflow-y: auto; padding: 22px; background: var(--lighter); }
-.msg { padding: 13px 18px; border-radius: 16px; margin-bottom: 12px; max-width: 80%; font-size: 14px; line-height: 1.5; animation: fadeIn .35s; word-wrap: break-word; }
-.msg.bot { background: var(--card-bg); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
-.msg.user { background: var(--grad-main); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
-.msg.typing { display: flex; gap: 4px; padding: 14px 18px; }
-.msg.typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--gray-light); animation: typing .8s infinite; }
-.msg.typing span:nth-child(2) { animation-delay: .15s; }
-.msg.typing span:nth-child(3) { animation-delay: .3s; }
-@keyframes typing { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-5px); opacity: 1; } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.quick-replies { display: flex; gap: 8px; padding: 14px 22px; flex-wrap: wrap; border-top: 1px solid var(--border); background: var(--card-bg); }
-.quick-replies button { background: var(--light); color: var(--primary-dark); border: none; padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; transition: .3s; }
-[data-theme="dark"] .quick-replies button { color: var(--accent); }
-.quick-replies button:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
-.chat-input { display: flex; padding: 18px 22px; gap: 10px; border-top: 1px solid var(--border); background: var(--card-bg); }
-.chat-input input { flex: 1; padding: 13px 20px; border: 1px solid var(--border); border-radius: 50px; outline: none; font-size: 14px; transition: .3s; background: var(--card-bg); color: var(--text); }
-.chat-input input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,180,216,.1); }
-.chat-input button { background: var(--grad-main); color: #fff; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 16px; transition: .3s; flex-shrink: 0; }
-.chat-input button:hover { transform: scale(1.1) rotate(15deg); }
 
 /* TESTIMONIALS */
 .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
@@ -560,6 +439,26 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
 .zoom-in { opacity: 0; transform: scale(.9); transition: .8s cubic-bezier(.2,.8,.2,1); }
 .zoom-in.visible { opacity: 1; transform: scale(1); }
 
+/* LIVE BADGE for modules */
+.live-badge {
+  position: absolute; top: 14px; right: 14px;
+  color: #fff; padding: 4px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 700; z-index: 3;
+  display: flex; align-items: center; gap: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+.live-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: white; animation: pulseLive 1.5s infinite;
+}
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* AUTH MODAL */
+#authModal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.75); backdrop-filter: blur(10px); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
+
 /* RESPONSIVE */
 @media (max-width: 1200px) {
   .nav-links { gap: 2px; }
@@ -571,10 +470,8 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-visual { height: 420px; }
   .hero-circle { width: 300px; height: 300px; font-size: 120px; }
-  .features-grid, .gps-wrap, .booking-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .features-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .dash-preview-grid { grid-template-columns: 1fr; }
-  .dash-content-preview { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .nav-links { display: none; width: 100%; flex-direction: column; gap: 4px; padding: 20px 0; order: 10; }
@@ -597,8 +494,6 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   .cta-box h2 { font-size: 26px; }
   .hero-stats { gap: 24px; }
   .hero-stats > div:not(:last-child)::after { display: none; }
-  .dashboard-preview { padding: 30px; }
-  .booking-form { padding: 30px 24px; }
   .cart-panel { width: 100%; max-width: 100%; }
   .notif-panel { width: calc(100% - 30px); right: 15px; }
 }
@@ -607,7 +502,6 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   .btn-lg { padding: 13px 24px; font-size: 14px; }
   .hero-btns { flex-direction: column; }
   .hero-btns .btn { width: 100%; }
-  .booking-form .form-row-2 { grid-template-columns: 1fr; }
   .section { padding: 60px 0; }
   .section-head h2 { font-size: 24px; }
 }
@@ -722,7 +616,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </div>
 
-<!-- HERO -->
+<!-- ═══════════════════ HERO ═══════════════════ -->
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="hero-text fade-up">
@@ -748,7 +642,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </section>
 
-<!-- MODULES -->
+<!-- ═══════════════════ MODULES ═══════════════════ -->
 <section class="section" id="modules">
   <div class="container">
     <div class="section-head fade-up">
@@ -757,124 +651,65 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
       <p>Nine powerful modules integrated into one seamless platform for owners, vets and vendors.</p>
     </div>
     <div class="modules-grid">
-      <a href="pet-profile.html" class="module-card fade-up"><div class="icon-wrap grad1"><i class="fa-solid fa-paw"></i></div><h3>Pet Profile Engine</h3><p>Complete profiles with breed, vaccination & medical history tracking.</p></a>
-      <a href="medical-support.html" class="module-card fade-up"><div class="icon-wrap grad2"><i class="fa-solid fa-stethoscope"></i></div><h3>Medical Support</h3><p>Vet booking, digital prescriptions & online medicine ordering.</p></a>
-      <a href="marketplace.html" class="module-card fade-up"><div class="icon-wrap grad3"><i class="fa-solid fa-cart-shopping"></i></div><h3>Pet Marketplace</h3><p>Accessories, grooming products, cart & order tracking.</p></a>
-      <a href="food-nutrition.html" class="module-card fade-up"><div class="icon-wrap grad4"><i class="fa-solid fa-bowl-food"></i></div><h3>Food & Nutrition</h3><p>Nutrition recommendations with smart dietary filtering.</p></a>
-      <a href="gps-tracking.html" class="module-card fade-up"><div class="icon-wrap grad5"><i class="fa-solid fa-satellite-dish"></i></div><h3>GPS Tracking</h3><p>Real-time location, geofencing & lost pet alerts.</p></a>
-      <a href="events.html" class="module-card fade-up"><div class="icon-wrap grad6"><i class="fa-solid fa-calendar-check"></i></div><h3>Events & Activities</h3><p>Publish events, ticketing & pet meetups.</p></a>
-      <a href="community-forum.html" class="module-card fade-up"><div class="icon-wrap grad7"><i class="fa-solid fa-comments"></i></div><h3>Community Forum</h3><p>Discussion boards, Q&A & owner messaging.</p></a>
-      <a href="adoption.html" class="module-card fade-up"><div class="icon-wrap grad8"><i class="fa-solid fa-house-chimney"></i></div><h3>Adoption Hub</h3><p>Listings, applications & status tracking.</p></a>
-      <a href="ai-assistant.html" class="module-card fade-up"><div class="icon-wrap grad9"><i class="fa-solid fa-robot"></i></div><h3>AI Assistant</h3><p>24/7 guidance on nutrition, vaccination & care.</p></a>
+      <a href="pet-profile.html" class="module-card fade-up">
+        <div class="icon-wrap grad1"><i class="fa-solid fa-paw"></i></div>
+        <h3>Pet Profile Engine</h3>
+        <p>Complete profiles with breed, vaccination & medical history tracking.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="medical-support.html" class="module-card fade-up">
+        <div class="icon-wrap grad2"><i class="fa-solid fa-stethoscope"></i></div>
+        <h3>Medical Support</h3>
+        <p>Vet booking, digital prescriptions & online medicine ordering.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="marketplace.html" class="module-card fade-up">
+        <div class="icon-wrap grad3"><i class="fa-solid fa-cart-shopping"></i></div>
+        <h3>Pet Marketplace</h3>
+        <p>Accessories, grooming products, cart & order tracking.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="food-nutrition.html" class="module-card fade-up">
+        <div class="icon-wrap grad4"><i class="fa-solid fa-bowl-food"></i></div>
+        <h3>Food & Nutrition</h3>
+        <p>Nutrition recommendations with smart dietary filtering.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="gps-tracking.html" class="module-card fade-up">
+        <div class="icon-wrap grad5"><i class="fa-solid fa-satellite-dish"></i></div>
+        <h3>GPS Tracking</h3>
+        <p>Real-time location, geofencing & lost pet alerts.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="events.html" class="module-card fade-up" id="moduleEvents">
+        <div class="icon-wrap grad6"><i class="fa-solid fa-calendar-check"></i></div>
+        <h3>Events & Activities</h3>
+        <p>Publish events, ticketing & pet meetups.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="community-forum.html" class="module-card fade-up">
+        <div class="icon-wrap grad7"><i class="fa-solid fa-comments"></i></div>
+        <h3>Community Forum</h3>
+        <p>Discussion boards, Q&A & owner messaging.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="adoption.html" class="module-card fade-up" id="moduleAdoption">
+        <div class="icon-wrap grad8"><i class="fa-solid fa-house-chimney"></i></div>
+        <h3>Adoption Hub</h3>
+        <p>Listings, applications & status tracking.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="ai-assistant.html" class="module-card fade-up">
+        <div class="icon-wrap grad9"><i class="fa-solid fa-robot"></i></div>
+        <h3>AI Assistant</h3>
+        <p>24/7 guidance on nutrition, vaccination & care.</p>
+        <span class="module-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- DASHBOARD PREVIEW -->
-<section class="section">
-  <div class="container">
-    <div class="section-head fade-up">
-      <span class="badge"><i class="fa-solid fa-gauge"></i> Live Preview</span>
-      <h2>Your Personal Dashboard</h2>
-      <p>Manage pets, appointments, orders & tracking from one beautiful dashboard.</p>
-    </div>
-    <div class="dashboard-preview zoom-in">
-      <div class="dash-preview-grid">
-        <div class="dash-sidebar-preview">
-          <h4><i class="fa-solid fa-paw"></i> Smart PetCare</h4>
-          <ul>
-            <li class="active"><i class="fa-solid fa-gauge"></i> Dashboard</li>
-            <li><i class="fa-solid fa-paw"></i> My Pets</li>
-            <li><i class="fa-solid fa-stethoscope"></i> Appointments</li>
-            <li><i class="fa-solid fa-cart-shopping"></i> Orders</li>
-            <li><i class="fa-solid fa-satellite-dish"></i> GPS Tracking</li>
-            <li><i class="fa-solid fa-robot"></i> AI Assistant</li>
-          </ul>
-        </div>
-        <div class="dash-content-preview">
-          <div class="dash-widget">
-            <h4><i class="fa-solid fa-paw"></i> My Pets</h4>
-            <div class="mini-stat"><i class="grad1 fa-solid fa-dog"></i><div><h5>Bruno</h5><p>Golden · Healthy</p></div></div>
-            <div class="mini-stat"><i class="grad4 fa-solid fa-cat"></i><div><h5>Luna</h5><p>Persian · Healthy</p></div></div>
-            <div class="mini-stat"><i class="grad2 fa-solid fa-rabbit"></i><div><h5>Snowy</h5><p>Vaccine Due</p></div></div>
-          </div>
-          <div class="dash-widget">
-            <h4><i class="fa-solid fa-chart-line"></i> Weekly Activity</h4>
-            <div style="display:flex; align-items:flex-end; gap:8px; height:120px; margin-top:20px;">
-              <div style="flex:1; background:var(--grad1); border-radius:8px 8px 0 0; height:40%;"></div>
-              <div style="flex:1; background:var(--grad2); border-radius:8px 8px 0 0; height:70%;"></div>
-              <div style="flex:1; background:var(--grad3); border-radius:8px 8px 0 0; height:55%;"></div>
-              <div style="flex:1; background:var(--grad4); border-radius:8px 8px 0 0; height:90%;"></div>
-              <div style="flex:1; background:var(--grad5); border-radius:8px 8px 0 0; height:65%;"></div>
-              <div style="flex:1; background:var(--grad6); border-radius:8px 8px 0 0; height:80%;"></div>
-              <div style="flex:1; background:var(--grad7); border-radius:8px 8px 0 0; height:45%;"></div>
-            </div>
-          </div>
-          <div class="dash-widget">
-            <h4><i class="fa-solid fa-calendar-check"></i> Next Appointment</h4>
-            <p style="color:#fff; font-size:15px; font-weight:700; margin-top:10px;">Vaccination — Bruno</p>
-            <p style="color:rgba(255,255,255,.6); font-size:13px;">Oct 12 · 10:30 AM · Dr. Perera</p>
-          </div>
-          <div class="dash-widget">
-            <h4><i class="fa-solid fa-location-dot"></i> Live Location</h4>
-            <p style="color:#fff; font-size:15px; font-weight:700; margin-top:10px;">Bruno — Home Zone</p>
-            <p style="color:rgba(255,255,255,.6); font-size:13px;">6.9271° N, 79.8612° E</p>
-            <p style="color:#43e97b; font-size:12px; margin-top:8px;">● Active Now</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GPS -->
-<section class="section gps-section" id="gps">
-  <div class="container">
-    <div class="section-head fade-up">
-      <span class="badge"><i class="fa-solid fa-satellite-dish"></i> Live GPS</span>
-      <h2>Real-Time Pet Tracking</h2>
-      <p>Never lose your pet again with live GPS tracking, geofencing & instant alerts.</p>
-    </div>
-    <div class="gps-wrap">
-      <div class="gps-info fade-up">
-        <h3>Track Every Paw Step 🐾</h3>
-        <p>Attach a Smart GPS Collar and monitor your pet's live location from anywhere.</p>
-        <div class="gps-list">
-          <div class="gps-pet"><div class="avatar">🐶</div><div><h4>Bruno</h4><p>Home Zone · 0.5 km away</p></div><span class="status-live">● Live</span></div>
-          <div class="gps-pet"><div class="avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">🐱</div><div><h4>Luna</h4><p>Garden Zone · 0.2 km away</p></div><span class="status-live">● Live</span></div>
-          <div class="gps-pet"><div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">🐰</div><div><h4>Snowy</h4><p>Home Zone · Idle</p></div><span class="status-live" style="background:rgba(245,158,11,.15); color:var(--warning);">● Idle</span></div>
-        </div>
-      </div>
-      <div class="gps-map-container fade-up">
-        <div class="map-grid-bg"></div>
-        <svg class="map-roads" viewBox="0 0 600 460" preserveAspectRatio="none">
-          <path d="M 0 150 Q 150 200 300 150 T 600 180"/>
-          <path d="M 0 300 Q 200 280 400 320 T 600 290"/>
-          <path d="M 150 0 Q 200 150 180 300 T 200 460"/>
-          <path d="M 400 0 Q 420 150 380 300 T 420 460"/>
-        </svg>
-        <div class="map-pulse" style="top:40%; left:50%;"></div>
-        <div class="map-pulse delay" style="top:65%; left:30%;"></div>
-        <div class="map-pulse delay2" style="top:55%; left:75%;"></div>
-        <div class="map-pet-marker" style="top:40%; left:50%;" id="petMarker1">🐶</div>
-        <div class="map-pet-marker" style="top:65%; left:30%; animation-delay:.8s;" id="petMarker2">🐱</div>
-        <div class="map-pet-marker" style="top:55%; left:75%; animation-delay:1.6s;" id="petMarker3">🐰</div>
-        <div class="map-tooltip" style="top:calc(40% - 70px); left:calc(50% - 60px);">
-          <h5>🐶 Bruno</h5>
-          <p>Home Zone · Active Now</p>
-        </div>
-        <div class="map-controls">
-          <button><i class="fa-solid fa-plus"></i></button>
-          <button><i class="fa-solid fa-minus"></i></button>
-          <button><i class="fa-solid fa-crosshairs"></i></button>
-          <button onclick="refreshMap()"><i class="fa-solid fa-rotate"></i></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
 <section class="section features-section">
   <div class="container">
     <div class="section-head fade-up">
@@ -895,7 +730,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </section>
 
-<!-- STATS -->
+<!-- ═══════════════════ STATS ═══════════════════ -->
 <section class="section stats-section">
   <div class="container">
     <div class="section-head fade-up">
@@ -912,105 +747,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section class="section" id="shop">
-  <div class="container">
-    <div class="section-head fade-up">
-      <span class="badge"><i class="fa-solid fa-cart-shopping"></i> Marketplace</span>
-      <h2>Popular Pet Products</h2>
-      <p>Top-rated food, accessories & healthcare products for your furry friends.</p>
-    </div>
-    <div class="products-grid" id="productsGrid"></div>
-  </div>
-</section>
-
-<!-- BOOKING -->
-<section class="section booking-section" id="booking">
-  <div class="container">
-    <div class="section-head fade-up">
-      <span class="badge"><i class="fa-solid fa-calendar-check"></i> Book Now</span>
-      <h2>Book a Vet Appointment</h2>
-      <p>Instant confirmation with digital prescriptions after your visit.</p>
-    </div>
-    <div class="booking-wrap">
-      <div class="booking-info fade-up">
-        <h3>Quick & Easy Booking 🩺</h3>
-        <p>Choose your preferred vet, date and time. Get instant confirmation via email & SMS.</p>
-        <ul class="booking-features">
-          <li><i class="fa-solid fa-check"></i> 340+ verified veterinary clinics</li>
-          <li><i class="fa-solid fa-check"></i> Instant digital prescriptions</li>
-          <li><i class="fa-solid fa-check"></i> Video consultations available</li>
-          <li><i class="fa-solid fa-check"></i> Free rescheduling up to 24h before</li>
-          <li><i class="fa-solid fa-check"></i> Medicine delivery to your doorstep</li>
-        </ul>
-      </div>
-      <form class="booking-form fade-up" onsubmit="handleBooking(event)">
-        <h3>Book Appointment</h3>
-        <p>Fill in the details below to book instantly.</p>
-        <div class="input-group"><i class="fa-solid fa-paw"></i>
-          <select required>
-            <option value="">Select your pet</option>
-            <option>🐶 Bruno (Golden Retriever)</option>
-            <option>🐱 Luna (Persian Cat)</option>
-            <option>🐰 Snowy (Rabbit)</option>
-          </select>
-        </div>
-        <div class="input-group"><i class="fa-solid fa-user-doctor"></i>
-          <select required>
-            <option value="">Select veterinarian</option>
-            <option>Dr. Anjali Perera — General Vet</option>
-            <option>Dr. Michael Chen — Surgeon</option>
-            <option>Dr. Sarah Johnson — Dentist</option>
-          </select>
-        </div>
-        <div class="form-row-2">
-          <div class="input-group"><i class="fa-solid fa-calendar"></i><input type="date" required></div>
-          <div class="input-group"><i class="fa-solid fa-clock"></i><input type="time" required></div>
-        </div>
-        <div class="input-group"><i class="fa-solid fa-notes-medical"></i><input type="text" placeholder="Reason for visit (optional)"></div>
-        <button type="submit" class="btn btn-primary btn-block btn-lg">Confirm Booking <i class="fa-solid fa-arrow-right"></i></button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CHATBOT -->
-<section class="section chatbot-section" id="assistant">
-  <div class="container chat-container">
-    <div class="section-head fade-up">
-      <span class="badge"><i class="fa-solid fa-robot"></i> AI Powered</span>
-      <h2>Meet Your AI Pet Assistant</h2>
-      <p>Ask anything — from nutrition to vaccination schedules. Available 24/7.</p>
-    </div>
-    <div class="chatbox fade-up">
-      <div class="chat-header">
-        <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
-        <div>
-          <h4>PetBot AI</h4>
-          <p><span class="dot"></span> Online — Instant Replies</p>
-        </div>
-        <div class="chat-status"><span></span><span></span><span></span></div>
-      </div>
-      <div class="chat-window" id="chatWindow">
-        <div class="msg bot">Hi! I'm PetBot 🐾 Ask me about vaccination, food, grooming, GPS tracking or adoption!</div>
-      </div>
-      <div class="quick-replies">
-        <button onclick="quickAsk('vaccination schedule')">💉 Vaccination</button>
-        <button onclick="quickAsk('best food for my pet')">🍖 Food</button>
-        <button onclick="quickAsk('grooming tips')">✂️ Grooming</button>
-        <button onclick="quickAsk('how to track lost pet')">📍 Tracking</button>
-        <button onclick="quickAsk('adoption process')">🏠 Adoption</button>
-        <button onclick="quickAsk('book appointment')">📅 Booking</button>
-      </div>
-      <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter') sendMsg()">
-        <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
+<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
 <section class="section">
   <div class="container">
     <div class="section-head fade-up">
@@ -1026,7 +763,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ═══════════════════ CTA ═══════════════════ -->
 <section class="cta-section">
   <div class="container">
     <div class="cta-box zoom-in">
@@ -1037,7 +774,7 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer id="contact">
   <div class="container footer-grid">
     <div>
@@ -1111,12 +848,16 @@ footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
 <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
 
 <script>
-// LOADER
+/* ═══════════════════════════════════════════════════════════════
+   LOADER
+   ═══════════════════════════════════════════════════════════════ */
 window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
 });
 
-// THEME
+/* ═══════════════════════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════════════════════ */
 function toggleTheme() {
   const html = document.documentElement;
   const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -1131,7 +872,7 @@ if (savedTheme) {
   if (savedTheme === 'dark') document.getElementById('themeIcon').className = 'fa-solid fa-sun';
 }
 
-// NAVBAR SCROLL
+/* NAVBAR SCROLL */
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   const top = document.getElementById('scrollTop');
@@ -1139,12 +880,10 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 400) top.classList.add('show'); else top.classList.remove('show');
 });
 
-// MOBILE MENU
+/* MOBILE MENU */
 function toggleMenu() {
   document.getElementById('navLinks').classList.toggle('mobile-open');
 }
-
-// Mobile dropdown toggle
 document.querySelectorAll('.dropdown-toggle').forEach(t => {
   t.addEventListener('click', e => {
     if (window.innerWidth <= 768) {
@@ -1154,13 +893,13 @@ document.querySelectorAll('.dropdown-toggle').forEach(t => {
   });
 });
 
-// SCROLL ANIMATIONS
+/* SCROLL ANIMATIONS */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-up, .zoom-in').forEach(el => observer.observe(el));
 
-// COUNTER
+/* COUNTER ANIMATION */
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1181,7 +920,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-// TOAST
+/* TOAST */
 function showToast(msg, error = false) {
   const toast = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
@@ -1192,158 +931,115 @@ function showToast(msg, error = false) {
   toast._t = setTimeout(() => toast.classList.remove('show'), 3500);
 }
 
-// PRODUCTS
-const products = [
-  { id: 1, name: 'Premium Dog Food', emoji: '🍖', price: 29.99, old: 39.99, rating: 5, badge: 'SALE' },
-  { id: 2, name: 'Cat Nutrition Mix', emoji: '🐱', price: 24.50, old: 32.00, rating: 5, badge: 'HOT' },
-  { id: 3, name: 'Interactive Toy Ball', emoji: '🎾', price: 14.99, old: 19.99, rating: 4, badge: null },
-  { id: 4, name: 'Dental Chew Bones', emoji: '🦴', price: 12.99, old: 16.99, rating: 5, badge: 'NEW' },
-  { id: 5, name: 'Smart GPS Collar', emoji: '📿', price: 79.99, old: 99.99, rating: 5, badge: 'BEST' },
-  { id: 6, name: 'Pet Grooming Kit', emoji: '🧴', price: 34.99, old: 44.99, rating: 4, badge: null },
-  { id: 7, name: 'Vet-Approved Vitamins', emoji: '💊', price: 18.99, old: 24.99, rating: 5, badge: 'SALE' },
-  { id: 8, name: 'Comfort Pet Bed', emoji: '🏠', price: 49.99, old: 64.99, rating: 5, badge: 'HOT' }
-];
+/* ═══════════════════════════════════════════════════════════════
+   LIVE DATA INTEGRATION — Reads from other pages
+   ═══════════════════════════════════════════════════════════════ */
+function loadLiveData() {
+  const adoptablePets = JSON.parse(localStorage.getItem('petcareUserAdoptions')) || [];
+  const userEvents = JSON.parse(localStorage.getItem('petcareUserEvents')) || [];
+  const userVets = JSON.parse(localStorage.getItem('petcareUserVets')) || [];
+  const sellerProducts = JSON.parse(localStorage.getItem('petcareUserProducts')) || [];
 
-function renderProducts() {
-  const grid = document.getElementById('productsGrid');
-  grid.innerHTML = products.map(p => `
-    <div class="product-card fade-up">
-      ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
-      <div class="product-img">${p.emoji}</div>
-      <div class="product-body">
-        <h4>${p.name}</h4>
-        <div class="product-rating">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)} <span style="color:var(--gray); margin-left:4px;">(${p.rating}.0)</span></div>
-        <div class="price">$${p.price.toFixed(2)} <span>$${p.old.toFixed(2)}</span></div>
-        <button onclick="addCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
-      </div>
-    </div>
-  `).join('');
-  document.querySelectorAll('.product-card.fade-up').forEach(el => observer.observe(el));
-}
-renderProducts();
+  console.log('📊 Live Data Loaded:', {
+    adoptions: adoptablePets.length,
+    events: userEvents.length,
+    vets: userVets.length,
+    products: sellerProducts.length
+  });
 
-// CART
-let cart = [];
+  // Add live badges to modules
+  if (adoptablePets.length > 0) addLiveBadge('moduleAdoption', adoptablePets.length + ' LIVE', '#10b981');
+  if (userEvents.length > 0) addLiveBadge('moduleEvents', userEvents.length + ' LIVE', '#f59e0b');
 
-function addCart(id) {
-  const product = products.find(p => p.id === id);
-  const existing = cart.find(item => item.id === id);
-  if (existing) existing.qty++;
-  else cart.push({ ...product, qty: 1 });
-  updateCart();
-  showToast(`${product.emoji} ${product.name} added to cart!`);
+  // Update hero stats with real counts
+  updateHeroStats(adoptablePets.length, userVets.length);
 }
-function removeCart(id) {
-  cart = cart.filter(item => item.id !== id);
-  updateCart();
+
+function addLiveBadge(elementId, text, color) {
+  const el = document.getElementById(elementId);
+  if (!el || el.querySelector('.live-badge')) return;
+  el.style.position = 'relative';
+  const badge = document.createElement('div');
+  badge.className = 'live-badge';
+  badge.style.background = color;
+  badge.textContent = text;
+  el.appendChild(badge);
 }
-function changeQty(id, delta) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) removeCart(id);
-  else updateCart();
+
+function updateHeroStats(adoptions, vets) {
+  const heroStats = document.querySelectorAll('.hero-stats h3');
+  if (heroStats.length >= 3) {
+    const totalAdoptions = 8900 + adoptions;
+    heroStats[2].dataset.count = totalAdoptions;
+    heroStats[2].textContent = '0';
+    counterObserver.observe(heroStats[2]);
+  }
+  if (heroStats.length >= 2 && vets > 0) {
+    const totalVets = 340 + vets;
+    heroStats[1].dataset.count = totalVets;
+    heroStats[1].textContent = '0';
+    counterObserver.observe(heroStats[1]);
+  }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   CART (shared - demo, syncs with other pages)
+   ═══════════════════════════════════════════════════════════════ */
+let cart = JSON.parse(localStorage.getItem('petcareHomeCart')) || [];
+
 function updateCart() {
   const count = cart.reduce((sum, i) => sum + i.qty, 0);
   document.getElementById('cartCount').textContent = count;
   const itemsEl = document.getElementById('cartItems');
   if (cart.length === 0) {
-    itemsEl.innerHTML = `<div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i><p>Your cart is empty</p><p style="font-size:13px; margin-top:8px;">Add products to get started</p></div>`;
+    itemsEl.innerHTML = `<div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i><p>Your cart is empty</p><p style="font-size:13px; margin-top:8px;">Browse our marketplace to add products</p></div>`;
   } else {
     itemsEl.innerHTML = cart.map(item => `
       <div class="cart-item">
-        <div class="item-img">${item.emoji}</div>
-        <div class="item-info"><h4>${item.name}</h4><p>$${item.price.toFixed(2)}</p></div>
+        <div class="item-img">${item.emoji || '📦'}</div>
+        <div class="item-info"><h4>${item.name}</h4><p>$${parseFloat(item.price).toFixed(2)}</p></div>
         <div class="qty-controls">
-          <button onclick="changeQty(${item.id},-1)">−</button>
+          <button onclick="changeQty('${item.id}',-1)">−</button>
           <span style="font-weight:700; font-size:14px; color:var(--dark);">${item.qty}</span>
-          <button onclick="changeQty(${item.id},1)">+</button>
+          <button onclick="changeQty('${item.id}',1)">+</button>
         </div>
-        <button class="remove-btn" onclick="removeCart(${item.id})"><i class="fa-solid fa-trash"></i></button>
+        <button class="remove-btn" onclick="removeCart('${item.id}')"><i class="fa-solid fa-trash"></i></button>
       </div>
     `).join('');
   }
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * i.qty, 0);
   document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+  localStorage.setItem('petcareHomeCart', JSON.stringify(cart));
 }
+
+function changeQty(id, delta) {
+  const item = cart.find(i => String(i.id) === String(id));
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => String(i.id) !== String(id));
+  updateCart();
+}
+
+function removeCart(id) {
+  cart = cart.filter(item => String(item.id) !== String(id));
+  updateCart();
+}
+
 function toggleCart() { document.getElementById('cartPanel').classList.toggle('show'); }
 function toggleNotif() { document.getElementById('notifPanel').classList.toggle('show'); }
+
 function checkout() {
   if (cart.length === 0) { showToast('Your cart is empty!', true); return; }
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * i.qty, 0);
   showToast(`Order placed! Total: $${total.toFixed(2)} 🎉`);
   cart = [];
   updateCart();
   toggleCart();
 }
 
-// BOOKING
-function handleBooking(e) {
-  e.preventDefault();
-  showToast('Appointment booked successfully! Confirmation sent. 🩺');
-  e.target.reset();
-}
-
-// GPS MOVEMENT
-function movePetsRandomly() {
-  ['petMarker1', 'petMarker2', 'petMarker3'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.style.top = (30 + Math.random() * 40) + '%';
-    el.style.left = (20 + Math.random() * 60) + '%';
-  });
-}
-setInterval(movePetsRandomly, 4000);
-function refreshMap() {
-  movePetsRandomly();
-  showToast('Map refreshed 📍');
-}
-
-// CHATBOT
-const replies = {
-  vaccination: "Puppies should be vaccinated starting at 6-8 weeks, with boosters every 3-4 weeks until 16 weeks old. 💉",
-  food: "Balanced diet rich in protein, healthy fats, fiber. Avoid chocolate, grapes, onions! 🍖",
-  grooming: "Brush 2-3x/week, bathe every 4-6 weeks, trim nails monthly. ✂️",
-  lost: "Enable GPS tracking immediately. Lost Pet Alert notifies nearby users & vets. 📍",
-  adoption: "Visit Adoption Hub to browse, apply, and track status. 🏠",
-  appointment: "Book via Medical Support — choose vet, slot, instant confirmation. 🩺",
-  tracking: "GPS module provides real-time location & lost pet recovery. 📍",
-  event: "Check Events module for meetups, training, adoption drives. 🎉",
-  community: "Join our Forum — 12,500+ owners & vets. 💬",
-  health: "Regular checkups, vaccinations, nutrition, exercise, dental care. ❤️",
-  default: "Great question! 🐾 Explore our modules or consult a vet."
-};
-
-function sendMsg() {
-  const input = document.getElementById('userInput');
-  const text = input.value.trim();
-  if (!text) return;
-  const win = document.getElementById('chatWindow');
-  win.innerHTML += `<div class="msg user">${escapeHtml(text)}</div>`;
-  input.value = '';
-  win.scrollTop = win.scrollHeight;
-  win.innerHTML += `<div class="msg bot typing" id="typing"><span></span><span></span><span></span></div>`;
-  win.scrollTop = win.scrollHeight;
-  setTimeout(() => {
-    document.getElementById('typing')?.remove();
-    const key = Object.keys(replies).find(k => text.toLowerCase().includes(k));
-    const reply = replies[key] || replies.default;
-    win.innerHTML += `<div class="msg bot">${reply}</div>`;
-    win.scrollTop = win.scrollHeight;
-  }, 900);
-}
-function quickAsk(text) {
-  document.getElementById('userInput').value = text;
-  sendMsg();
-}
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-// AUTH
+/* ═══════════════════════════════════════════════════════════════
+   AUTH
+   ═══════════════════════════════════════════════════════════════ */
 function openAuth(type) {
   document.getElementById('authModal').style.display = 'flex';
   switchAuth(type || 'login');
@@ -1356,12 +1052,10 @@ function switchAuth(type) {
   const tabReg = document.getElementById('tabRegister');
   if (type === 'login') {
     loginForm.style.display = 'block'; regForm.style.display = 'none';
-    tabLogin.classList.add('active'); tabReg.classList.remove('active');
     tabLogin.style.background = 'var(--grad-main)'; tabLogin.style.color = '#fff';
     tabReg.style.background = 'transparent'; tabReg.style.color = 'var(--gray)';
   } else {
     loginForm.style.display = 'none'; regForm.style.display = 'block';
-    tabLogin.classList.remove('active'); tabReg.classList.add('active');
     tabReg.style.background = 'var(--grad-main)'; tabReg.style.color = '#fff';
     tabLogin.style.background = 'transparent'; tabLogin.style.color = 'var(--gray)';
   }
@@ -1382,7 +1076,7 @@ document.getElementById('authModal')?.addEventListener('click', (e) => {
   if (e.target.id === 'authModal') closeAuth();
 });
 
-// SMOOTH SCROLL
+/* SMOOTH SCROLL */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
@@ -1395,7 +1089,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// ESC
+/* ESC */
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeAuth();
@@ -1404,11 +1098,20 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+/* INIT */
+window.addEventListener('DOMContentLoaded', () => {
+  updateCart();
+  setTimeout(loadLiveData, 1500);
+});
+
 setTimeout(() => {
   showToast('🔔 You have 3 new notifications!');
 }, 5000);
 
 console.log('%c🐾 Smart PetCare — Ultra Pro Max', 'font-size:26px; font-weight:bold; color:#0077b6;');
+console.log('%c✨ Clean Home Page — Landing + Overview', 'font-size:14px; color:#10b981;');
+console.log('%c📊 Live Data Integration active', 'font-size:12px; color:#00b4d8;');
+console.log('%c🔗 All modules linked and working', 'font-size:12px; color:#94a3b8;');
 </script>
 </body>
 </html>
