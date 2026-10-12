@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace — Smart PetCare</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SMART PETCARE — MASTER STYLESHEET (same as index.html)
+   ═══════════════════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #0077b6;
+  --primary-dark: #023e8a;
+  --primary-light: #0096c7;
+  --accent: #00b4d8;
+  --accent-light: #48cae4;
+  --light: #e0f7ff;
+  --lighter: #f0faff;
+  --dark: #0f172a;
+  --dark-2: #1e293b;
+  --text: #334155;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --bg: #f4f8fb;
+  --card-bg: #ffffff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --grad1: linear-gradient(135deg, #4facfe, #00f2fe);
+  --grad2: linear-gradient(135deg, #43e97b, #38f9d7);
+  --grad3: linear-gradient(135deg, #fa709a, #fee140);
+  --grad4: linear-gradient(135deg, #f093fb, #f5576c);
+  --grad5: linear-gradient(135deg, #667eea, #764ba2);
+  --grad6: linear-gradient(135deg, #f6d365, #fda085);
+  --grad7: linear-gradient(135deg, #84fab0, #8fd3f4);
+  --grad8: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  --grad9: linear-gradient(135deg, #ff9a9e, #fecfef);
+  --grad-main: linear-gradient(135deg, #0077b6, #00b4d8);
+  --grad-hero: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #48cae4 100%);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --shadow-lg: 0 20px 60px rgba(0,119,182,.15);
+  --shadow-xl: 0 30px 80px rgba(0,119,182,.25);
+}
+
+[data-theme="dark"] {
+  --dark: #f8fafc;
+  --dark-2: #e2e8f0;
+  --text: #cbd5e1;
+  --gray: #94a3b8;
+  --gray-light: #64748b;
+  --white: #1e293b;
+  --border: #334155;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --light: #334155;
+  --lighter: #1e293b;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+}
+a { text-decoration: none; color: inherit; transition: .3s; }
+button { font-family: inherit; cursor: pointer; border: none; }
+input, select, textarea { font-family: inherit; }
+img { max-width: 100%; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* LOADER */
+#loader {
+  position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 24px;
+  transition: opacity .6s, visibility .6s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-paw { font-size: 70px; color: var(--primary); animation: bounce 1.2s infinite; }
+@keyframes bounce {
+  0%,100% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-25px) rotate(12deg); }
+}
+.loader-text { font-size: 20px; font-weight: 700; color: var(--primary-dark); letter-spacing: 2px; }
+.loader-bar { width: 240px; height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.loader-bar span { display: block; height: 100%; width: 0; background: var(--grad-main); border-radius: 10px; animation: load 1.8s forwards; }
+@keyframes load { to { width: 100%; } }
+
+/* BG ANIMATION */
+.bg-animation { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg-animation span {
+  position: absolute; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79,172,254,.15), rgba(0,242,254,.15));
+  animation: floatBg 22s infinite ease-in-out;
+}
+.bg-animation span:nth-child(1){width:420px;height:420px;top:-150px;left:-150px;}
+.bg-animation span:nth-child(2){width:280px;height:280px;top:40%;right:-120px;animation-delay:2s;}
+.bg-animation span:nth-child(3){width:200px;height:200px;bottom:10%;left:10%;animation-delay:4s;}
+.bg-animation span:nth-child(4){width:320px;height:320px;bottom:-100px;right:20%;animation-delay:6s;}
+.bg-animation span:nth-child(5){width:220px;height:220px;top:20%;left:30%;animation-delay:8s;}
+.bg-animation span:nth-child(6){width:180px;height:180px;top:60%;left:50%;animation-delay:10s;}
+@keyframes floatBg {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(50px,-50px) scale(1.15); }
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226,232,240,.6);
+  transition: .3s;
+}
+[data-theme="dark"] .navbar { background: rgba(15,23,42,.85); border-bottom-color: rgba(51,65,85,.6); }
+.navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+
+.logo {
+  font-size: 22px; font-weight: 800;
+  color: var(--primary-dark);
+  display: flex; align-items: center; gap: 10px;
+  letter-spacing: -0.5px; flex-shrink: 0;
+}
+.logo i {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--grad-main); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 6px 18px rgba(0,119,182,.35);
+  transition: .3s;
+}
+.logo:hover i { transform: rotate(-10deg) scale(1.05); }
+.logo .smart-text { color: var(--primary-dark); }
+.logo .petcare-text { color: var(--accent); }
+[data-theme="dark"] .logo .smart-text { color: #caf0f8; }
+[data-theme="dark"] .logo .petcare-text { color: #48cae4; }
+
+.nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+.nav-links > li > a {
+  font-weight: 600; font-size: 14px;
+  color: var(--gray); padding: 10px 14px;
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 6px;
+  position: relative; transition: .3s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active {
+  color: var(--primary); background: rgba(0,119,182,.08);
+}
+[data-theme="dark"] .nav-links > li > a:hover,
+[data-theme="dark"] .nav-links > li > a.active {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+
+.dropdown { position: relative; }
+.dropdown-toggle i.fa-chevron-down { transition: transform .3s; }
+.dropdown:hover > a i.fa-chevron-down { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--card-bg); border-radius: 14px; padding: 8px;
+  min-width: 220px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15);
+  border: 1px solid var(--border);
+  opacity: 0; visibility: hidden; transition: .3s;
+  list-style: none; z-index: 100;
+}
+.dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu li { margin: 0; }
+.dropdown-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; color: var(--gray);
+  font-weight: 600; transition: .2s;
+}
+.dropdown-menu a:hover {
+  background: rgba(0,119,182,.08);
+  color: var(--primary); transform: translateX(4px);
+}
+[data-theme="dark"] .dropdown-menu a:hover {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+.dropdown-menu a i { width: 18px; text-align: center; color: var(--primary); font-size: 13px; }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.theme-toggle, .cart-btn {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--lighter); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: .3s; position: relative;
+}
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .cart-btn { background: var(--light); }
+.theme-toggle:hover { transform: rotate(20deg); }
+.cart-btn:hover { background: var(--primary); color: #fff; }
+[data-theme="dark"] .theme-toggle { color: #fbbf24; }
+.cart-count {
+  position: absolute; top: -5px; right: -5px;
+  background: var(--danger); color: #fff;
+  min-width: 20px; height: 20px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--card-bg); padding: 0 5px;
+}
+.menu-toggle { display: none; font-size: 22px; cursor: pointer; color: var(--primary-dark); background: transparent; padding: 8px; }
+[data-theme="dark"] .menu-toggle { color: var(--white); }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 8px; justify-content: center; padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: all .3s; white-space: nowrap; position: relative; overflow: hidden; }
+.btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,.25); border-radius: 50%; transform: translate(-50%,-50%); transition: width .5s, height .5s; }
+.btn:hover::before { width: 350px; height: 350px; }
+.btn > * { position: relative; z-index: 2; }
+.btn-primary { background: var(--grad-main); color: #fff; box-shadow: 0 6px 18px rgba(79,172,254,.4); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(79,172,254,.55); }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-ghost { background: rgba(0,119,182,.08); color: var(--primary); }
+[data-theme="dark"] .btn-ghost { background: rgba(0,180,216,.15); color: var(--accent); }
+.btn-ghost:hover { background: rgba(0,119,182,.15); }
+.btn-white { background: #fff; color: var(--primary); }
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.15); }
+.btn-lg { padding: 16px 36px; font-size: 16px; }
+.btn-block { width: 100%; }
+
+/* SECTIONS */
+.section { padding: 90px 0; }
+.section-head { text-align: center; margin-bottom: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.section-head h2 { font-size: 44px; font-weight: 800; color: var(--dark); margin-bottom: 14px; letter-spacing: -1.5px; }
+.section-head p { color: var(--gray); font-size: 16px; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--light); color: var(--primary-dark); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 22px; border: 1px solid rgba(0,119,182,.15); }
+[data-theme="dark"] .badge { color: var(--accent); }
+.badge i { color: var(--accent); }
+
+/* NOTIFICATION PANEL */
+.notif-panel { position: fixed; top: 90px; right: 30px; width: 360px; max-height: 480px; background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-xl); border: 1px solid var(--border); z-index: 999; transform: translateX(150%); transition: .4s; overflow: hidden; }
+.notif-panel.show { transform: translateX(0); }
+.notif-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.notif-header h3 { font-size: 16px; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+.notif-header i { color: var(--primary); }
+.notif-list { max-height: 380px; overflow-y: auto; }
+.notif-item { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; gap: 14px; transition: .3s; cursor: pointer; }
+.notif-item:hover { background: var(--lighter); }
+.notif-item i { width: 40px; height: 40px; border-radius: 12px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.notif-item div h5 { font-size: 14px; color: var(--dark); margin-bottom: 3px; }
+.notif-item div p { font-size: 12px; color: var(--gray); }
+.notif-item .notif-time { font-size: 11px; color: var(--gray-light); margin-top: 4px; }
+
+/* CART PANEL */
+.cart-panel { position: fixed; top: 0; right: 0; width: 420px; max-width: 100%; height: 100vh; background: var(--card-bg); box-shadow: -10px 0 40px rgba(0,0,0,.2); z-index: 1500; transform: translateX(100%); transition: .4s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; }
+.cart-panel.show { transform: translateX(0); }
+.cart-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.5); backdrop-filter: blur(4px); z-index: 1400; opacity: 0; visibility: hidden; transition: .3s; }
+.cart-overlay.show { opacity: 1; visibility: visible; }
+.cart-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cart-header h3 { font-size: 18px; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+.cart-header h3 i { color: var(--primary); }
+.cart-header button { width: 36px; height: 36px; border-radius: 50%; background: var(--lighter); color: var(--gray); font-size: 16px; transition: .3s; }
+.cart-header button:hover { background: var(--danger); color: #fff; }
+.cart-items { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.cart-empty { text-align: center; padding: 60px 20px; color: var(--gray); }
+.cart-empty i { font-size: 70px; margin-bottom: 16px; opacity: .25; color: var(--primary); display: block; }
+.cart-empty p { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+.cart-empty small { font-size: 13px; }
+.cart-item { display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: var(--lighter); margin-bottom: 12px; align-items: center; transition: .3s; }
+.cart-item:hover { background: var(--light); }
+.cart-item .item-img { width: 55px; height: 55px; border-radius: 12px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.cart-item .item-info { flex: 1; min-width: 0; }
+.cart-item h4 { font-size: 14px; color: var(--dark); margin-bottom: 4px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cart-item p { font-size: 13px; color: var(--primary); font-weight: 700; }
+.cart-item .qty-controls { display: flex; gap: 6px; align-items: center; background: var(--card-bg); padding: 4px; border-radius: 10px; }
+.cart-item .qty-controls button { width: 26px; height: 26px; border-radius: 6px; background: transparent; color: var(--primary); font-size: 14px; font-weight: 700; transition: .3s; }
+.cart-item .qty-controls button:hover { background: var(--primary); color: #fff; }
+.cart-item .qty-controls span { font-weight: 700; font-size: 13px; color: var(--dark); min-width: 20px; text-align: center; }
+.cart-item .remove-btn { color: var(--danger); font-size: 14px; padding: 6px; transition: .3s; }
+.cart-item .remove-btn:hover { transform: scale(1.2); }
+.cart-footer { padding: 24px; border-top: 1px solid var(--border); }
+.cart-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+.cart-row span:first-child { color: var(--gray); }
+.cart-row span:last-child { color: var(--dark); font-weight: 600; }
+.cart-total { display: flex; justify-content: space-between; margin: 16px 0; padding-top: 16px; border-top: 2px dashed var(--border); }
+.cart-total span:first-child { color: var(--gray); font-size: 15px; font-weight: 600; }
+.cart-total span:last-child { color: var(--primary); font-weight: 800; font-size: 24px; }
+
+/* SCROLL TOP */
+#scrollTop { position: fixed; bottom: 30px; left: 30px; z-index: 999; width: 50px; height: 50px; border-radius: 50%; background: var(--grad-main); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: .3s; cursor: pointer; }
+#scrollTop.show { opacity: 1; visibility: visible; }
+#scrollTop:hover { transform: translateY(-5px) scale(1.1); }
+
+/* TOAST */
+#toast { position: fixed; bottom: 30px; right: 30px; z-index: 9999; background: var(--card-bg); border-radius: 16px; padding: 18px 24px; box-shadow: var(--shadow-xl); display: flex; align-items: center; gap: 14px; transform: translateX(150%); transition: .4s; max-width: 380px; border-left: 4px solid var(--success); }
+#toast.show { transform: translateX(0); }
+#toast i { font-size: 22px; color: var(--success); }
+#toast p { font-size: 14px; color: var(--dark); font-weight: 500; }
+#toast.error { border-left-color: var(--danger); }
+#toast.error i { color: var(--danger); }
+
+/* FADE ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(50px); transition: .9s cubic-bezier(.2,.8,.2,1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.zoom-in { opacity: 0; transform: scale(.9); transition: .8s cubic-bezier(.2,.8,.2,1); }
+.zoom-in.visible { opacity: 1; transform: scale(1); }
+
+/* AUTH MODAL */
+#authModal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.75); backdrop-filter: blur(10px); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MARKETPLACE PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* PAGE HEADER */
+.page-header { padding: 70px 0 30px; text-align: center; }
+.page-header h1 { font-size: 52px; font-weight: 800; color: var(--dark); margin-bottom: 16px; letter-spacing: -1.5px; line-height: 1.1; }
+.gradient-text { background: var(--grad-main); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.page-header p { color: var(--gray); font-size: 17px; max-width: 640px; margin: 0 auto; }
+
+/* TOOLBAR */
+.toolbar { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; margin-bottom: 30px; align-items: center; }
+.search-box { position: relative; }
+.search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray-light); font-size: 15px; }
+.search-box input { width: 100%; padding: 14px 20px 14px 46px; border: 1px solid var(--border); border-radius: 14px; outline: none; font-size: 14px; background: var(--card-bg); color: var(--text); transition: .3s; font-family: inherit; }
+.search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0,180,216,.1); }
+.sort-select { padding: 14px 20px; border: 1px solid var(--border); border-radius: 14px; outline: none; font-size: 14px; background: var(--card-bg); color: var(--text); cursor: pointer; transition: .3s; font-family: inherit; }
+.sort-select:focus { border-color: var(--accent); }
+.result-count { font-size: 14px; color: var(--gray); font-weight: 600; padding: 14px 18px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border); }
+.result-count span { color: var(--primary); font-weight: 800; }
+
+/* CATEGORIES */
+.categories { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+.cat-btn { padding: 10px 20px; border-radius: 50px; background: var(--card-bg); border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--gray); cursor: pointer; transition: .3s; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.cat-btn:hover { border-color: var(--accent); color: var(--primary); }
+.cat-btn.active { background: var(--grad-main); color: #fff; border-color: transparent; box-shadow: 0 6px 18px rgba(0,119,182,.35); }
+.cat-btn i { font-size: 13px; }
+
+/* PRODUCTS GRID */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px; }
+.product-card { background: var(--card-bg); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-sm); transition: .4s; border: 1px solid var(--border); position: relative; }
+.product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+.product-badge { position: absolute; top: 14px; left: 14px; color: #fff; padding: 5px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; z-index: 2; letter-spacing: .5px; }
+.badge-sale { background: var(--danger); }
+.badge-hot { background: var(--warning); }
+.badge-new { background: var(--success); }
+.badge-best { background: linear-gradient(135deg, #667eea, #764ba2); }
+.wishlist-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--gray); display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 2; transition: .3s; cursor: pointer; }
+[data-theme="dark"] .wishlist-btn { background: rgba(30,41,59,.9); }
+.wishlist-btn:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
+.wishlist-btn.active { background: var(--danger); color: #fff; }
+.product-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--lighter); transition: .4s; }
+.product-card:hover .product-img { transform: scale(1.08) rotate(3deg); }
+.product-body { padding: 20px; }
+.product-category { font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: .8px; font-weight: 700; margin-bottom: 6px; }
+.product-body h4 { font-size: 16px; color: var(--dark); margin-bottom: 8px; font-weight: 700; line-height: 1.3; }
+.product-rating { color: #fbbf24; font-size: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.product-rating span { color: var(--gray); font-size: 11px; }
+.product-price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+.product-price .current { font-size: 22px; color: var(--primary); font-weight: 800; }
+.product-price .old { font-size: 14px; color: var(--gray-light); text-decoration: line-through; font-weight: 500; }
+.product-body button { width: 100%; padding: 12px; border-radius: 12px; background: var(--grad-main); color: #fff; font-weight: 600; font-size: 14px; transition: .3s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
+.product-body button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,119,182,.4); }
+.product-body button.added { background: var(--success); }
+
+/* NO RESULTS */
+.no-results { text-align: center; padding: 80px 20px; grid-column: 1 / -1; }
+.no-results i { font-size: 70px; color: var(--gray-light); margin-bottom: 20px; opacity: .5; }
+.no-results h3 { font-size: 22px; color: var(--dark); margin-bottom: 8px; }
+.no-results p { color: var(--gray); }
+
+/* FOOTER */
+footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; margin-top: 60px; }
+[data-theme="dark"] footer { background: #020617; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; }
+.footer-grid h3 { font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #fff; }
+.footer-grid h3 i { color: var(--accent); }
+.footer-grid h4 { font-size: 16px; margin-bottom: 18px; color: #fff; font-weight: 600; }
+.footer-grid p { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+.footer-grid a { display: block; font-size: 14px; color: var(--gray-light); margin-bottom: 10px; transition: .3s; }
+.footer-grid a:hover { color: var(--accent); transform: translateX(5px); }
+.socials { display: flex; gap: 12px; margin-top: 8px; }
+.socials a { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 16px; margin: 0; }
+.socials a:hover { background: var(--grad-main); transform: translateY(-5px); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 24px 0; text-align: center; font-size: 13px; color: var(--gray-light); }
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .nav-links { gap: 2px; }
+  .nav-links > li > a { padding: 10px 10px; font-size: 13px; }
+  .logo { font-size: 20px; }
+}
+@media (max-width: 1024px) {
+  .page-header h1 { font-size: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .toolbar { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 4px; padding: 20px 0; order: 10; }
+  .nav-links.mobile-open {
+    display: flex; position: absolute; top: 76px; left: 0; right: 0;
+    background: var(--card-bg); padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border-top: 1px solid var(--border);
+  }
+  .nav-links > li > a { width: 100%; padding: 14px 16px; justify-content: flex-start; }
+  .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; border: none; background: rgba(0,119,182,.05); margin: 4px 0 4px 12px; padding: 4px; min-width: auto; display: none; }
+  .dropdown.open .dropdown-menu { display: block; }
+  .nav-actions .btn-outline { display: none; }
+  .menu-toggle { display: block; }
+  .page-header h1 { font-size: 28px; }
+  .page-header { padding: 40px 0 20px; }
+  .cart-panel { width: 100%; }
+  .product-img { height: 150px; font-size: 60px; }
+  .categories { gap: 8px; }
+  .cat-btn { padding: 8px 14px; font-size: 12px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  .notif-panel { width: calc(100% - 30px); right: 15px; }
+}
+@media (max-width: 480px) {
+  .page-header h1 { font-size: 24px; }
+  .products-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-paw"><i class="fa-solid fa-paw"></i></div>
+  <div class="loader-text">SMART PETCARE</div>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<!-- BG ANIMATION -->
+<div class="bg-animation">
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-paw"></i>
+      <span class="smart-text">Smart</span>
+      <span class="petcare-text">PetCare</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-heart-pulse"></i> Pet Care <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="pet-profile.html"><i class="fa-solid fa-paw"></i> Pet Profile</a></li>
+            <li><a href="ai-assistant.html"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+            <li><a href="gps-tracking.html"><i class="fa-solid fa-location-dot"></i> GPS Tracking</a></li>
+            <li><a href="dog-breeds.html"><i class="fa-solid fa-book"></i> Dog Breeds</a></li>
+            <li><a href="medical-support.html"><i class="fa-solid fa-stethoscope"></i> Medical Support</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle active"><i class="fa-solid fa-cart-shopping"></i> Shop <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="marketplace.html"><i class="fa-solid fa-shop"></i> Marketplace</a></li>
+            <li><a href="food-nutrition.html"><i class="fa-solid fa-bowl-food"></i> Food & Nutrition</a></li>
+            <li><a href="pet-listing-portal.html"><i class="fa-solid fa-tag"></i> Pet Listing</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-users"></i> Community <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="community-forum.html"><i class="fa-solid fa-comments"></i> Forum</a></li>
+            <li><a href="events.html"><i class="fa-solid fa-calendar-check"></i> Events</a></li>
+            <li><a href="adoption.html"><i class="fa-solid fa-house-chimney"></i> Adoption Hub</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-gauge"></i> Dashboards <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-speedometer"></i> Admin</a></li>
+            <li><a href="vet-portal.html"><i class="fa-solid fa-user-doctor"></i> Vet Portal</a></li>
+            <li><a href="seller.html"><i class="fa-solid fa-shop"></i> Seller</a></li>
+            <li><a href="adoption-portal.html"><i class="fa-solid fa-house-heart"></i> Shelter</a></li>
+            <li><a href="organizer.html"><i class="fa-solid fa-trophy"></i> Event Organizer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="cart-btn" onclick="openCart()" title="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span></button>
+      <button class="cart-btn" onclick="toggleNotif()" title="Notifications"><i class="fa-solid fa-bell"></i><span class="cart-count">3</span></button>
+      <a href="#" class="btn btn-outline" onclick="openAuth('login'); return false;">Login</a>
+      <a href="#" class="btn btn-primary" onclick="openAuth('register'); return false;">Get Started</a>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-header">
+    <h3><i class="fa-solid fa-bell"></i> Notifications</h3>
+    <button style="background:transparent; color:var(--gray);" onclick="toggleNotif()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="notif-list">
+    <div class="notif-item"><i class="fa-solid fa-tag"></i><div><h5>Flash Sale</h5><p>20% off on all dog food this week!</p><div class="notif-time">1 hour ago</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-truck-fast"></i><div><h5>Order Shipped</h5><p>Your Smart GPS Collar is on the way.</p><div class="notif-time">4 hours ago</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-star"></i><div><h5>New Arrival</h5><p>Check out our new Organic Pet Treats!</p><div class="notif-time">Yesterday</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-gift"></i><div><h5>Free Delivery</h5><p>Free shipping on orders over $30.</p><div class="notif-time">2 days ago</div></div></div>
+  </div>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3><i class="fa-solid fa-cart-shopping"></i> Your Cart</h3>
+    <button onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <div class="cart-row"><span>Delivery</span><span style="color:var(--success);">FREE</span></div>
+    <div class="cart-row"><span>Tax (5%)</span><span id="tax">$0.00</span></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="btn btn-primary btn-block" onclick="checkout()">
+      <i class="fa-solid fa-lock"></i> Proceed to Checkout
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE CONTENT ═══════════════════ -->
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="container">
+    <span class="badge"><i class="fa-solid fa-shop"></i> Marketplace</span>
+    <h1>Pet <span class="gradient-text">Shop</span></h1>
+    <p>Top-rated food, accessories & healthcare products for your furry friends.</p>
+  </div>
+</section>
+
+<!-- MAIN -->
+<section class="section" style="padding-top: 20px;">
+  <div class="container">
+
+    <!-- TOOLBAR -->
+    <div class="toolbar fade-up">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="renderProducts()">
+      </div>
+      <select class="sort-select" id="sortSelect" onchange="renderProducts()">
+        <option value="popular">Sort by: Popular</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+        <option value="name">Name (A-Z)</option>
+      </select>
+      <div class="result-count">Showing <span id="resultCount">0</span></div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories fade-up">
+      <button class="cat-btn active" onclick="setCategory('all', this)"><i class="fa-solid fa-border-all"></i> All</button>
+      <button class="cat-btn" onclick="setCategory('food', this)"><i class="fa-solid fa-bowl-food"></i> Food</button>
+      <button class="cat-btn" onclick="setCategory('toys', this)"><i class="fa-solid fa-baseball"></i> Toys</button>
+      <button class="cat-btn" onclick="setCategory('accessories', this)"><i class="fa-solid fa-bag-shopping"></i> Accessories</button>
+      <button class="cat-btn" onclick="setCategory('health', this)"><i class="fa-solid fa-briefcase-medical"></i> Health</button>
+      <button class="cat-btn" onclick="setCategory('grooming', this)"><i class="fa-solid fa-scissors"></i> Grooming</button>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="products-grid" id="productsGrid"></div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container footer-grid">
+    <div>
+      <h3><i class="fa-solid fa-paw"></i> Smart PetCare</h3>
+      <p>An integrated pet healthcare, marketplace and community platform for pet owners, veterinarians and vendors.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Modules</h4>
+      <a href="pet-profile.html">Healthcare</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="gps-tracking.html">GPS Tracking</a>
+      <a href="adoption.html">Adoption Hub</a>
+      <a href="ai-assistant.html">AI Assistant</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Press Kit</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Report Issue</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Smart PetCare. All rights reserved. Made with <i class="fa-solid fa-heart" style="color:#ef4444"></i> for pets everywhere.</div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,.75); backdrop-filter:blur(10px); z-index:5000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--card-bg); border-radius:24px; max-width:460px; width:100%; padding:42px; position:relative; animation:fadeIn .3s; max-height:90vh; overflow-y:auto; box-shadow:var(--shadow-xl);">
+    <button onclick="closeAuth()" style="position:absolute; top:18px; right:18px; width:38px; height:38px; border-radius:50%; background:var(--lighter); color:var(--gray); font-size:16px;"><i class="fa-solid fa-xmark"></i></button>
+    <div style="display:flex; background:var(--lighter); border-radius:50px; padding:5px; margin-bottom:34px;">
+      <button class="tab active" id="tabLogin" onclick="switchAuth('login')" style="flex:1; padding:12px; border-radius:50px; background:var(--grad-main); color:#fff; font-weight:600; font-size:14px;">Login</button>
+      <button class="tab" id="tabRegister" onclick="switchAuth('register')" style="flex:1; padding:12px; border-radius:50px; background:transparent; color:var(--gray); font-weight:600; font-size:14px;">Register</button>
+    </div>
+    <form id="modalLoginForm" onsubmit="handleLogin(event)">
+      <h2 style="font-size:24px; color:var(--dark); margin-bottom:6px; font-weight:800;">Sign In</h2>
+      <p style="font-size:13px; color:var(--gray); margin-bottom:24px;">Welcome back!</p>
+      <div style="position:relative; margin-bottom:16px;"><i class="fa-solid fa-envelope" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="email" id="loginEmail" placeholder="Email address" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:16px;"><i class="fa-solid fa-lock" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="password" id="loginPassword" placeholder="Password" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+    <form id="modalRegisterForm" style="display:none;" onsubmit="handleRegister(event)">
+      <h2 style="font-size:24px; color:var(--dark); margin-bottom:6px; font-weight:800;">Create Account</h2>
+      <p style="font-size:13px; color:var(--gray); margin-bottom:24px;">Join us today.</p>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-user" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="text" id="regName" placeholder="Full name" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-envelope" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="email" id="regEmail" placeholder="Email" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-lock" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="password" id="regPassword" placeholder="Password" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"><i class="fa-solid fa-circle-check"></i><p id="toastMsg">Success!</p></div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCTS DATA
+   ═══════════════════════════════════════════════════════════════ */
+const products = [
+  { id: 1, name: 'Premium Dog Food', emoji: '🍖', price: 29.99, old: 39.99, rating: 5, reviews: 245, category: 'food', badge: 'SALE' },
+  { id: 2, name: 'Cat Nutrition Mix', emoji: '🐱', price: 24.50, old: 32.00, rating: 5, reviews: 189, category: 'food', badge: 'HOT' },
+  { id: 3, name: 'Interactive Toy Ball', emoji: '🎾', price: 14.99, old: 19.99, rating: 4, reviews: 128, category: 'toys', badge: null },
+  { id: 4, name: 'Dental Chew Bones', emoji: '🦴', price: 12.99, old: 16.99, rating: 5, reviews: 312, category: 'food', badge: 'NEW' },
+  { id: 5, name: 'Smart GPS Collar', emoji: '📿', price: 79.99, old: 99.99, rating: 5, reviews: 456, category: 'accessories', badge: 'BEST' },
+  { id: 6, name: 'Pet Grooming Kit', emoji: '🧴', price: 34.99, old: 44.99, rating: 4, reviews: 167, category: 'grooming', badge: null },
+  { id: 7, name: 'Vet-Approved Vitamins', emoji: '💊', price: 18.99, old: 24.99, rating: 5, reviews: 289, category: 'health', badge: 'SALE' },
+  { id: 8, name: 'Comfort Pet Bed', emoji: '🏠', price: 49.99, old: 64.99, rating: 5, reviews: 378, category: 'accessories', badge: 'HOT' },
+  { id: 9, name: 'Cat Scratching Post', emoji: '🐈', price: 39.99, old: 49.99, rating: 4, reviews: 156, category: 'toys', badge: null },
+  { id: 10, name: 'Organic Pet Treats', emoji: '🥫', price: 9.99, old: 14.99, rating: 5, reviews: 421, category: 'food', badge: 'BEST' },
+  { id: 11, name: 'Leather Pet Leash', emoji: '🦮', price: 22.99, old: 29.99, rating: 4, reviews: 134, category: 'accessories', badge: null },
+  { id: 12, name: 'Flea & Tick Shampoo', emoji: '🧼', price: 16.99, old: 21.99, rating: 5, reviews: 267, category: 'grooming', badge: 'NEW' },
+  { id: 13, name: 'Joint Health Chews', emoji: '🦴', price: 27.99, old: 34.99, rating: 5, reviews: 198, category: 'health', badge: 'SALE' },
+  { id: 14, name: 'Squeaky Duck Toy', emoji: '🦆', price: 11.99, old: 15.99, rating: 4, reviews: 245, category: 'toys', badge: null },
+  { id: 15, name: 'Pet Hair Brush', emoji: '🪮', price: 13.99, old: 18.99, rating: 5, reviews: 356, category: 'grooming', badge: 'HOT' },
+  { id: 16, name: 'Cat Litter Premium', emoji: '🐾', price: 19.99, old: 25.99, rating: 4, reviews: 178, category: 'accessories', badge: null }
+];
+
+let cart = JSON.parse(localStorage.getItem('petcareMarketCart')) || [];
+let currentCategory = 'all';
+
+/* ═══════════════════════════════════════════════════════════════
+   LOADER
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME (shared)
+   ═══════════════════════════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  localStorage.setItem('petcare-theme', next);
+  showToast(next === 'dark' ? '🌙 Dark mode activated' : '☀️ Light mode activated');
+}
+const savedTheme = localStorage.getItem('petcare-theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (savedTheme === 'dark') document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+}
+
+/* NAVBAR SCROLL */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  const top = document.getElementById('scrollTop');
+  if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  if (window.scrollY > 400) top.classList.add('show'); else top.classList.remove('show');
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MENU
+   ═══════════════════════════════════════════════════════════════ */
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('mobile-open');
+}
+document.querySelectorAll('.dropdown-toggle').forEach(t => {
+  t.addEventListener('click', e => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      t.parentElement.classList.toggle('open');
+    }
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up, .zoom-in').forEach(el => observer.observe(el));
+
+/* ═══════════════════════════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════════════════════════ */
+function showToast(msg, error = false) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.toggle('error', error);
+  toast.querySelector('i').className = error ? 'fa-solid fa-circle-exclamation' : 'fa-solid fa-circle-check';
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTH (shared)
+   ═══════════════════════════════════════════════════════════════ */
+function openAuth(type) {
+  document.getElementById('authModal').style.display = 'flex';
+  switchAuth(type || 'login');
+}
+function closeAuth() { document.getElementById('authModal').style.display = 'none'; }
+function switchAuth(type) {
+  const loginForm = document.getElementById('modalLoginForm');
+  const regForm = document.getElementById('modalRegisterForm');
+  const tabLogin = document.getElementById('tabLogin');
+  const tabReg = document.getElementById('tabRegister');
+  if (type === 'login') {
+    loginForm.style.display = 'block'; regForm.style.display = 'none';
+    tabLogin.style.background = 'var(--grad-main)'; tabLogin.style.color = '#fff';
+    tabReg.style.background = 'transparent'; tabReg.style.color = 'var(--gray)';
+  } else {
+    loginForm.style.display = 'none'; regForm.style.display = 'block';
+    tabReg.style.background = 'var(--grad-main)'; tabReg.style.color = '#fff';
+    tabLogin.style.background = 'transparent'; tabLogin.style.color = 'var(--gray)';
+  }
+}
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  showToast('Welcome back, ' + email.split('@')[0] + '! 🐾');
+  closeAuth();
+}
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value;
+  showToast('Account created for ' + name + '! 🎉');
+  closeAuth();
+}
+document.getElementById('authModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'authModal') closeAuth();
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   NOTIFICATIONS
+   ═══════════════════════════════════════════════════════════════ */
+function toggleNotif() { document.getElementById('notifPanel').classList.toggle('show'); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CATEGORY FILTER
+   ═══════════════════════════════════════════════════════════════ */
+function setCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER PRODUCTS
+   ═══════════════════════════════════════════════════════════════ */
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort = document.getElementById('sortSelect').value;
+
+  let filtered = products.filter(p => {
+    const matchCat = currentCategory === 'all' || p.category === currentCategory;
+    const matchSearch = p.name.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+
+  if (sort === 'low') filtered.sort((a, b) => a.price - b.price);
+  else if (sort === 'high') filtered.sort((a, b) => b.price - a.price);
+  else if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+  else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+  else filtered.sort((a, b) => b.reviews - a.reviews);
+
+  document.getElementById('resultCount').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results"><i class="fa-solid fa-magnifying-glass"></i><h3>No products found</h3><p>Try a different search or category</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => {
+    const badgeClass = p.badge === 'SALE' ? 'badge-sale' : p.badge === 'HOT' ? 'badge-hot' : p.badge === 'NEW' ? 'badge-new' : 'badge-best';
+    const stars = '★'.repeat(p.rating) + '☆'.repeat(5 - p.rating);
+    return `
+      <div class="product-card fade-up">
+        ${p.badge ? `<div class="product-badge ${badgeClass}">${p.badge}</div>` : ''}
+        <div class="wishlist-btn" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></div>
+        <div class="product-img">${p.emoji}</div>
+        <div class="product-body">
+          <div class="product-category">${p.category}</div>
+          <h4>${p.name}</h4>
+          <div class="product-rating">${stars} <span>(${p.reviews})</span></div>
+          <div class="product-price">
+            <span class="current">$${p.price.toFixed(2)}</span>
+            <span class="old">$${p.old.toFixed(2)}</span>
+          </div>
+          <button onclick="addToCart(${p.id}, this)">
+            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.product-card.fade-up').forEach(el => obs.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WISHLIST
+   ═══════════════════════════════════════════════════════════════ */
+function toggleWish(el) {
+  el.classList.toggle('active');
+  const icon = el.querySelector('i');
+  if (el.classList.contains('active')) {
+    icon.className = 'fa-solid fa-heart';
+    showToast('Added to wishlist ❤️');
+  } else {
+    icon.className = 'fa-regular fa-heart';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CART
+   ═══════════════════════════════════════════════════════════════ */
+function addToCart(id, btn) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(item => item.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ id: product.id, name: product.name, emoji: product.emoji, price: product.price, qty: 1 });
+
+  saveCart();
+  updateCart();
+
+  if (btn) {
+    btn.classList.add('added');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+    setTimeout(() => {
+      btn.classList.remove('added');
+      btn.innerHTML = '<i class="fa-solid fa-cart-plus"></i> Add to Cart';
+    }, 1200);
+  }
+
+  showToast(`${product.emoji} ${product.name} added!`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
+  updateCart();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else { saveCart(); updateCart(); }
+}
+
+function saveCart() {
+  localStorage.setItem('petcareMarketCart', JSON.stringify(cart));
+}
+
+function updateCart() {
+  const count = cart.reduce((sum, i) => sum + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = `<div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i><p>Your cart is empty</p><small>Add products to get started</small></div>`;
+    footerEl.style.display = 'none';
+    return;
+  }
+
+  footerEl.style.display = 'block';
+
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="item-img">${item.emoji}</div>
+      <div class="item-info">
+        <h4>${item.name}</h4>
+        <p>$${item.price.toFixed(2)}</p>
+      </div>
+      <div class="qty-controls">
+        <button onclick="changeQty(${item.id}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${item.id}, 1)">+</button>
+      </div>
+      <button class="remove-btn" onclick="removeFromCart(${item.id})"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  `).join('');
+
+  const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const tax = subtotal * 0.05;
+  document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+  document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+  document.getElementById('cartTotal').textContent = '$' + (subtotal + tax).toFixed(2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CART PANEL
+   ═══════════════════════════════════════════════════════════════ */
+function openCart() {
+  document.getElementById('cartPanel').classList.add('show');
+  document.getElementById('cartOverlay').classList.add('show');
+}
+function closeCart() {
+  document.getElementById('cartPanel').classList.remove('show');
+  document.getElementById('cartOverlay').classList.remove('show');
+}
+
+function checkout() {
+  if (cart.length === 0) { showToast('Your cart is empty!', true); return; }
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0) * 1.05;
+  showToast(`Order placed! Total: $${total.toFixed(2)} 🎉`);
+  cart = [];
+  saveCart();
+  updateCart();
+  setTimeout(closeCart, 800);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ESC key closes panels
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeCart();
+    closeAuth();
+    document.getElementById('notifPanel').classList.remove('show');
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+renderProducts();
+updateCart();
+
+console.log('%c🛒 Marketplace — Smart PetCare', 'font-size:20px; font-weight:bold; color:#0077b6;');
+console.log('%c✅ 16 products, cart, wishlist, filters all working', 'font-size:12px; color:#10b981;');
+</script>
+</body>
+</html>

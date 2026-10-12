@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Profile — Smart PetCare</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SMART PETCARE — PET PROFILE PAGE
+   ═══════════════════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #0077b6;
+  --primary-dark: #023e8a;
+  --accent: #00b4d8;
+  --light: #e0f7ff;
+  --lighter: #f0faff;
+  --dark: #0f172a;
+  --dark-2: #1e293b;
+  --text: #334155;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --bg: #f4f8fb;
+  --card-bg: #ffffff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --grad1: linear-gradient(135deg, #4facfe, #00f2fe);
+  --grad2: linear-gradient(135deg, #43e97b, #38f9d7);
+  --grad4: linear-gradient(135deg, #f093fb, #f5576c);
+  --grad-main: linear-gradient(135deg, #0077b6, #00b4d8);
+  --grad-hero: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #48cae4 100%);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --shadow-lg: 0 20px 60px rgba(0,119,182,.15);
+  --shadow-xl: 0 30px 80px rgba(0,119,182,.25);
+}
+
+[data-theme="dark"] {
+  --dark: #f8fafc;
+  --dark-2: #e2e8f0;
+  --text: #cbd5e1;
+  --gray: #94a3b8;
+  --gray-light: #64748b;
+  --white: #1e293b;
+  --border: #334155;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --light: #334155;
+  --lighter: #1e293b;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+}
+a { text-decoration: none; color: inherit; transition: .3s; }
+button { font-family: inherit; cursor: pointer; border: none; }
+input, select, textarea { font-family: inherit; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+/* ═══════════ NAVBAR ═══════════ */
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226,232,240,.6);
+  transition: .3s;
+}
+[data-theme="dark"] .navbar { background: rgba(15,23,42,.85); border-bottom-color: rgba(51,65,85,.6); }
+.navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+
+.logo {
+  font-size: 22px; font-weight: 800;
+  color: var(--primary-dark);
+  display: flex; align-items: center; gap: 10px;
+  letter-spacing: -0.5px; flex-shrink: 0;
+}
+.logo i {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--grad-main); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 6px 18px rgba(0,119,182,.35);
+  transition: .3s;
+}
+.logo:hover i { transform: rotate(-10deg) scale(1.05); }
+.logo .smart-text { color: var(--primary-dark); }
+.logo .petcare-text { color: var(--accent); }
+[data-theme="dark"] .logo .smart-text { color: #caf0f8; }
+[data-theme="dark"] .logo .petcare-text { color: #48cae4; }
+
+.nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+.nav-links > li > a {
+  font-weight: 600; font-size: 14px;
+  color: var(--gray); padding: 10px 14px;
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 6px;
+  position: relative; transition: .3s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active {
+  color: var(--primary); background: rgba(0,119,182,.08);
+}
+[data-theme="dark"] .nav-links > li > a:hover,
+[data-theme="dark"] .nav-links > li > a.active {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+
+.dropdown { position: relative; }
+.dropdown-toggle i.fa-chevron-down { transition: transform .3s; }
+.dropdown:hover > a i.fa-chevron-down { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--card-bg); border-radius: 14px; padding: 8px;
+  min-width: 220px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15);
+  border: 1px solid var(--border);
+  opacity: 0; visibility: hidden; transition: .3s;
+  list-style: none; z-index: 100;
+}
+.dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu li { margin: 0; }
+.dropdown-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; color: var(--gray);
+  font-weight: 600; transition: .2s;
+}
+.dropdown-menu a:hover {
+  background: rgba(0,119,182,.08);
+  color: var(--primary); transform: translateX(4px);
+}
+[data-theme="dark"] .dropdown-menu a:hover {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+.dropdown-menu a i { width: 18px; text-align: center; color: var(--primary); font-size: 13px; }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.theme-toggle, .cart-btn {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--lighter); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: .3s; position: relative;
+}
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .cart-btn { background: var(--light); }
+.theme-toggle:hover { transform: rotate(20deg); }
+.cart-btn:hover { background: var(--primary); color: #fff; }
+[data-theme="dark"] .theme-toggle { color: #fbbf24; }
+.cart-count {
+  position: absolute; top: -5px; right: -5px;
+  background: var(--danger); color: #fff;
+  min-width: 20px; height: 20px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--card-bg); padding: 0 5px;
+}
+.menu-toggle { display: none; font-size: 22px; cursor: pointer; color: var(--primary-dark); background: transparent; padding: 8px; }
+[data-theme="dark"] .menu-toggle { color: var(--white); }
+
+/* ═══════════ BUTTONS ═══════════ */
+.btn { display: inline-flex; align-items: center; gap: 8px; justify-content: center; padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: all .3s; white-space: nowrap; }
+.btn-primary { background: var(--grad-main); color: #fff; box-shadow: 0 6px 18px rgba(79,172,254,.4); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(79,172,254,.55); }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+
+/* ═══════════ PAGE HEADER ═══════════ */
+.page-header-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin: 30px auto 20px;
+  max-width: 1280px;
+}
+.page-header-top {
+  background: var(--grad-main);
+  padding: 24px 30px; color: white;
+  position: relative; overflow: hidden;
+}
+.page-header-top::before {
+  content: ''; position: absolute;
+  top: -50%; right: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.page-header-top h1 {
+  font-size: 1.5rem; font-weight: 700; margin: 0;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 14px;
+}
+.icon-badge {
+  background: rgba(255,255,255,0.2);
+  width: 50px; height: 50px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.page-header-top .subtitle {
+  font-size: 0.85rem; opacity: 0.9; margin-top: 6px;
+  position: relative; z-index: 1; padding-left: 64px;
+}
+
+/* ═══════════ PAGE BODY ═══════════ */
+.page-body { max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; }
+
+/* ═══════════ MAIN GRID ═══════════ */
+.main-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+}
+
+/* PETS SIDEBAR */
+.pets-sidebar {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  height: fit-content;
+  position: sticky;
+  top: 96px;
+}
+.sidebar-title {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--gray-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.pet-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 8px;
+  border: 2px solid transparent;
+}
+.pet-item:hover {
+  background: var(--lighter);
+  border-color: var(--border);
+}
+.pet-item.active {
+  background: linear-gradient(135deg, rgba(0,119,182,0.1) 0%, rgba(0,180,216,0.1) 100%);
+  border-color: var(--primary);
+}
+.pet-item-avatar {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  background: var(--grad-hero);
+}
+.pet-item-info { flex: 1; min-width: 0; }
+.pet-item-name {
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pet-item-breed {
+  font-size: 0.72rem;
+  color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pet-item-health {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.health-good { background: var(--success); }
+.health-warn { background: var(--warning); }
+.health-bad { background: var(--danger); }
+
+.add-pet-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px;
+  border: 2px dashed var(--border);
+  border-radius: 14px;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.3s;
+  background: transparent;
+  width: 100%;
+  margin-top: 12px;
+  font-family: inherit;
+}
+.add-pet-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--lighter);
+}
+
+/* PET DETAIL */
+.pet-detail { display: flex; flex-direction: column; gap: 20px; }
+
+/* PROFILE CARD */
+.profile-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 100px;
+  background: var(--grad-hero);
+  z-index: 0;
+}
+.profile-header {
+  display: flex; align-items: center; gap: 24px;
+  position: relative; z-index: 1;
+  flex-wrap: wrap;
+}
+.profile-avatar {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  background: var(--grad-hero);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+  border: 5px solid var(--card-bg);
+  box-shadow: 0 15px 35px rgba(0,119,182,0.35);
+  flex-shrink: 0;
+}
+.profile-info { flex: 1; min-width: 200px; padding-top: 40px; }
+.profile-info h2 {
+  font-size: 1.8rem; font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.profile-info p {
+  font-size: 0.92rem;
+  color: var(--gray);
+  margin-bottom: 14px;
+}
+.profile-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.profile-tag {
+  background: var(--lighter);
+  color: var(--primary);
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 5px;
+}
+.profile-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.btn-profile {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  font-family: inherit;
+}
+.btn-profile.btn-primary { background: var(--grad-main); color: white; }
+.btn-profile.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,119,182,0.4); }
+.btn-profile.btn-ghost { background: var(--lighter); color: var(--dark); border: 1px solid var(--border); }
+.btn-profile.btn-ghost:hover { background: var(--primary); color: white; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  position: relative; z-index: 1;
+  margin-top: 24px;
+}
+.stat-mini {
+  background: var(--lighter);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  transition: 0.3s;
+}
+.stat-mini:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,119,182,0.15); }
+.stat-mini i { font-size: 1.3rem; color: var(--primary); margin-bottom: 6px; display: block; }
+.stat-mini h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark); line-height: 1; }
+.stat-mini p {
+  font-size: 0.7rem; color: var(--gray);
+  margin-top: 4px; text-transform: uppercase;
+  font-weight: 600; letter-spacing: 0.5px;
+}
+
+/* INFO CARD */
+.info-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.info-card-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+}
+.info-card-title {
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--dark);
+  display: flex; align-items: center; gap: 10px;
+}
+.info-card-title i { color: var(--primary); font-size: 1.1rem; }
+.info-card-badge {
+  background: var(--lighter);
+  color: var(--gray);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.info-item {
+  background: var(--lighter);
+  border-radius: 12px;
+  padding: 14px;
+  transition: 0.3s;
+}
+.info-item:hover { background: rgba(0,119,182,0.08); }
+.info-item label {
+  font-size: 0.68rem; color: var(--gray-light);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  display: block; margin-bottom: 4px; font-weight: 700;
+}
+.info-item span { font-size: 0.92rem; color: var(--dark); font-weight: 600; }
+
+/* VACCINE LIST */
+.vaccine-list { display: flex; flex-direction: column; gap: 10px; }
+.vaccine-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--lighter);
+  border-radius: 12px;
+  padding: 14px;
+  transition: 0.3s;
+  border-left: 4px solid var(--success);
+}
+.vaccine-item.warn { border-left-color: var(--warning); }
+.vaccine-item.due { border-left-color: var(--danger); }
+.vaccine-item:hover { transform: translateX(6px); }
+.vaccine-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: white;
+  background: var(--grad-main);
+  flex-shrink: 0;
+}
+.vaccine-item.warn .vaccine-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.vaccine-item.due .vaccine-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.vaccine-info { flex: 1; min-width: 0; }
+.vaccine-info h4 { font-size: 0.88rem; color: var(--dark); font-weight: 700; margin-bottom: 3px; }
+.vaccine-info p { font-size: 0.72rem; color: var(--gray); }
+.vaccine-status {
+  padding: 5px 12px; border-radius: 50px;
+  font-size: 0.68rem; font-weight: 700;
+  background: rgba(16,185,129,0.15);
+  color: var(--success); white-space: nowrap;
+}
+.vaccine-item.warn .vaccine-status { background: rgba(245,158,11,0.15); color: var(--warning); }
+.vaccine-item.due .vaccine-status { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+/* ACTIVITY TIMELINE */
+.activity-list {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative; padding-left: 30px;
+}
+.activity-list::before {
+  content: ''; position: absolute;
+  left: 10px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--border);
+}
+.activity-item { position: relative; padding: 12px 0; }
+.activity-dot {
+  position: absolute; left: -26px; top: 16px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--grad-main);
+  border: 3px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+.activity-dot.recent { animation: pulseDot 2s infinite; }
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 2px var(--primary), 0 0 0 6px rgba(0,119,182,0.2); }
+  50% { box-shadow: 0 0 0 2px var(--primary), 0 0 0 12px rgba(0,119,182,0); }
+}
+.activity-content {
+  background: var(--lighter);
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.activity-content:hover { background: rgba(0,119,182,0.08); transform: translateX(6px); }
+.activity-content h4 { font-size: 0.86rem; color: var(--dark); font-weight: 700; margin-bottom: 3px; }
+.activity-content p { font-size: 0.72rem; color: var(--gray); }
+
+/* WEIGHT CHART */
+.chart-card {
+  background: var(--lighter);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 8px;
+}
+.chart-bars {
+  display: flex; align-items: flex-end;
+  gap: 10px; height: 140px; padding-top: 20px;
+}
+.chart-bar-wrapper {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 6px; height: 100%;
+  justify-content: flex-end;
+}
+.chart-bar {
+  width: 100%; background: var(--grad-main);
+  border-radius: 8px 8px 0 0;
+  transition: 0.6s; position: relative;
+  min-height: 10px;
+}
+.chart-bar:hover { opacity: 0.8; }
+.chart-bar-value {
+  position: absolute; top: -20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem; font-weight: 700;
+  color: var(--primary); white-space: nowrap;
+}
+.chart-label { font-size: 0.7rem; color: var(--gray); font-weight: 600; }
+
+/* MODAL */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal.show { display: flex; }
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 24px;
+  max-width: 500px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 32px; position: relative;
+  animation: modalIn 0.3s;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+}
+@keyframes modalIn {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--lighter); color: var(--gray);
+  font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border: none; transition: 0.2s;
+}
+.modal-close:hover { background: var(--danger); color: white; transform: rotate(90deg); }
+.modal h2 { font-size: 1.4rem; color: var(--dark); margin-bottom: 6px; font-weight: 800; }
+.modal > p { font-size: 0.85rem; color: var(--gray); margin-bottom: 22px; }
+.form-group { margin-bottom: 14px; }
+.form-group label { font-size: 0.78rem; color: var(--gray); font-weight: 600; margin-bottom: 6px; display: block; }
+.form-input {
+  width: 100%; padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px; outline: none;
+  font-size: 0.88rem; background: var(--lighter);
+  color: var(--dark); transition: 0.3s;
+  font-family: inherit;
+}
+.form-input:focus {
+  border-color: var(--primary);
+  background: var(--card-bg);
+  box-shadow: 0 0 0 4px rgba(0,119,182,0.15);
+}
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* TOAST */
+#toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(150%);
+  z-index: 9999;
+  background: #0f172a; color: white;
+  border-radius: 14px; padding: 16px 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  display: flex; align-items: center; gap: 12px;
+  transition: 0.4s; max-width: 90%;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast i { font-size: 1.1rem; color: #43e97b; }
+#toast p { font-size: 0.88rem; font-weight: 500; }
+
+/* FOOTER */
+footer { background: var(--dark-2); color: #fff; padding: 40px 0; margin-top: 40px; text-align: center; }
+[data-theme="dark"] footer { background: #020617; }
+footer p { font-size: 0.82rem; color: var(--gray-light); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .nav-links { gap: 2px; }
+  .nav-links > li > a { padding: 10px 10px; font-size: 13px; }
+  .logo { font-size: 20px; }
+}
+@media (max-width: 900px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .pets-sidebar { position: static; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 4px; padding: 20px 0; order: 10; }
+  .nav-links.mobile-open {
+    display: flex; position: absolute; top: 76px; left: 0; right: 0;
+    background: var(--card-bg); padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border-top: 1px solid var(--border);
+  }
+  .nav-links > li > a { width: 100%; padding: 14px 16px; justify-content: flex-start; }
+  .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; border: none; background: rgba(0,119,182,.05); margin: 4px 0 4px 12px; padding: 4px; min-width: auto; display: none; }
+  .dropdown.open .dropdown-menu { display: block; }
+  .nav-actions .btn-outline { display: none; }
+  .menu-toggle { display: block; }
+  .page-header-top h1 { font-size: 1.1rem; }
+  .page-header-top .subtitle { padding-left: 0; }
+  .profile-card { padding: 20px; }
+  .profile-avatar { width: 100px; height: 100px; font-size: 3rem; }
+  .profile-info { padding-top: 20px; }
+  .profile-info h2 { font-size: 1.4rem; }
+  .info-card { padding: 18px; }
+  .modal-content { padding: 24px; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .chart-bars { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-paw"></i>
+      <span class="smart-text">Smart</span>
+      <span class="petcare-text">PetCare</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-heart-pulse"></i> Pet Care <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="pet-profile.html"><i class="fa-solid fa-paw"></i> Pet Profile</a></li>
+            <li><a href="ai-assistant.html"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+            <li><a href="gps-tracking.html"><i class="fa-solid fa-location-dot"></i> GPS Tracking</a></li>
+            <li><a href="dog-breeds.html"><i class="fa-solid fa-book"></i> Dog Breeds</a></li>
+            <li><a href="medical-support.html"><i class="fa-solid fa-stethoscope"></i> Medical Support</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-cart-shopping"></i> Shop <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="marketplace.html"><i class="fa-solid fa-shop"></i> Marketplace</a></li>
+            <li><a href="food-nutrition.html"><i class="fa-solid fa-bowl-food"></i> Food & Nutrition</a></li>
+            <li><a href="pet-listing-portal.html"><i class="fa-solid fa-tag"></i> Pet Listing</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-users"></i> Community <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="community-forum.html"><i class="fa-solid fa-comments"></i> Forum</a></li>
+            <li><a href="events.html"><i class="fa-solid fa-calendar-check"></i> Events</a></li>
+            <li><a href="adoption.html"><i class="fa-solid fa-house-chimney"></i> Adoption Hub</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-gauge"></i> Dashboards <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-speedometer"></i> Admin</a></li>
+            <li><a href="vet-portal.html"><i class="fa-solid fa-user-doctor"></i> Vet Portal</a></li>
+            <li><a href="seller.html"><i class="fa-solid fa-shop"></i> Seller</a></li>
+            <li><a href="adoption-portal.html"><i class="fa-solid fa-house-heart"></i> Shelter</a></li>
+            <li><a href="organizer.html"><i class="fa-solid fa-trophy"></i> Event Organizer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="cart-btn" onclick="window.location.href='marketplace.html'" title="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count">0</span></button>
+      <a href="#" class="btn btn-outline" onclick="showToast('Login coming soon! 🔐'); return false;">Login</a>
+      <a href="#" class="btn btn-primary" onclick="showToast('Sign up coming soon! 🎉'); return false;">Get Started</a>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header-card">
+  <div class="page-header-top">
+    <h1>
+      <div class="icon-badge"><i class="fa-solid fa-paw"></i></div>
+      <div>
+        My Pet Profiles
+        <div class="subtitle">Manage your pets' complete profiles, health records & activities</div>
+      </div>
+    </h1>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+  <div class="main-grid">
+
+    <!-- PETS SIDEBAR -->
+    <aside class="pets-sidebar">
+      <div class="sidebar-title"><i class="fa-solid fa-users"></i> Your Pets</div>
+      <div class="pets-sidebar-list" id="petsSidebarList"></div>
+      <button class="add-pet-btn" onclick="openAddPetModal()">
+        <i class="fa-solid fa-plus-circle"></i> Add New Pet
+      </button>
+    </aside>
+
+    <!-- PET DETAIL -->
+    <div class="pet-detail" id="petDetail"></div>
+
+  </div>
+</div>
+
+<!-- MODAL: ADD/EDIT PET -->
+<div class="modal" id="petModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closePetModal()"><i class="fa-solid fa-xmark"></i></button>
+    <h2 id="modalTitle">Add New Pet</h2>
+    <p>Fill in your pet's details below</p>
+    <form id="petForm" onsubmit="savePet(event)">
+      <input type="hidden" id="editPetId">
+      <div class="form-group">
+        <label>Pet Name *</label>
+        <input type="text" class="form-input" id="petName" placeholder="e.g., Bruno" required>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Species *</label>
+          <select class="form-input" id="petSpecies" required>
+            <option value="dog">🐶 Dog</option>
+            <option value="cat">🐱 Cat</option>
+            <option value="rabbit">🐰 Rabbit</option>
+            <option value="bird">🦜 Bird</option>
+            <option value="other">🐾 Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Gender *</label>
+          <select class="form-input" id="petGender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Breed</label>
+          <input type="text" class="form-input" id="petBreed" placeholder="e.g., Golden Retriever">
+        </div>
+        <div class="form-group">
+          <label>Age (years)</label>
+          <input type="number" class="form-input" id="petAge" placeholder="3" min="0" step="0.1">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" class="form-input" id="petWeight" placeholder="28" min="0" step="0.1">
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" class="form-input" id="petColor" placeholder="e.g., Golden">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Birth Date</label>
+        <input type="date" class="form-input" id="petBirthDate">
+      </div>
+      <button type="submit" class="btn-profile btn-primary" style="width:100%; justify-content:center; padding:14px; margin-top:10px;">
+        <i class="fa-solid fa-check"></i> Save Pet
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Smart PetCare. All rights reserved. Made with ❤️ for pets everywhere.</p>
+</footer>
+
+<!-- TOAST -->
+<div id="toast"><i class="fa-solid fa-circle-check"></i><p id="toastMsg">Success!</p></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   NAVBAR JS
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+});
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('mobile-open');
+}
+document.querySelectorAll('.dropdown-toggle').forEach(t => {
+  t.addEventListener('click', e => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      t.parentElement.classList.toggle('open');
+    }
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  localStorage.setItem('petcare-theme', next);
+  showToast(next === 'dark' ? '🌙 Dark mode activated' : '☀️ Light mode activated');
+}
+const savedTheme = localStorage.getItem('petcare-theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (savedTheme === 'dark') document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════════════════════════ */
+const defaultPets = [
+  {
+    id: 1, name: 'Bruno', emoji: '🐶', species: 'dog',
+    breed: 'Golden Retriever', gender: 'Male', age: 3, weight: 28, color: 'Golden',
+    birthDate: '2023-05-12', healthScore: 98, microchip: 'LKR-982-3471',
+    lastCheckup: '2026-10-05', vet: 'Dr. Anjali Perera',
+    allergies: 'None', conditions: 'None', lastTreatment: 'Dental Cleaning',
+    nextVisit: '2026-10-12',
+    vaccines: [
+      { name: 'Rabies', last: 'Jan 15, 2026', next: 'Jan 15, 2027', status: 'good' },
+      { name: 'Distemper', last: 'Feb 10, 2026', next: 'Feb 10, 2027', status: 'good' },
+      { name: 'Parvovirus', last: 'Feb 10, 2026', next: 'Feb 10, 2027', status: 'good' },
+      { name: 'Hepatitis', last: 'Mar 05, 2026', next: 'Mar 05, 2027', status: 'good' },
+      { name: 'Leptospirosis', last: 'Apr 20, 2026', next: 'Apr 20, 2027', status: 'good' }
+    ],
+    activities: [
+      { title: 'Dental Cleaning Completed', desc: 'Oct 05, 2026 · Dr. Anjali Perera', recent: true },
+      { title: 'Leptospirosis Vaccine', desc: 'Apr 20, 2026 · Colombo Vet Clinic', recent: false },
+      { title: 'Annual Health Checkup', desc: 'Mar 15, 2026 · All vitals normal', recent: false },
+      { title: 'Hepatitis Booster', desc: 'Mar 05, 2026 · Colombo Vet Clinic', recent: false }
+    ],
+    weightHistory: [
+      { month: 'May', value: 25.2 }, { month: 'Jun', value: 25.8 },
+      { month: 'Jul', value: 26.5 }, { month: 'Aug', value: 27.1 },
+      { month: 'Sep', value: 27.8 }, { month: 'Oct', value: 28.0 }
+    ]
+  },
+  {
+    id: 2, name: 'Luna', emoji: '🐱', species: 'cat',
+    breed: 'Persian', gender: 'Female', age: 2, weight: 4.2, color: 'White',
+    birthDate: '2024-03-08', healthScore: 95, microchip: 'LKR-441-9832',
+    lastCheckup: '2026-09-28', vet: 'Dr. Michael Chen',
+    allergies: 'Chicken', conditions: 'None', lastTreatment: 'Flea Treatment',
+    nextVisit: '2026-11-15',
+    vaccines: [
+      { name: 'Rabies', last: 'Feb 20, 2026', next: 'Feb 20, 2027', status: 'good' },
+      { name: 'FVRCP', last: 'Mar 10, 2026', next: 'Mar 10, 2027', status: 'good' },
+      { name: 'FeLV', last: 'Mar 10, 2026', next: 'Mar 10, 2027', status: 'good' }
+    ],
+    activities: [
+      { title: 'Flea Treatment', desc: 'Sep 28, 2026 · Dr. Michael Chen', recent: true },
+      { title: 'Annual Checkup', desc: 'Aug 15, 2026 · Healthy', recent: false },
+      { title: 'FVRCP Booster', desc: 'Mar 10, 2026 · Colombo Vet Clinic', recent: false }
+    ],
+    weightHistory: [
+      { month: 'May', value: 3.8 }, { month: 'Jun', value: 3.9 },
+      { month: 'Jul', value: 4.0 }, { month: 'Aug', value: 4.1 },
+      { month: 'Sep', value: 4.15 }, { month: 'Oct', value: 4.2 }
+    ]
+  },
+  {
+    id: 3, name: 'Snowy', emoji: '🐰', species: 'rabbit',
+    breed: 'Angora', gender: 'Female', age: 1, weight: 2.1, color: 'White',
+    birthDate: '2025-06-20', healthScore: 88, microchip: 'LKR-776-2245',
+    lastCheckup: '2026-09-15', vet: 'Dr. Sarah Johnson',
+    allergies: 'None', conditions: 'Vaccine Due', lastTreatment: 'Nail Trimming',
+    nextVisit: '2026-10-20',
+    vaccines: [
+      { name: 'Myxomatosis', last: 'May 10, 2026', next: 'Oct 20, 2026', status: 'warn' },
+      { name: 'RHDV', last: 'May 10, 2026', next: 'Nov 10, 2026', status: 'good' }
+    ],
+    activities: [
+      { title: 'Nail Trimming', desc: 'Sep 15, 2026 · Dr. Sarah Johnson', recent: true },
+      { title: 'Myxomatosis Vaccine Due Soon', desc: 'Due: Oct 20, 2026', recent: true },
+      { title: 'Wellness Checkup', desc: 'Aug 05, 2026 · Healthy', recent: false }
+    ],
+    weightHistory: [
+      { month: 'May', value: 1.8 }, { month: 'Jun', value: 1.85 },
+      { month: 'Jul', value: 1.95 }, { month: 'Aug', value: 2.0 },
+      { month: 'Sep', value: 2.05 }, { month: 'Oct', value: 2.1 }
+    ]
+  }
+];
+
+let pets = JSON.parse(localStorage.getItem('petcarePets')) || defaultPets;
+let currentPetId = pets[0]?.id || 1;
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER SIDEBAR
+   ═══════════════════════════════════════════════════════════════ */
+function renderPetsSidebar() {
+  const list = document.getElementById('petsSidebarList');
+  list.innerHTML = pets.map(pet => {
+    const healthClass = pet.healthScore >= 90 ? 'health-good' : pet.healthScore >= 70 ? 'health-warn' : 'health-bad';
+    return `
+      <div class="pet-item ${pet.id === currentPetId ? 'active' : ''}" onclick="selectPet(${pet.id})">
+        <div class="pet-item-avatar">${pet.emoji}</div>
+        <div class="pet-item-info">
+          <div class="pet-item-name">${pet.name}</div>
+          <div class="pet-item-breed">${pet.breed || pet.species}</div>
+        </div>
+        <div class="pet-item-health ${healthClass}"></div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectPet(id) {
+  currentPetId = id;
+  renderPetsSidebar();
+  renderPetDetail();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER PET DETAIL
+   ═══════════════════════════════════════════════════════════════ */
+function renderPetDetail() {
+  const pet = pets.find(p => p.id === currentPetId);
+  if (!pet) return;
+  const detail = document.getElementById('petDetail');
+
+  const vaccineHTML = pet.vaccines.map(v => {
+    const statusText = v.status === 'good' ? '✓ Up to date' : v.status === 'warn' ? '⚠ Due soon' : '⚠ Overdue';
+    return `
+      <div class="vaccine-item ${v.status === 'warn' ? 'warn' : v.status === 'due' ? 'due' : ''}">
+        <div class="vaccine-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="vaccine-info">
+          <h4>${v.name}</h4>
+          <p>Last: ${v.last} · Next: ${v.next}</p>
+        </div>
+        <div class="vaccine-status">${statusText}</div>
+      </div>
+    `;
+  }).join('');
+
+  const activityHTML = pet.activities.map(a => `
+    <div class="activity-item">
+      <div class="activity-dot ${a.recent ? 'recent' : ''}"></div>
+      <div class="activity-content">
+        <h4>${a.title}</h4>
+        <p>${a.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  const maxWeight = Math.max(...pet.weightHistory.map(w => w.value));
+  const weightHTML = pet.weightHistory.map(w => {
+    const heightPercent = (w.value / maxWeight) * 100;
+    return `
+      <div class="chart-bar-wrapper">
+        <div class="chart-bar" style="height: ${heightPercent}%;">
+          <span class="chart-bar-value">${w.value}</span>
+        </div>
+        <div class="chart-label">${w.month}</div>
+      </div>
+    `;
+  }).join('');
+
+  detail.innerHTML = `
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">${pet.emoji}</div>
+        <div class="profile-info">
+          <h2>${pet.name}</h2>
+          <p>${pet.breed || pet.species} · ${pet.gender} · ${pet.age} ${pet.age === 1 ? 'year' : 'years'} old</p>
+          <div class="profile-tags">
+            <span class="profile-tag"><i class="fa-solid fa-heart-pulse"></i> ${pet.healthScore}% Healthy</span>
+            <span class="profile-tag"><i class="fa-solid fa-location-dot"></i> Colombo</span>
+            <span class="profile-tag"><i class="fa-solid fa-tag"></i> ${pet.microchip}</span>
+          </div>
+          <div class="profile-actions">
+            <button class="btn-profile btn-primary" onclick="openEditPetModal()">
+              <i class="fa-solid fa-pen"></i> Edit Profile
+            </button>
+            <button class="btn-profile btn-ghost" onclick="showToast('Opening medical records 📋')">
+              <i class="fa-solid fa-file-medical"></i> Records
+            </button>
+            <button class="btn-profile btn-ghost" onclick="showToast('Booking appointment 🩺')">
+              <i class="fa-solid fa-calendar-check"></i> Book Vet
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-mini"><i class="fa-solid fa-gauge-high"></i><h3>${pet.healthScore}%</h3><p>Health Score</p></div>
+        <div class="stat-mini"><i class="fa-solid fa-weight-scale"></i><h3>${pet.weight}kg</h3><p>Weight</p></div>
+        <div class="stat-mini"><i class="fa-solid fa-shield-halved"></i><h3>${pet.vaccines.length}</h3><p>Vaccines</p></div>
+        <div class="stat-mini"><i class="fa-solid fa-calendar-check"></i><h3>${pet.activities.length}</h3><p>Checkups</p></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-card-title"><i class="fa-solid fa-circle-info"></i> Basic Information</div>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><label>Breed</label><span>${pet.breed || 'N/A'}</span></div>
+        <div class="info-item"><label>Age</label><span>${pet.age} Years</span></div>
+        <div class="info-item"><label>Gender</label><span>${pet.gender}</span></div>
+        <div class="info-item"><label>Color</label><span>${pet.color || 'N/A'}</span></div>
+        <div class="info-item"><label>Birth Date</label><span>${pet.birthDate || 'N/A'}</span></div>
+        <div class="info-item"><label>Microchip ID</label><span>${pet.microchip || 'N/A'}</span></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-card-title"><i class="fa-solid fa-shield-halved"></i> Vaccination Records</div>
+        <div class="info-card-badge">${pet.vaccines.length} vaccines</div>
+      </div>
+      <div class="vaccine-list">${vaccineHTML}</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-card-title"><i class="fa-solid fa-clipboard"></i> Medical History</div>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><label>Last Checkup</label><span>${pet.lastCheckup}</span></div>
+        <div class="info-item"><label>Vet</label><span>${pet.vet}</span></div>
+        <div class="info-item"><label>Allergies</label><span>${pet.allergies}</span></div>
+        <div class="info-item"><label>Conditions</label><span>${pet.conditions}</span></div>
+        <div class="info-item"><label>Last Treatment</label><span>${pet.lastTreatment}</span></div>
+        <div class="info-item"><label>Next Visit</label><span>${pet.nextVisit}</span></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-card-title"><i class="fa-solid fa-chart-line"></i> Weight Trend</div>
+        <div class="info-card-badge">Last 6 months</div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-bars">${weightHTML}</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="info-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</div>
+      </div>
+      <div class="activity-list">${activityHTML}</div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ADD/EDIT PET
+   ═══════════════════════════════════════════════════════════════ */
+function openAddPetModal() {
+  document.getElementById('modalTitle').textContent = 'Add New Pet';
+  document.getElementById('petForm').reset();
+  document.getElementById('editPetId').value = '';
+  document.getElementById('petModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function openEditPetModal() {
+  const pet = pets.find(p => p.id === currentPetId);
+  if (!pet) return;
+  document.getElementById('modalTitle').textContent = 'Edit ' + pet.name;
+  document.getElementById('editPetId').value = pet.id;
+  document.getElementById('petName').value = pet.name;
+  document.getElementById('petSpecies').value = pet.species;
+  document.getElementById('petGender').value = pet.gender;
+  document.getElementById('petBreed').value = pet.breed || '';
+  document.getElementById('petAge').value = pet.age || '';
+  document.getElementById('petWeight').value = pet.weight || '';
+  document.getElementById('petColor').value = pet.color || '';
+  document.getElementById('petBirthDate').value = pet.birthDate || '';
+  document.getElementById('petModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePetModal() {
+  document.getElementById('petModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function savePet(e) {
+  e.preventDefault();
+  const editId = document.getElementById('editPetId').value;
+  const emojiMap = { dog: '🐶', cat: '🐱', rabbit: '🐰', bird: '🦜', other: '🐾' };
+  const species = document.getElementById('petSpecies').value;
+
+  const petData = {
+    name: document.getElementById('petName').value,
+    species: species,
+    emoji: emojiMap[species] || '🐾',
+    gender: document.getElementById('petGender').value,
+    breed: document.getElementById('petBreed').value,
+    age: parseFloat(document.getElementById('petAge').value) || 0,
+    weight: parseFloat(document.getElementById('petWeight').value) || 0,
+    color: document.getElementById('petColor').value,
+    birthDate: document.getElementById('petBirthDate').value
+  };
+
+  if (editId) {
+    const idx = pets.findIndex(p => p.id === parseInt(editId));
+    if (idx !== -1) pets[idx] = { ...pets[idx], ...petData };
+    showToast(`${petData.name} updated! ✏️`);
+  } else {
+    const newId = Math.max(...pets.map(p => p.id), 0) + 1;
+    pets.push({
+      id: newId, ...petData,
+      healthScore: 95,
+      microchip: 'LKR-' + Math.floor(100 + Math.random() * 900) + '-' + Math.floor(1000 + Math.random() * 9000),
+      lastCheckup: new Date().toISOString().split('T')[0],
+      vet: 'Not assigned',
+      allergies: 'None', conditions: 'None',
+      lastTreatment: 'Initial checkup',
+      nextVisit: 'Not scheduled',
+      vaccines: [],
+      activities: [{ title: 'Profile created', desc: new Date().toLocaleDateString(), recent: true }],
+      weightHistory: [{ month: 'Now', value: petData.weight || 0 }]
+    });
+    currentPetId = newId;
+    showToast(`${petData.name} added! 🎉`);
+  }
+
+  localStorage.setItem('petcarePets', JSON.stringify(pets));
+  closePetModal();
+  renderPetsSidebar();
+  renderPetDetail();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════════════════════════ */
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   KEYBOARD + INIT
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePetModal();
+});
+document.getElementById('petModal').addEventListener('click', (e) => {
+  if (e.target.id === 'petModal') closePetModal();
+});
+
+renderPetsSidebar();
+renderPetDetail();
+
+console.log('%c🐾 Pet Profile — Smart PetCare', 'font-size:20px; font-weight:bold; color:#0077b6;');
+</script>
+</body>
+</html>

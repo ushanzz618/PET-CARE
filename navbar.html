@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart PetCare — Universal Navbar</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ✅ Universal Navbar CSS -->
+<link rel="stylesheet" href="css/navbar.css">
+
+<style>
+  /* Demo page background (navbar.html test කරන්න විතරයි) */
+  body {
+    background: #f4f8fb;
+    min-height: 200vh;
+    margin: 0;
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+  [data-theme="dark"] body { background: #0f172a; }
+  .demo-content {
+    max-width: 1280px;
+    margin: 60px auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .demo-content h1 {
+    color: #023e8a;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  [data-theme="dark"] .demo-content h1 { color: #caf0f8; }
+  .demo-content p {
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ SMART PETCARE NAVBAR ═══════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo" aria-label="Smart PetCare Home">
+      <i class="fa-solid fa-paw" aria-hidden="true"></i>
+      <span class="smart-text">Smart</span>
+      <span class="petcare-text">PetCare</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="index.html" class="active">
+            <i class="fa-solid fa-house" aria-hidden="true"></i> Home
+          </a>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Pet Care
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="pet-profile.html"><i class="fa-solid fa-paw"></i> Pet Profile</a></li>
+            <li><a href="ai-assistant.html"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+            <li><a href="gps-tracking.html"><i class="fa-solid fa-location-dot"></i> GPS Tracking</a></li>
+            <li><a href="dog-breeds.html"><i class="fa-solid fa-book"></i> Dog Breeds</a></li>
+            <li><a href="medical-support.html"><i class="fa-solid fa-stethoscope"></i> Medical Support</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Shop
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="marketplace.html"><i class="fa-solid fa-shop"></i> Marketplace</a></li>
+            <li><a href="food-nutrition.html"><i class="fa-solid fa-bowl-food"></i> Food & Nutrition</a></li>
+            <li><a href="pet-listing-portal.html"><i class="fa-solid fa-tag"></i> Pet Listing</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-users" aria-hidden="true"></i> Community
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="community-forum.html"><i class="fa-solid fa-comments"></i> Forum</a></li>
+            <li><a href="events.html"><i class="fa-solid fa-calendar-check"></i> Events</a></li>
+            <li><a href="adoption.html"><i class="fa-solid fa-house-chimney"></i> Adoption Hub</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-gauge" aria-hidden="true"></i> Dashboards
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-speedometer"></i> Admin</a></li>
+            <li><a href="vet-portal.html"><i class="fa-solid fa-user-doctor"></i> Vet Portal</a></li>
+            <li><a href="seller.html"><i class="fa-solid fa-shop"></i> Seller</a></li>
+            <li><a href="adoption-portal.html"><i class="fa-solid fa-house-heart"></i> Shelter</a></li>
+            <li><a href="organizer.html"><i class="fa-solid fa-trophy"></i> Event Organizer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
+      </button>
+
+      <button class="cart-btn" onclick="toggleCart()" aria-label="View cart" title="Cart">
+        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+
+      <button class="cart-btn" onclick="toggleNotif()" aria-label="Notifications" title="Notifications">
+        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+        <span class="cart-count">3</span>
+      </button>
+
+      <a href="#" class="btn btn-outline" onclick="openAuth('login'); return false;">Login</a>
+      <a href="#" class="btn btn-primary" onclick="openAuth('register'); return false;">Get Started</a>
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════ DEMO CONTENT (test කරන්න විතරයි) ═══════════ -->
+<div class="demo-content">
+  <h1>🐾 Navbar Test Page</h1>
+  <p>මේක navbar එක test කරන්න විතරයි. ඔයාගේ page එකේ මේක ඕන නෑ.</p>
+  <p>Scroll කරලා navbar එකේ <strong>scrolled</strong> effect එක බලන්න. 📜</p>
+  <p>Browser එක <strong>resize</strong> කරලා mobile menu එක test කරන්න. 📱</p>
+</div>
+
+<!-- ═══════════ Demo Toast (test) ═══════════ -->
+<div id="toast" class="toast" role="status" aria-live="polite">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg">Success!</span>
+</div>
+
+<!-- ✅ Universal Navbar JS -->
+<script src="js/navbar.js"></script>
+
+<!-- Demo functions (navbar.js එකේ නැති ඒවා — demo විතරයි) -->
+<script>
+  function toggleCart() {
+    if (window.showToast) window.showToast('🛒 Cart panel demo (navbar.html test)');
+  }
+  function toggleNotif() {
+    if (window.showToast) window.showToast('🔔 Notification panel demo');
+  }
+  function openAuth(type) {
+    if (window.showToast) window.showToast(type === 'login' ? '🔐 Login demo' : '🎉 Register demo');
+  }
+</script>
+
+</body>
+</html>

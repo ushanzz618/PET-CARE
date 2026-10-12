@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veterinarian Portal — Smart PetCare</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg-gradient: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #48cae4 100%);
+        --card-bg: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --input-bg: #f0f9ff;
+        --input-border: #e0f2fe;
+        --result-bg: #ffffff;
+        --result-border: #e0f2fe;
+        --shadow-color: rgba(0, 119, 182, 0.15);
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --purple: #8b5cf6;
+        --pink: #ec4899;
+        --grad-main: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+        --grad-hero: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #48cae4 100%);
+    }
+    html[data-theme="dark"] {
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        --card-bg: #1e293b;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --input-bg: #334155;
+        --input-border: #475569;
+        --result-bg: #1e293b;
+        --result-border: #334155;
+        --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+    * { font-family: 'Poppins', 'Inter', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        min-height: 100vh;
+        background: var(--bg-gradient);
+        background-attachment: fixed;
+        padding: 20px 15px;
+        position: relative;
+        overflow-x: hidden;
+    }
+    body::before {
+        content: ''; position: fixed;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.15), transparent);
+        border-radius: 50%; top: -200px; left: -200px;
+        animation: float 15s ease-in-out infinite; z-index: 0;
+    }
+    body::after {
+        content: ''; position: fixed;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+        border-radius: 50%; bottom: -150px; right: -150px;
+        animation: float 20s ease-in-out infinite reverse; z-index: 0;
+    }
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(50px, 50px) scale(1.1); }
+    }
+
+    .top-controls {
+        display: flex; justify-content: flex-end; gap: 10px;
+        margin-bottom: 15px; position: relative; z-index: 10;
+        max-width: 1300px; margin-left: auto; margin-right: auto;
+    }
+    .control-group {
+        display: flex; background: var(--card-bg);
+        border-radius: 12px; padding: 4px;
+        box-shadow: 0 8px 25px var(--shadow-color);
+        border: 1px solid var(--result-border);
+    }
+    .control-btn {
+        background: transparent; border: none; padding: 8px 14px;
+        font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
+        border-radius: 8px; cursor: pointer; transition: 0.3s;
+        font-family: inherit; display: flex; align-items: center; gap: 6px;
+    }
+    .control-btn:hover { color: #0077b6; background: rgba(0, 119, 182, 0.1); }
+    .theme-btn { padding: 10px 14px; font-size: 1rem; }
+
+    .app-container { max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* AUTH */
+    .auth-screen {
+        display: flex; align-items: center; justify-content: center;
+        min-height: calc(100vh - 100px);
+        padding: 20px 0;
+    }
+    .auth-card {
+        background: var(--card-bg);
+        border: 1px solid var(--result-border);
+        border-radius: 26px;
+        box-shadow: 0 30px 70px var(--shadow-color);
+        max-width: 560px;
+        width: 100%;
+        overflow: hidden;
+        animation: slideUp 0.5s;
+    }
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .auth-header {
+        background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+        padding: 32px 30px; color: white; text-align: center;
+        position: relative; overflow: hidden;
+    }
+    .auth-header::before {
+        content: ''; position: absolute;
+        top: -50%; right: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .auth-logo {
+        width: 70px; height: 70px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 20px;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 2rem;
+        position: relative; z-index: 1;
+    }
+    .auth-header h1 {
+        font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;
+        position: relative; z-index: 1;
+    }
+    .auth-header p {
+        font-size: 0.85rem; opacity: 0.9;
+        position: relative; z-index: 1;
+    }
+
+    /* STEPPER */
+    .stepper {
+        display: flex; justify-content: center;
+        padding: 24px 30px 0;
+        gap: 8px;
+        align-items: center;
+    }
+    .step {
+        display: flex; align-items: center; gap: 8px;
+    }
+    .step-circle {
+        width: 34px; height: 34px;
+        border-radius: 50%;
+        background: var(--input-bg);
+        color: var(--text-muted);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800;
+        font-size: 0.85rem;
+        transition: 0.3s;
+        border: 2px solid var(--input-border);
+    }
+    .step.active .step-circle {
+        background: var(--grad-main);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 6px 15px rgba(0, 119, 182, 0.4);
+    }
+    .step.completed .step-circle {
+        background: var(--success);
+        color: white;
+        border-color: transparent;
+    }
+    .step-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        display: none;
+    }
+    .step.active .step-label { color: var(--text-primary); display: block; }
+    .step-line {
+        width: 30px;
+        height: 2px;
+        background: var(--input-border);
+        border-radius: 2px;
+    }
+
+    .auth-body { padding: 30px; }
+    .step-panel { display: none; }
+    .step-panel.active { display: block; animation: fadeIn 0.3s; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    .auth-field { margin-bottom: 16px; }
+    .auth-field label {
+        font-size: 0.8rem; font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+        display: block;
+    }
+    .auth-field label .required { color: #ef4444; }
+    .auth-input, .auth-select, .auth-textarea {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid var(--input-border);
+        border-radius: 12px;
+        font-size: 0.9rem;
+        background: var(--input-bg);
+        color: var(--text-primary);
+        outline: none;
+        transition: 0.3s;
+        font-family: inherit;
+    }
+    .auth-textarea { min-height: 80px; resize: vertical; }
+    .auth-input:focus, .auth-select:focus, .auth-textarea:focus {
+        border-color: #0077b6;
+        background: var(--card-bg);
+        box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.15);
+    }
+    .auth-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .btn-auth {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        background: var(--grad-main);
+        color: white;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: 0.3s;
+        font-family: inherit;
+        margin-top: 8px;
+    }
+    .btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 119, 182, 0.4);
+    }
+    .btn-auth-outline {
+        background: var(--input-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--input-border);
+    }
+    .btn-auth-outline:hover {
+        background: var(--input-border);
+        box-shadow: none;
+    }
+    .btn-row {
+        display: flex; gap: 10px;
+        margin-top: 20px;
+    }
+
+    /* SERVICES PILLS */
+    .service-list {
+        display: flex; flex-direction: column; gap: 10px;
+    }
+    .service-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 16px;
+        background: var(--input-bg);
+        border: 2px solid var(--input-border);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .service-item:hover { border-color: #0077b6; }
+    .service-item.selected {
+        background: linear-gradient(135deg, rgba(0,119,182,0.1), rgba(0,180,216,0.1));
+        border-color: #0077b6;
+    }
+    .service-checkbox {
+        width: 22px; height: 22px;
+        border-radius: 6px;
+        border: 2px solid var(--input-border);
+        display: flex; align-items: center; justify-content: center;
+        color: transparent;
+        font-size: 0.75rem;
+        transition: 0.3s;
+        flex-shrink: 0;
+    }
+    .service-item.selected .service-checkbox {
+        background: #0077b6;
+        color: white;
+        border-color: #0077b6;
+    }
+    .service-name {
+        flex: 1;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    .service-fee {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #0077b6;
+    }
+
+    /* DASHBOARD */
+    .dashboard { display: none; }
+    .dashboard.active { display: block; }
+
+    .page-header-card {
+        background: var(--card-bg);
+        border: 1px solid var(--result-border);
+        border-radius: 24px;
+        box-shadow: 0 25px 60px var(--shadow-color);
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .page-header-top {
+        background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+        padding: 24px 30px; color: white;
+        position: relative; overflow: hidden;
+        display: flex; justify-content: space-between;
+        align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .page-header-top::before {
+        content: ''; position: absolute;
+        top: -50%; right: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+    .page-header-top h1 {
+        font-size: 1.4rem; font-weight: 700; margin: 0;
+        position: relative; z-index: 1;
+        display: flex; align-items: center; gap: 14px;
+    }
+    .icon-badge {
+        background: rgba(255,255,255,0.2);
+        width: 50px; height: 50px; border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; flex-shrink: 0;
+    }
+    .page-header-top .subtitle {
+        font-size: 0.85rem; opacity: 0.9; margin-top: 6px;
+        position: relative; z-index: 1; padding-left: 64px;
+    }
+    .header-right {
+        display: flex; gap: 10px; align-items: center;
+        flex-wrap: wrap; position: relative; z-index: 1;
+    }
+    .online-toggle {
+        display: flex; align-items: center; gap: 8px;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 8px 14px; border-radius: 50px;
+        font-size: 0.8rem; font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        color: white;
+        transition: 0.3s;
+    }
+    .online-toggle.online {
+        background: rgba(16,185,129,0.3);
+        border-color: rgba(16,185,129,0.5);
+    }
+    .online-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #94a3b8;
+        transition: 0.3s;
+    }
+    .online-toggle.online .online-dot {
+        background: #43e97b;
+        animation: pulseLive 2s infinite;
+    }
+    @keyframes pulseLive {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(67,233,123,0.7); }
+        50% { box-shadow: 0 0 0 6px rgba(67,233,123,0); }
+    }
+    .logout-btn {
+        background: rgba(239,68,68,0.15);
+        border: 1px solid rgba(239,68,68,0.3);
+        color: #ef4444;
+        padding: 8px 14px;
+        border-radius: 50px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: 0.3s;
+        display: flex; align-items: center; gap: 6px;
+    }
+    .logout-btn:hover { background: #ef4444; color: white; }
+
+    /* STATS */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--result-border);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        transition: 0.3s;
+        display: flex; align-items: center; gap: 14px;
+    }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-icon {
+        width: 48px; height: 48px;
+        border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.3rem; color: white;
+        flex-shrink: 0;
+    }
+    .stat-body { flex: 1; min-width: 0; }
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+    }
+    .stat-label {
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+    }
+    .s-primary .stat-icon { background: linear-gradient(135deg, #0077b6, #00b4d8); }
+    .s-success .stat-icon { background: linear-gradient(135deg, #10b981, #059669); }
+    .s-warning .stat-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .s-purple .stat-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+    /* TABS */
+    .tabs-nav {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .tab-nav-btn {
+        padding: 12px 20px;
+        border-radius: 14px;
+        border: 1px solid var(--result-border);
+        background: var(--card-bg);
+        color: var(--text-secondary);
+        font-weight: 700;
+        font-size: 0.83rem;
+        cursor: pointer;
+        transition: 0.3s;
+        font-family: inherit;
+        display: flex; align-items: center; gap: 8px;
+        box-shadow: 0 4px 15px var(--shadow-color);
+    }
+    .tab-nav-btn:hover { color: #0077b6; }
+    .tab-nav-btn.active {
+        background: var(--grad-main);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 8px 20px rgba(0, 119, 182, 0.35);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.3s; }
+
+    /* CARDS */
+    .content-card {
+        background: var(--card-bg);
+        border: 1px solid var(--result-border);
+        border-radius: 22px;
+        padding: 26px;
+        box-shadow: 0 15px 40px var(--shadow-color);
+        margin-bottom: 20px;
+    }
+    .content-card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--input-border);
+        display: flex; align-items: center; gap: 10px;
+    }
+    .content-card-title i { color: #0077b6; }
+
+    /* PROFILE */
+    .profile-header {
+        display: flex; gap: 24px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+    }
+    .profile-avatar {
+        width: 110px; height: 110px;
+        border-radius: 24px;
+        background: var(--grad-hero);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 3rem;
+        color: white;
+        box-shadow: 0 15px 35px rgba(0, 119, 182, 0.35);
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-info { flex: 1; min-width: 200px; }
+    .profile-info h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+    }
+    .profile-info > p {
+        font-size: 0.88rem;
+        color: #0077b6;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .profile-tags {
+        display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .profile-tag {
+        padding: 5px 12px;
+        border-radius: 50px;
+        background: var(--input-bg);
+        color: var(--text-secondary);
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: flex; align-items: center; gap: 4px;
+    }
+    .profile-tag i { color: #0077b6; }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+    }
+    .info-item {
+        padding: 14px;
+        background: var(--input-bg);
+        border-radius: 12px;
+    }
+    .info-item label {
+        font-size: 0.68rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: block;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
+    .info-item span {
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    /* SERVICES */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 14px;
+    }
+    .service-card {
+        padding: 18px;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: 14px;
+        transition: 0.3s;
+    }
+    .service-card:hover {
+        transform: translateY(-3px);
+        border-color: #0077b6;
+    }
+    .service-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .service-card h4 i { color: #0077b6; }
+    .service-card .fee {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #0077b6;
+        margin-bottom: 4px;
+    }
+    .service-card p {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+    }
+
+    /* APPOINTMENTS */
+    .appt-list { display: flex; flex-direction: column; gap: 12px; }
+    .appt-item {
+        display: flex; gap: 16px;
+        padding: 16px;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        transition: 0.3s;
+    }
+    .appt-item:hover {
+        border-color: #0077b6;
+        transform: translateX(4px);
+    }
+    .appt-time {
+        background: var(--grad-main);
+        color: white;
+        padding: 12px;
+        border-radius: 12px;
+        text-align: center;
+        min-width: 70px;
+        flex-shrink: 0;
+    }
+    .appt-time h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+    .appt-time p {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-top: 3px;
+        opacity: 0.9;
+    }
+    .appt-info { flex: 1; min-width: 180px; }
+    .appt-info h4 {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+    }
+    .appt-info p {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        display: flex; align-items: center; gap: 6px;
+        flex-wrap: wrap;
+    }
+    .appt-info p i { color: #0077b6; font-size: 0.72rem; }
+    .appt-status {
+        padding: 5px 12px;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .status-upcoming { background: rgba(16,185,129,0.15); color: var(--success); }
+    .status-pending { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .status-completed { background: rgba(148,163,184,0.15); color: var(--text-secondary); }
+
+    /* AVAILABILITY */
+    .days-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    .day-card {
+        padding: 14px;
+        background: var(--input-bg);
+        border: 2px solid var(--input-border);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .day-card:hover { border-color: #0077b6; }
+    .day-card.selected {
+        background: linear-gradient(135deg, rgba(0,119,182,0.1), rgba(0,180,216,0.1));
+        border-color: #0077b6;
+    }
+    .day-card h4 {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .day-card p {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+    }
+    .day-card.selected p { color: #0077b6; font-weight: 700; }
+
+    /* TOAST */
+    #toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(150%);
+        z-index: 9999;
+        background: #0f172a;
+        color: white;
+        border-radius: 14px;
+        padding: 16px 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: 0.4s;
+        max-width: 90%;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast i { font-size: 1.1rem; color: #43e97b; }
+    #toast p { font-size: 0.88rem; font-weight: 500; }
+
+    .footer {
+        text-align: center;
+        color: rgba(255,255,255,0.85);
+        font-size: 0.78rem;
+        margin-top: 30px;
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 700px) {
+        .page-header-top { padding: 18px 20px; }
+        .page-header-top h1 { font-size: 1.1rem; }
+        .page-header-top .subtitle { padding-left: 0; }
+        .auth-row-2 { grid-template-columns: 1fr; }
+        .profile-avatar { width: 80px; height: 80px; font-size: 2rem; }
+        .profile-info h2 { font-size: 1.2rem; }
+        .step-label { display: none !important; }
+    }
+</style>
+</head>
+<body>
+
+<div class="top-controls">
+    <div class="control-group">
+        <button class="control-btn theme-btn" id="themeToggle" title="Toggle theme">
+            <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+        </button>
+    </div>
+</div>
+
+<div class="app-container">
+
+    <!-- AUTH / REGISTRATION -->
+    <div class="auth-screen" id="authScreen">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo"><i class="bi bi-heart-pulse-fill"></i></div>
+                <h1>Veterinarian Portal</h1>
+                <p>Register your practice on Smart PetCare</p>
+            </div>
+
+            <!-- STEPPER -->
+            <div class="stepper">
+                <div class="step active" id="step1Indicator">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Personal</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step2Indicator">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Clinic</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step3Indicator">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Services</span>
+                </div>
+            </div>
+
+            <div class="auth-body">
+
+                <!-- STEP 1: PERSONAL -->
+                <div class="step-panel active" id="step1">
+                    <div class="auth-field">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" class="auth-input" id="vetName" placeholder="e.g., Dr. Anjali Perera">
+                    </div>
+                    <div class="auth-field">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" class="auth-input" id="vetEmail" placeholder="doctor@example.com">
+                    </div>
+                    <div class="auth-row-2">
+                        <div class="auth-field">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" class="auth-input" id="vetPhone" placeholder="+94 7X XXX XXXX">
+                        </div>
+                        <div class="auth-field">
+                            <label>License No. <span class="required">*</span></label>
+                            <input type="text" class="auth-input" id="vetLicense" placeholder="VET-XXXXX">
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Specialization <span class="required">*</span></label>
+                        <select class="auth-select" id="vetSpecialty">
+                            <option value="">Select specialization</option>
+                            <option>General Practice</option>
+                            <option>Surgery</option>
+                            <option>Dentistry</option>
+                            <option>Dermatology</option>
+                            <option>Ophthalmology</option>
+                            <option>Cardiology</option>
+                            <option>Orthopedics</option>
+                            <option>Emergency Care</option>
+                        </select>
+                    </div>
+                    <div class="auth-field">
+                        <label>Years of Experience</label>
+                        <input type="number" class="auth-input" id="vetExperience" placeholder="e.g., 8" min="0">
+                    </div>
+                </div>
+
+                <!-- STEP 2: CLINIC -->
+                <div class="step-panel" id="step2">
+                    <div class="auth-field">
+                        <label>Clinic Name <span class="required">*</span></label>
+                        <input type="text" class="auth-input" id="clinicName" placeholder="e.g., Colombo Vet Clinic">
+                    </div>
+                    <div class="auth-field">
+                        <label>Clinic Address <span class="required">*</span></label>
+                        <textarea class="auth-textarea" id="clinicAddress" placeholder="Full address with city"></textarea>
+                    </div>
+                    <div class="auth-row-2">
+                        <div class="auth-field">
+                            <label>City <span class="required">*</span></label>
+                            <input type="text" class="auth-input" id="clinicCity" placeholder="e.g., Colombo">
+                        </div>
+                        <div class="auth-field">
+                            <label>Consultation Fee (LKR)</label>
+                            <input type="number" class="auth-input" id="vetFee" placeholder="e.g., 2500" min="0">
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Bio / About</label>
+                        <textarea class="auth-textarea" id="vetBio" placeholder="Tell pet owners about yourself and your practice..."></textarea>
+                    </div>
+                    <div class="auth-field">
+                        <label>Profile Photo (Optional)</label>
+                        <input type="file" class="auth-input" id="vetPhoto" accept="image/*" style="padding: 10px;">
+                    </div>
+                </div>
+
+                <!-- STEP 3: SERVICES -->
+                <div class="step-panel" id="step3">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+                        Select the services you offer. Click to toggle.
+                    </p>
+                    <div class="service-list" id="servicesList">
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">General Consultation</span>
+                            <span class="service-fee">LKR 2,500</span>
+                        </div>
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">Vaccination</span>
+                            <span class="service-fee">LKR 1,500</span>
+                        </div>
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">Surgery</span>
+                            <span class="service-fee">LKR 15,000+</span>
+                        </div>
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">Dental Care</span>
+                            <span class="service-fee">LKR 5,000</span>
+                        </div>
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">Grooming</span>
+                            <span class="service-fee">LKR 3,000</span>
+                        </div>
+                        <div class="service-item" onclick="toggleService(this)">
+                            <div class="service-checkbox"><i class="bi bi-check"></i></div>
+                            <span class="service-name">Emergency Care</span>
+                            <span class="service-fee">LKR 5,000+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="btn-row">
+                    <button class="btn-auth btn-auth-outline" id="backBtn" onclick="prevStep()" style="display: none;">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-auth" id="nextBtn" onclick="nextStep()">
+                        Next <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard" id="dashboard">
+        <div class="page-header-card">
+            <div class="page-header-top">
+                <h1>
+                    <div class="icon-badge"><i class="bi bi-heart-pulse-fill"></i></div>
+                    <div>
+                        Vet Dashboard
+                        <div class="subtitle">Manage your practice and appointments</div>
+                    </div>
+                </h1>
+                <div class="header-right">
+                    <button class="online-toggle" id="onlineToggle" onclick="toggleOnline()">
+                        <span class="online-dot"></span>
+                        <span id="onlineText">Offline</span>
+                    </button>
+                    <button class="logout-btn" onclick="logoutVet()">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+            <div class="stat-card s-primary">
+                <div class="stat-icon"><i class="bi bi-calendar-check-fill"></i></div>
+                <div class="stat-body">
+                    <div class="stat-value" id="statAppts">0</div>
+                    <div class="stat-label">Appointments</div>
+                </div>
+            </div>
+            <div class="stat-card s-success">
+                <div class="stat-icon"><i class="bi bi-star-fill"></i></div>
+                <div class="stat-body">
+                    <div class="stat-value" id="statRating">4.9</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
+            <div class="stat-card s-warning">
+                <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+                <div class="stat-body">
+                    <div class="stat-value" id="statPatients">0</div>
+                    <div class="stat-label">Patients</div>
+                </div>
+            </div>
+            <div class="stat-card s-purple">
+                <div class="stat-icon"><i class="bi bi-currency-dollar"></i></div>
+                <div class="stat-body">
+                    <div class="stat-value" id="statEarnings">LKR 0</div>
+                    <div class="stat-label">Earnings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-nav">
+            <button class="tab-nav-btn active" onclick="switchTab('profile', this)">
+                <i class="bi bi-person-badge-fill"></i> Profile
+            </button>
+            <button class="tab-nav-btn" onclick="switchTab('availability', this)">
+                <i class="bi bi-calendar-week-fill"></i> Availability
+            </button>
+            <button class="tab-nav-btn" onclick="switchTab('services', this)">
+                <i class="bi bi-clipboard2-pulse-fill"></i> Services
+            </button>
+            <button class="tab-nav-btn" onclick="switchTab('appointments', this)">
+                <i class="bi bi-calendar-event-fill"></i> Appointments
+            </button>
+        </div>
+
+        <!-- TAB: PROFILE -->
+        <div class="tab-panel active" id="tab-profile">
+            <div class="content-card">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">👨‍⚕️</div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Dr. Name</h2>
+                        <p id="profileSpecialty">Specialization</p>
+                        <div class="profile-tags">
+                            <span class="profile-tag"><i class="bi bi-hospital-fill"></i> <span id="profileClinic">Clinic</span></span>
+                            <span class="profile-tag"><i class="bi bi-geo-alt-fill"></i> <span id="profileCity">City</span></span>
+                            <span class="profile-tag"><i class="bi bi-briefcase-fill"></i> <span id="profileExp">0 yrs exp</span></span>
+                            <span class="profile-tag"><i class="bi bi-patch-check-fill"></i> <span id="profileLicense">License</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item"><label>Email</label><span id="infoEmail">-</span></div>
+                    <div class="info-item"><label>Phone</label><span id="infoPhone">-</span></div>
+                    <div class="info-item"><label>Consultation Fee</label><span id="infoFee">LKR 0</span></div>
+                    <div class="info-item"><label>Joined</label><span id="infoJoined">-</span></div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div class="content-card-title" style="border: none; padding: 0; margin-bottom: 12px;">
+                        <i class="bi bi-file-text-fill"></i> About
+                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7;" id="profileBio">
+                        No bio added yet.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: AVAILABILITY -->
+        <div class="tab-panel" id="tab-availability">
+            <div class="content-card">
+                <div class="content-card-title">
+                    <i class="bi bi-calendar-week-fill"></i> Weekly Availability
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+                    Click on days to toggle available/unavailable.
+                </p>
+                <div class="days-grid" id="daysGrid">
+                    <div class="day-card selected" onclick="toggleDay(this, 'Monday')"><h4>Mon</h4><p>Available</p></div>
+                    <div class="day-card selected" onclick="toggleDay(this, 'Tuesday')"><h4>Tue</h4><p>Available</p></div>
+                    <div class="day-card selected" onclick="toggleDay(this, 'Wednesday')"><h4>Wed</h4><p>Available</p></div>
+                    <div class="day-card selected" onclick="toggleDay(this, 'Thursday')"><h4>Thu</h4><p>Available</p></div>
+                    <div class="day-card selected" onclick="toggleDay(this, 'Friday')"><h4>Fri</h4><p>Available</p></div>
+                    <div class="day-card" onclick="toggleDay(this, 'Saturday')"><h4>Sat</h4><p>Unavailable</p></div>
+                    <div class="day-card" onclick="toggleDay(this, 'Sunday')"><h4>Sun</h4><p>Unavailable</p></div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-card-title">
+                    <i class="bi bi-clock-fill"></i> Time Slots
+                </div>
+                <div class="auth-row-2">
+                    <div class="auth-field">
+                        <label>Morning Start</label>
+                        <input type="time" class="auth-input" id="morningStart" value="09:00">
+                    </div>
+                    <div class="auth-field">
+                        <label>Morning End</label>
+                        <input type="time" class="auth-input" id="morningEnd" value="12:00">
+                    </div>
+                    <div class="auth-field">
+                        <label>Evening Start</label>
+                        <input type="time" class="auth-input" id="eveningStart" value="14:00">
+                    </div>
+                    <div class="auth-field">
+                        <label>Evening End</label>
+                        <input type="time" class="auth-input" id="eveningEnd" value="18:00">
+                    </div>
+                </div>
+                <button class="btn-auth" onclick="saveAvailability()">
+                    <i class="bi bi-check-circle-fill"></i> Save Availability
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB: SERVICES -->
+        <div class="tab-panel" id="tab-services">
+            <div class="content-card">
+                <div class="content-card-title">
+                    <i class="bi bi-clipboard2-pulse-fill"></i> Your Services
+                </div>
+                <div class="services-grid" id="servicesGrid"></div>
+            </div>
+        </div>
+
+        <!-- TAB: APPOINTMENTS -->
+        <div class="tab-panel" id="tab-appointments">
+            <div class="content-card">
+                <div class="content-card-title">
+                    <i class="bi bi-calendar-event-fill"></i> Upcoming Appointments
+                </div>
+                <div class="appt-list" id="apptList"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <i class="bi bi-shield-check"></i> Smart PetCare • Veterinarian Portal
+    </div>
+</div>
+
+<div id="toast"><i class="bi bi-check-circle-fill"></i><p id="toastMsg">Success!</p></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════════════ */
+let currentVet = JSON.parse(localStorage.getItem('petcareVet')) || null;
+let vetOnline = JSON.parse(localStorage.getItem('petcareVetOnline')) || false;
+let currentStep = 1;
+let selectedServices = [];
+let vetPhotoBase64 = null;
+
+// Fake appointments for demo
+const demoAppointments = [
+    { id: 1, petName: 'Bruno', petEmoji: '🐶', ownerName: 'Sarah Johnson', date: '2026-10-15', time: '10:30 AM', reason: 'Annual Checkup', status: 'upcoming' },
+    { id: 2, petName: 'Luna', petEmoji: '🐱', ownerName: 'Michael Chen', date: '2026-10-15', time: '02:00 PM', reason: 'Vaccination', status: 'upcoming' },
+    { id: 3, petName: 'Snowy', petEmoji: '🐰', ownerName: 'Amaya Silva', date: '2026-10-16', time: '09:00 AM', reason: 'Dental Care', status: 'pending' },
+    { id: 4, petName: 'Max', petEmoji: '🐕', ownerName: 'John Doe', date: '2026-10-17', time: '11:00 AM', reason: 'Skin Issue', status: 'upcoming' },
+    { id: 5, petName: 'Whiskers', petEmoji: '🐈', ownerName: 'Lisa Perera', date: '2026-10-10', time: '03:30 PM', reason: 'Post-Surgery Check', status: 'completed' }
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════════════════════ */
+let currentTheme = localStorage.getItem('petcare-theme') || 'light';
+function applyTheme(theme) {
+    currentTheme = theme;
+    localStorage.setItem('petcare-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});
+applyTheme(currentTheme);
+
+/* ═══════════════════════════════════════════════════════════════
+   MULTI-STEP REGISTRATION
+   ═══════════════════════════════════════════════════════════════ */
+function updateStepper() {
+    for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById('step' + i + 'Indicator');
+        ind.classList.remove('active', 'completed');
+        if (i < currentStep) ind.classList.add('completed');
+        else if (i === currentStep) ind.classList.add('active');
+    }
+    for (let i = 1; i <= 3; i++) {
+        document.getElementById('step' + i).classList.toggle('active', i === currentStep);
+    }
+    document.getElementById('backBtn').style.display = currentStep > 1 ? 'flex' : 'none';
+    const nextBtn = document.getElementById('nextBtn');
+    if (currentStep === 3) {
+        nextBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Register';
+    } else {
+        nextBtn.innerHTML = 'Next <i class="bi bi-arrow-right"></i>';
+    }
+}
+
+function nextStep() {
+    if (currentStep === 1) {
+        // Validate step 1
+        const name = document.getElementById('vetName').value.trim();
+        const email = document.getElementById('vetEmail').value.trim();
+        const phone = document.getElementById('vetPhone').value.trim();
+        const license = document.getElementById('vetLicense').value.trim();
+        const specialty = document.getElementById('vetSpecialty').value;
+        if (!name) { showToast('Please enter your name!'); return; }
+        if (!email || !email.includes('@')) { showToast('Please enter a valid email!'); return; }
+        if (!phone) { showToast('Please enter your phone number!'); return; }
+        if (!license) { showToast('Please enter your license number!'); return; }
+        if (!specialty) { showToast('Please select a specialization!'); return; }
+    }
+    if (currentStep === 2) {
+        // Validate step 2
+        const clinic = document.getElementById('clinicName').value.trim();
+        const address = document.getElementById('clinicAddress').value.trim();
+        const city = document.getElementById('clinicCity').value.trim();
+        if (!clinic) { showToast('Please enter clinic name!'); return; }
+        if (!address) { showToast('Please enter clinic address!'); return; }
+        if (!city) { showToast('Please enter city!'); return; }
+    }
+    if (currentStep === 3) {
+        registerVet();
+        return;
+    }
+    currentStep++;
+    updateStepper();
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        updateStepper();
+    }
+}
+
+function toggleService(el) {
+    el.classList.toggle('selected');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REGISTER VET
+   ═══════════════════════════════════════════════════════════════ */
+document.getElementById('vetPhoto').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => { vetPhotoBase64 = ev.target.result; };
+    reader.readAsDataURL(file);
+});
+
+function registerVet() {
+    // Collect selected services
+    const selectedServices = [];
+    document.querySelectorAll('.service-item.selected').forEach(item => {
+        selectedServices.push({
+            name: item.querySelector('.service-name').textContent,
+            fee: item.querySelector('.service-fee').textContent
+        });
+    });
+
+    currentVet = {
+        name: document.getElementById('vetName').value.trim(),
+        email: document.getElementById('vetEmail').value.trim(),
+        phone: document.getElementById('vetPhone').value.trim(),
+        license: document.getElementById('vetLicense').value.trim(),
+        specialty: document.getElementById('vetSpecialty').value,
+        experience: document.getElementById('vetExperience').value || '0',
+        clinicName: document.getElementById('clinicName').value.trim(),
+        clinicAddress: document.getElementById('clinicAddress').value.trim(),
+        clinicCity: document.getElementById('clinicCity').value.trim(),
+        fee: document.getElementById('vetFee').value || '0',
+        bio: document.getElementById('vetBio').value.trim() || 'No bio added yet.',
+        photo: vetPhotoBase64,
+        services: selectedServices,
+        availability: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        joined: new Date().toISOString(),
+        rating: 4.9
+    };
+
+    localStorage.setItem('petcareVet', JSON.stringify(currentVet));
+    // Save to global vets list (for appointment page)
+    const globalVets = JSON.parse(localStorage.getItem('petcareUserVets')) || [];
+    globalVets.unshift(currentVet);
+    localStorage.setItem('petcareUserVets', JSON.stringify(globalVets));
+
+    showDashboard();
+    showToast(`Welcome, ${currentVet.name}! 🩺`);
+}
+
+function logoutVet() {
+    if (!confirm('Logout from Vet Portal?')) return;
+    localStorage.removeItem('petcareVet');
+    currentVet = null;
+    location.reload();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHOW DASHBOARD
+   ═══════════════════════════════════════════════════════════════ */
+function showDashboard() {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('dashboard').classList.add('active');
+    renderProfile();
+    renderServices();
+    renderAppointments();
+    updateStats();
+    updateOnlineStatus();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER PROFILE
+   ═══════════════════════════════════════════════════════════════ */
+function renderProfile() {
+    const avatar = document.getElementById('profileAvatar');
+    if (currentVet.photo) {
+        avatar.innerHTML = `<img src="${currentVet.photo}" alt="Vet">`;
+    } else {
+        avatar.textContent = '👨‍⚕️';
+    }
+    document.getElementById('profileName').textContent = currentVet.name;
+    document.getElementById('profileSpecialty').textContent = currentVet.specialty;
+    document.getElementById('profileClinic').textContent = currentVet.clinicName;
+    document.getElementById('profileCity').textContent = currentVet.clinicCity;
+    document.getElementById('profileExp').textContent = currentVet.experience + ' yrs exp';
+    document.getElementById('profileLicense').textContent = currentVet.license;
+    document.getElementById('infoEmail').textContent = currentVet.email;
+    document.getElementById('infoPhone').textContent = currentVet.phone;
+    document.getElementById('infoFee').textContent = 'LKR ' + Number(currentVet.fee).toLocaleString();
+    document.getElementById('infoJoined').textContent = new Date(currentVet.joined).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    document.getElementById('profileBio').textContent = currentVet.bio;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER SERVICES
+   ═══════════════════════════════════════════════════════════════ */
+function renderServices() {
+    const grid = document.getElementById('servicesGrid');
+    if (!currentVet.services || currentVet.services.length === 0) {
+        grid.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.88rem;">No services added yet.</p>';
+        return;
+    }
+    grid.innerHTML = currentVet.services.map(s => `
+        <div class="service-card">
+            <h4><i class="bi bi-check-circle-fill"></i> ${s.name}</h4>
+            <div class="fee">${s.fee}</div>
+            <p>Available for booking</p>
+        </div>
+    `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER APPOINTMENTS
+   ═══════════════════════════════════════════════════════════════ */
+function renderAppointments() {
+    const list = document.getElementById('apptList');
+    list.innerHTML = demoAppointments.map(a => `
+        <div class="appt-item">
+            <div class="appt-time">
+                <h4>${a.time.split(' ')[0]}</h4>
+                <p>${a.time.split(' ')[1]}</p>
+            </div>
+            <div class="appt-info">
+                <h4>${a.petEmoji} ${a.petName} — ${a.reason}</h4>
+                <p><i class="bi bi-person-fill"></i> ${a.ownerName} · <i class="bi bi-calendar3"></i> ${a.date}</p>
+            </div>
+            <span class="appt-status status-${a.status}">${a.status}</span>
+        </div>
+    `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATS
+   ═══════════════════════════════════════════════════════════════ */
+function updateStats() {
+    const appts = demoAppointments.length;
+    const patients = new Set(demoAppointments.map(a => a.petName)).size;
+    const earnings = 245000;
+    document.getElementById('statAppts').textContent = appts;
+    document.getElementById('statPatients').textContent = patients;
+    document.getElementById('statEarnings').textContent = 'LKR ' + earnings.toLocaleString();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ONLINE TOGGLE
+   ═══════════════════════════════════════════════════════════════ */
+function updateOnlineStatus() {
+    const toggle = document.getElementById('onlineToggle');
+    const text = document.getElementById('onlineText');
+    if (vetOnline) {
+        toggle.classList.add('online');
+        text.textContent = 'Online';
+    } else {
+        toggle.classList.remove('online');
+        text.textContent = 'Offline';
+    }
+}
+
+function toggleOnline() {
+    vetOnline = !vetOnline;
+    localStorage.setItem('petcareVetOnline', JSON.stringify(vetOnline));
+    updateOnlineStatus();
+    showToast(vetOnline ? '✅ You are now online' : '⭕ You are now offline');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TAB SWITCH
+   ═══════════════════════════════════════════════════════════════ */
+function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AVAILABILITY
+   ═══════════════════════════════════════════════════════════════ */
+function toggleDay(el, day) {
+    el.classList.toggle('selected');
+    el.querySelector('p').textContent = el.classList.contains('selected') ? 'Available' : 'Unavailable';
+}
+
+function saveAvailability() {
+    const days = [];
+    document.querySelectorAll('.day-card.selected').forEach(d => days.push(d.querySelector('h4').textContent));
+    currentVet.availability = days;
+    localStorage.setItem('petcareVet', JSON.stringify(currentVet));
+    showToast('Availability saved ✅');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════════════════════════ */
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+    if (currentVet) showDashboard();
+});
+
+console.log('%c🩺 Veterinarian Portal — Smart PetCare', 'font-size:20px; font-weight:bold; color:#0077b6;');
+console.log('%c✅ Multi-step registration + Dashboard', 'font-size:12px; color:#10b981;');
+</script>
+</body>
+</html>

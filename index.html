@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart PetCare — Ultra Pro Max Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SMART PETCARE — MASTER STYLESHEET
+   ═══════════════════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #0077b6;
+  --primary-dark: #023e8a;
+  --primary-light: #0096c7;
+  --accent: #00b4d8;
+  --accent-light: #48cae4;
+  --light: #e0f7ff;
+  --lighter: #f0faff;
+  --dark: #0f172a;
+  --dark-2: #1e293b;
+  --text: #334155;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --bg: #f4f8fb;
+  --card-bg: #ffffff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --grad1: linear-gradient(135deg, #4facfe, #00f2fe);
+  --grad2: linear-gradient(135deg, #43e97b, #38f9d7);
+  --grad3: linear-gradient(135deg, #fa709a, #fee140);
+  --grad4: linear-gradient(135deg, #f093fb, #f5576c);
+  --grad5: linear-gradient(135deg, #667eea, #764ba2);
+  --grad6: linear-gradient(135deg, #f6d365, #fda085);
+  --grad7: linear-gradient(135deg, #84fab0, #8fd3f4);
+  --grad8: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  --grad9: linear-gradient(135deg, #ff9a9e, #fecfef);
+  --grad-main: linear-gradient(135deg, #0077b6, #00b4d8);
+  --grad-hero: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #48cae4 100%);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --shadow-lg: 0 20px 60px rgba(0,119,182,.15);
+  --shadow-xl: 0 30px 80px rgba(0,119,182,.25);
+}
+
+[data-theme="dark"] {
+  --dark: #f8fafc;
+  --dark-2: #e2e8f0;
+  --text: #cbd5e1;
+  --gray: #94a3b8;
+  --gray-light: #64748b;
+  --white: #1e293b;
+  --border: #334155;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --light: #334155;
+  --lighter: #1e293b;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+}
+a { text-decoration: none; color: inherit; transition: .3s; }
+button { font-family: inherit; cursor: pointer; border: none; }
+input, select, textarea { font-family: inherit; }
+img { max-width: 100%; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* LOADER */
+#loader {
+  position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 24px;
+  transition: opacity .6s, visibility .6s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-paw { font-size: 70px; color: var(--primary); animation: bounce 1.2s infinite; }
+@keyframes bounce {
+  0%,100% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-25px) rotate(12deg); }
+}
+.loader-text { font-size: 20px; font-weight: 700; color: var(--primary-dark); letter-spacing: 2px; }
+.loader-bar { width: 240px; height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.loader-bar span { display: block; height: 100%; width: 0; background: var(--grad-main); border-radius: 10px; animation: load 1.8s forwards; }
+@keyframes load { to { width: 100%; } }
+
+/* BG ANIMATION */
+.bg-animation { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg-animation span {
+  position: absolute; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79,172,254,.15), rgba(0,242,254,.15));
+  animation: floatBg 22s infinite ease-in-out;
+}
+.bg-animation span:nth-child(1){width:420px;height:420px;top:-150px;left:-150px;}
+.bg-animation span:nth-child(2){width:280px;height:280px;top:40%;right:-120px;animation-delay:2s;}
+.bg-animation span:nth-child(3){width:200px;height:200px;bottom:10%;left:10%;animation-delay:4s;}
+.bg-animation span:nth-child(4){width:320px;height:320px;bottom:-100px;right:20%;animation-delay:6s;}
+.bg-animation span:nth-child(5){width:220px;height:220px;top:20%;left:30%;animation-delay:8s;}
+.bg-animation span:nth-child(6){width:180px;height:180px;top:60%;left:50%;animation-delay:10s;}
+@keyframes floatBg {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(50px,-50px) scale(1.15); }
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226,232,240,.6);
+  transition: .3s;
+}
+[data-theme="dark"] .navbar { background: rgba(15,23,42,.85); border-bottom-color: rgba(51,65,85,.6); }
+.navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+
+.logo {
+  font-size: 22px; font-weight: 800;
+  color: var(--primary-dark);
+  display: flex; align-items: center; gap: 10px;
+  letter-spacing: -0.5px; flex-shrink: 0;
+}
+.logo i {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--grad-main); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 6px 18px rgba(0,119,182,.35);
+  transition: .3s;
+}
+.logo:hover i { transform: rotate(-10deg) scale(1.05); }
+.logo .smart-text { color: var(--primary-dark); }
+.logo .petcare-text { color: var(--accent); }
+[data-theme="dark"] .logo .smart-text { color: #caf0f8; }
+[data-theme="dark"] .logo .petcare-text { color: #48cae4; }
+
+.nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+.nav-links > li > a {
+  font-weight: 600; font-size: 14px;
+  color: var(--gray); padding: 10px 14px;
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 6px;
+  position: relative; transition: .3s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active {
+  color: var(--primary); background: rgba(0,119,182,.08);
+}
+[data-theme="dark"] .nav-links > li > a:hover,
+[data-theme="dark"] .nav-links > li > a.active {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+
+.dropdown { position: relative; }
+.dropdown-toggle i.fa-chevron-down { transition: transform .3s; }
+.dropdown:hover > a i.fa-chevron-down { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--card-bg); border-radius: 14px; padding: 8px;
+  min-width: 220px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15);
+  border: 1px solid var(--border);
+  opacity: 0; visibility: hidden; transition: .3s;
+  list-style: none; z-index: 100;
+}
+.dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu li { margin: 0; }
+.dropdown-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; color: var(--gray);
+  font-weight: 600; transition: .2s;
+}
+.dropdown-menu a:hover {
+  background: rgba(0,119,182,.08);
+  color: var(--primary); transform: translateX(4px);
+}
+[data-theme="dark"] .dropdown-menu a:hover {
+  background: rgba(0,180,216,.15); color: var(--accent);
+}
+.dropdown-menu a i { width: 18px; text-align: center; color: var(--primary); font-size: 13px; }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.theme-toggle, .cart-btn {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--lighter); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: .3s; position: relative;
+}
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .cart-btn { background: var(--light); }
+.theme-toggle:hover { transform: rotate(20deg); }
+.cart-btn:hover { background: var(--primary); color: #fff; }
+[data-theme="dark"] .theme-toggle { color: #fbbf24; }
+.cart-count {
+  position: absolute; top: -5px; right: -5px;
+  background: var(--danger); color: #fff;
+  min-width: 20px; height: 20px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--card-bg); padding: 0 5px;
+}
+.menu-toggle { display: none; font-size: 22px; cursor: pointer; color: var(--primary-dark); background: transparent; padding: 8px; }
+[data-theme="dark"] .menu-toggle { color: var(--white); }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 8px; justify-content: center; padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: all .3s; white-space: nowrap; position: relative; overflow: hidden; }
+.btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,.25); border-radius: 50%; transform: translate(-50%,-50%); transition: width .5s, height .5s; }
+.btn:hover::before { width: 350px; height: 350px; }
+.btn > * { position: relative; z-index: 2; }
+.btn-primary { background: var(--grad-main); color: #fff; box-shadow: 0 6px 18px rgba(79,172,254,.4); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(79,172,254,.55); }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-ghost { background: rgba(0,119,182,.08); color: var(--primary); }
+[data-theme="dark"] .btn-ghost { background: rgba(0,180,216,.15); color: var(--accent); }
+.btn-ghost:hover { background: rgba(0,119,182,.15); }
+.btn-white { background: #fff; color: var(--primary); }
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.15); }
+.btn-lg { padding: 16px 36px; font-size: 16px; }
+.btn-block { width: 100%; }
+
+/* HERO */
+.hero { padding: 80px 0 70px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--light); color: var(--primary-dark); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 22px; border: 1px solid rgba(0,119,182,.15); }
+[data-theme="dark"] .badge { color: var(--accent); }
+.badge i { color: var(--accent); }
+.hero h1 { font-size: 58px; font-weight: 800; line-height: 1.1; color: var(--dark); margin-bottom: 22px; letter-spacing: -1.5px; }
+.gradient-text { background: var(--grad-main); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { font-size: 17px; color: var(--gray); margin-bottom: 32px; max-width: 540px; }
+.hero-btns { display: flex; gap: 14px; margin-bottom: 55px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 46px; flex-wrap: wrap; }
+.hero-stats > div { position: relative; }
+.hero-stats > div:not(:last-child)::after { content: ''; position: absolute; right: -23px; top: 10%; height: 80%; width: 1px; background: var(--border); }
+.hero-stats h3 { font-size: 34px; font-weight: 800; color: var(--primary-dark); line-height: 1; }
+[data-theme="dark"] .hero-stats h3 { color: var(--accent); }
+.hero-stats p { font-size: 13px; color: var(--gray); margin-top: 6px; }
+
+.hero-visual { position: relative; height: 520px; display: flex; align-items: center; justify-content: center; }
+.hero-circle {
+  width: 360px; height: 360px; border-radius: 50%;
+  background: var(--grad-hero);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 150px; color: #fff;
+  box-shadow: 0 40px 90px rgba(79,172,254,.5);
+  animation: float2 5s infinite ease-in-out;
+  position: relative;
+}
+.hero-circle::before { content: ''; position: absolute; inset: -25px; border-radius: 50%; border: 2px dashed rgba(0,119,182,.3); animation: spin 30s linear infinite; }
+.hero-circle::after { content: ''; position: absolute; inset: -50px; border-radius: 50%; border: 1px solid rgba(0,180,216,.15); animation: spin 40s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+.floating-card {
+  position: absolute; background: var(--card-bg); border-radius: 18px;
+  padding: 16px 22px; box-shadow: var(--shadow-lg);
+  display: flex; align-items: center; gap: 14px;
+  animation: float2 3.5s infinite ease-in-out;
+  border: 1px solid var(--border);
+}
+.floating-card i { font-size: 22px; width: 44px; height: 44px; border-radius: 12px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+.floating-card h4 { font-size: 14px; color: var(--dark); font-weight: 700; }
+.floating-card p { font-size: 12px; color: var(--gray); }
+.card1 { top: 20px; left: -10px; animation-delay: .5s; }
+.card2 { bottom: 70px; right: -10px; animation-delay: 1.5s; }
+.card3 { bottom: 10px; left: 40px; animation-delay: 2.5s; }
+
+/* SECTIONS */
+.section { padding: 90px 0; }
+.section-head { text-align: center; margin-bottom: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.section-head h2 { font-size: 44px; font-weight: 800; color: var(--dark); margin-bottom: 14px; letter-spacing: -1.5px; }
+.section-head p { color: var(--gray); font-size: 16px; }
+
+/* MODULES */
+.modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 26px; }
+.module-card {
+  background: var(--card-bg); padding: 32px; border-radius: 22px;
+  box-shadow: var(--shadow-sm); transition: all .4s;
+  border: 1px solid var(--border); position: relative; overflow: hidden;
+  cursor: pointer; display: block;
+}
+.module-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--grad-main); transform: scaleX(0); transform-origin: left; transition: .4s; }
+.module-card:hover::before { transform: scaleX(1); }
+.module-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,119,182,.2); border-color: var(--accent); }
+.icon-wrap { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #fff; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,.12); transition: .4s; }
+.module-card:hover .icon-wrap { transform: scale(1.1) rotate(-8deg); }
+.grad1{background:var(--grad1);} .grad2{background:var(--grad2);} .grad3{background:var(--grad3);}
+.grad4{background:var(--grad4);} .grad5{background:var(--grad5);} .grad6{background:var(--grad6);}
+.grad7{background:var(--grad7);} .grad8{background:var(--grad8);} .grad9{background:var(--grad9);}
+.module-card h3 { font-size: 18px; color: var(--dark); margin-bottom: 10px; font-weight: 700; }
+.module-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+/* DASHBOARD PREVIEW */
+.dashboard-preview {
+  background: var(--dark); border-radius: 32px; padding: 50px;
+  position: relative; overflow: hidden; box-shadow: var(--shadow-xl);
+  margin-top: 40px;
+}
+.dashboard-preview::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(0,180,216,.2), transparent 55%), radial-gradient(circle at 80% 80%, rgba(79,172,254,.2), transparent 55%); }
+.dashboard-preview > * { position: relative; z-index: 2; }
+.dash-preview-grid { display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
+.dash-sidebar-preview { background: rgba(255,255,255,.05); border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,.1); }
+.dash-sidebar-preview h4 { color: #fff; font-size: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.dash-sidebar-preview h4 i { color: var(--accent); }
+.dash-sidebar-preview ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.dash-sidebar-preview li { padding: 10px 14px; border-radius: 10px; color: rgba(255,255,255,.7); font-size: 13px; display: flex; align-items: center; gap: 12px; transition: .3s; cursor: pointer; }
+.dash-sidebar-preview li:hover, .dash-sidebar-preview li.active { background: var(--grad-main); color: #fff; }
+.dash-content-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.dash-widget { background: rgba(255,255,255,.05); border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,.1); }
+.dash-widget h4 { color: #fff; font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.dash-widget h4 i { color: var(--accent); }
+.mini-stat { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.mini-stat i { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; }
+.mini-stat h5 { color: #fff; font-size: 18px; font-weight: 800; }
+.mini-stat p { color: rgba(255,255,255,.6); font-size: 12px; }
+
+/* GPS */
+.gps-section { background: var(--lighter); }
+[data-theme="dark"] .gps-section { background: var(--bg); }
+.gps-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: center; }
+.gps-info h3 { font-size: 28px; color: var(--dark); margin-bottom: 16px; font-weight: 800; }
+.gps-info p { color: var(--gray); margin-bottom: 24px; }
+.gps-list { display: flex; flex-direction: column; gap: 14px; }
+.gps-pet { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); transition: .3s; }
+.gps-pet:hover { transform: translateX(8px); border-color: var(--accent); box-shadow: var(--shadow); }
+.gps-pet .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--grad-main); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.gps-pet div h4 { font-size: 15px; color: var(--dark); }
+.gps-pet div p { font-size: 12px; color: var(--gray); }
+.gps-pet .status-live { margin-left: auto; padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; background: rgba(16,185,129,.15); color: var(--success); }
+.gps-map-container { height: 460px; border-radius: 24px; background: linear-gradient(135deg, #e0f7ff, #f0faff); position: relative; overflow: hidden; box-shadow: var(--shadow-xl); border: 1px solid var(--border); }
+[data-theme="dark"] .gps-map-container { background: linear-gradient(135deg, #0f172a, #1e293b); }
+.map-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,119,182,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,119,182,.1) 1px, transparent 1px); background-size: 40px 40px; }
+.map-roads { position: absolute; inset: 0; opacity: .3; }
+.map-roads path { stroke: var(--accent); stroke-width: 2; fill: none; }
+.map-pet-marker { position: absolute; font-size: 40px; animation: float2 2.5s infinite ease-in-out; z-index: 3; transition: all 1s ease; }
+.map-pulse { position: absolute; width: 90px; height: 90px; border-radius: 50%; background: rgba(0,180,216,.25); transform: translate(-50%,-50%); animation: pulseRing 2.5s infinite; z-index: 1; }
+.map-pulse.delay { animation-delay: 1s; }
+.map-pulse.delay2 { animation-delay: 2s; }
+@keyframes pulseRing { 0% { transform: translate(-50%,-50%) scale(.4); opacity: 1; } 100% { transform: translate(-50%,-50%) scale(2.5); opacity: 0; } }
+.map-tooltip { position: absolute; background: var(--card-bg); border-radius: 12px; padding: 10px 14px; box-shadow: var(--shadow-lg); font-size: 12px; z-index: 5; border: 1px solid var(--border); }
+.map-tooltip h5 { color: var(--dark); font-size: 13px; margin-bottom: 2px; }
+.map-tooltip p { color: var(--gray); font-size: 11px; }
+.map-controls { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 5; }
+.map-controls button { width: 40px; height: 40px; border-radius: 10px; background: var(--card-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); transition: .3s; }
+.map-controls button:hover { background: var(--primary); color: #fff; }
+
+/* FEATURES */
+.features-section { background: var(--lighter); }
+[data-theme="dark"] .features-section { background: var(--bg); }
+.features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.features-list { display: flex; flex-direction: column; gap: 20px; }
+.feature-item { display: flex; gap: 18px; padding: 22px; background: var(--card-bg); border-radius: 18px; box-shadow: var(--shadow-sm); transition: .3s; border: 1px solid transparent; }
+.feature-item:hover { transform: translateX(10px); border-color: var(--accent); box-shadow: var(--shadow); }
+.feature-item i { width: 50px; height: 50px; border-radius: 14px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.feature-item h4 { font-size: 16px; color: var(--dark); margin-bottom: 4px; }
+.feature-item p { font-size: 14px; color: var(--gray); }
+.features-visual { height: 460px; border-radius: 28px; background: var(--grad-hero); display: flex; align-items: center; justify-content: center; font-size: 180px; color: #fff; box-shadow: var(--shadow-xl); position: relative; overflow: hidden; }
+.features-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 60%); }
+
+/* STATS */
+.stats-section { background: var(--dark); color: #fff; position: relative; overflow: hidden; }
+[data-theme="dark"] .stats-section { background: #020617; }
+.stats-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(0,180,216,.15), transparent 50%), radial-gradient(circle at 80% 70%, rgba(79,172,254,.15), transparent 50%); }
+.stats-section .container { position: relative; z-index: 2; }
+.stats-section .section-head h2 { color: #fff; }
+.stats-section .section-head p { color: var(--gray-light); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+.stat-box { text-align: center; padding: 32px 20px; border-radius: 22px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: .3s; }
+.stat-box:hover { background: rgba(255,255,255,.08); transform: translateY(-8px); border-color: rgba(0,180,216,.4); }
+.stat-box i { font-size: 36px; background: var(--grad1); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 14px; display: block; }
+.stat-box h3 { font-size: 42px; font-weight: 800; margin-bottom: 6px; color: #fff; }
+.stat-box p { font-size: 14px; color: var(--gray-light); }
+
+/* PRODUCTS */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+.product-card { background: var(--card-bg); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-sm); transition: .4s; border: 1px solid var(--border); position: relative; }
+.product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+.product-badge { position: absolute; top: 14px; left: 14px; background: var(--danger); color: #fff; padding: 5px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; z-index: 2; letter-spacing: .5px; }
+.product-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--lighter); transition: .4s; }
+.product-card:hover .product-img { transform: scale(1.05); }
+.product-body { padding: 22px; }
+.product-body h4 { font-size: 16px; color: var(--dark); margin-bottom: 6px; font-weight: 700; }
+.product-rating { color: #fbbf24; font-size: 12px; margin-bottom: 10px; }
+.product-body .price { font-size: 20px; color: var(--primary); font-weight: 800; margin-bottom: 16px; }
+.product-body .price span { font-size: 13px; color: var(--gray-light); text-decoration: line-through; font-weight: 500; margin-left: 8px; }
+.product-body button { width: 100%; padding: 12px; border-radius: 12px; background: var(--grad-main); color: #fff; font-weight: 600; font-size: 14px; transition: .3s; }
+.product-body button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,119,182,.4); }
+
+/* BOOKING */
+.booking-section { background: var(--lighter); }
+[data-theme="dark"] .booking-section { background: var(--bg); }
+.booking-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
+.booking-info h3 { font-size: 30px; color: var(--dark); margin-bottom: 16px; font-weight: 800; }
+.booking-info p { color: var(--gray); margin-bottom: 26px; }
+.booking-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.booking-features li { display: flex; align-items: center; gap: 14px; font-size: 15px; }
+.booking-features li i { width: 34px; height: 34px; border-radius: 10px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.booking-form { background: var(--card-bg); border-radius: 26px; padding: 40px; box-shadow: var(--shadow-xl); border: 1px solid var(--border); }
+.booking-form h3 { font-size: 22px; color: var(--dark); margin-bottom: 8px; font-weight: 800; }
+.booking-form > p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+.booking-form .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.booking-form .input-group { position: relative; margin-bottom: 14px; }
+.booking-form .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray-light); font-size: 15px; pointer-events: none; z-index: 2; }
+.booking-form .input-group input,
+.booking-form .input-group select { width: 100%; padding: 14px 48px 14px 46px; border: 1px solid var(--border); border-radius: 14px; outline: none; font-size: 14px; background: var(--card-bg); transition: .3s; color: var(--text); }
+.booking-form .input-group input:focus,
+.booking-form .input-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0,180,216,.1); }
+
+/* CHATBOT */
+.chatbot-section { background: var(--grad-main); position: relative; overflow: hidden; }
+.chatbot-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,.1), transparent 50%); }
+.chatbot-section .container { position: relative; z-index: 2; }
+.chatbot-section .badge { background: rgba(255,255,255,.2); color: #fff; border-color: transparent; }
+.chatbot-section .badge i { color: #fff; }
+.chatbot-section h2 { color: #fff; }
+.chatbot-section .section-head p { color: rgba(255,255,255,.85); }
+.chat-container { max-width: 780px; }
+.chatbox { background: var(--card-bg); border-radius: 26px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
+.chat-header { background: var(--grad-main); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 16px; }
+.chat-avatar { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.chat-header h4 { font-size: 17px; font-weight: 700; }
+.chat-header p { font-size: 12px; display: flex; align-items: center; gap: 6px; opacity: .9; }
+.chat-header .chat-status { margin-left: auto; display: flex; gap: 6px; }
+.chat-status span { width: 8px; height: 8px; border-radius: 50%; background: #43e97b; }
+.chat-status span:nth-child(2) { background: #fbbf24; animation: pulse 1.5s infinite; }
+.chat-status span:nth-child(3) { background: rgba(255,255,255,.4); }
+.dot { width: 8px; height: 8px; background: #43e97b; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+.chat-window { height: 360px; overflow-y: auto; padding: 22px; background: var(--lighter); }
+.msg { padding: 13px 18px; border-radius: 16px; margin-bottom: 12px; max-width: 80%; font-size: 14px; line-height: 1.5; animation: fadeIn .35s; word-wrap: break-word; }
+.msg.bot { background: var(--card-bg); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg.user { background: var(--grad-main); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+.msg.typing { display: flex; gap: 4px; padding: 14px 18px; }
+.msg.typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--gray-light); animation: typing .8s infinite; }
+.msg.typing span:nth-child(2) { animation-delay: .15s; }
+.msg.typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes typing { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-5px); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.quick-replies { display: flex; gap: 8px; padding: 14px 22px; flex-wrap: wrap; border-top: 1px solid var(--border); background: var(--card-bg); }
+.quick-replies button { background: var(--light); color: var(--primary-dark); border: none; padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; transition: .3s; }
+[data-theme="dark"] .quick-replies button { color: var(--accent); }
+.quick-replies button:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+.chat-input { display: flex; padding: 18px 22px; gap: 10px; border-top: 1px solid var(--border); background: var(--card-bg); }
+.chat-input input { flex: 1; padding: 13px 20px; border: 1px solid var(--border); border-radius: 50px; outline: none; font-size: 14px; transition: .3s; background: var(--card-bg); color: var(--text); }
+.chat-input input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,180,216,.1); }
+.chat-input button { background: var(--grad-main); color: #fff; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 16px; transition: .3s; flex-shrink: 0; }
+.chat-input button:hover { transform: scale(1.1) rotate(15deg); }
+
+/* TESTIMONIALS */
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+.testimonial-card { background: var(--card-bg); padding: 30px; border-radius: 22px; box-shadow: var(--shadow-sm); transition: .3s; border: 1px solid var(--border); }
+.testimonial-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+.stars { color: #fbbf24; margin-bottom: 14px; font-size: 15px; }
+.testimonial-card p { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.testimonial-user { display: flex; align-items: center; gap: 14px; }
+.testimonial-user .avatar-circle { width: 50px; height: 50px; border-radius: 50%; background: var(--grad-main); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+.testimonial-user h4 { font-size: 15px; color: var(--dark); }
+.testimonial-user p { font-size: 12px; color: var(--gray); margin: 0; font-style: normal; }
+
+/* CTA */
+.cta-section { padding: 60px 0 90px; }
+.cta-box { background: var(--dark); border-radius: 32px; padding: 70px 40px; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-xl); }
+.cta-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 10% 20%, rgba(0,180,216,.25), transparent 50%), radial-gradient(circle at 90% 80%, rgba(79,172,254,.25), transparent 50%); }
+.cta-box > * { position: relative; z-index: 2; }
+.cta-box h2 { color: #fff; font-size: 40px; font-weight: 800; margin-bottom: 16px; }
+.cta-box p { color: var(--gray-light); margin-bottom: 30px; font-size: 16px; }
+
+/* FOOTER */
+footer { background: var(--dark-2); color: #fff; padding: 70px 0 0; }
+[data-theme="dark"] footer { background: #020617; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; }
+.footer-grid h3 { font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #fff; }
+.footer-grid h3 i { color: var(--accent); }
+.footer-grid h4 { font-size: 16px; margin-bottom: 18px; color: #fff; font-weight: 600; }
+.footer-grid p { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+.footer-grid a { display: block; font-size: 14px; color: var(--gray-light); margin-bottom: 10px; transition: .3s; }
+.footer-grid a:hover { color: var(--accent); transform: translateX(5px); }
+.socials { display: flex; gap: 12px; margin-top: 8px; }
+.socials a { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 16px; margin: 0; }
+.socials a:hover { background: var(--grad-main); transform: translateY(-5px); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 24px 0; text-align: center; font-size: 13px; color: var(--gray-light); }
+
+/* NOTIFICATION PANEL */
+.notif-panel { position: fixed; top: 90px; right: 30px; width: 360px; max-height: 480px; background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-xl); border: 1px solid var(--border); z-index: 999; transform: translateX(150%); transition: .4s; overflow: hidden; }
+.notif-panel.show { transform: translateX(0); }
+.notif-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.notif-header h3 { font-size: 16px; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+.notif-header i { color: var(--primary); }
+.notif-list { max-height: 380px; overflow-y: auto; }
+.notif-item { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; gap: 14px; transition: .3s; cursor: pointer; }
+.notif-item:hover { background: var(--lighter); }
+.notif-item i { width: 40px; height: 40px; border-radius: 12px; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.notif-item div h5 { font-size: 14px; color: var(--dark); margin-bottom: 3px; }
+.notif-item div p { font-size: 12px; color: var(--gray); }
+.notif-item .notif-time { font-size: 11px; color: var(--gray-light); margin-top: 4px; }
+
+/* CART PANEL */
+.cart-panel { position: fixed; top: 0; right: 0; width: 400px; max-width: 90vw; height: 100vh; background: var(--card-bg); box-shadow: -10px 0 40px rgba(0,0,0,.15); z-index: 1500; transform: translateX(100%); transition: .4s; display: flex; flex-direction: column; }
+.cart-panel.show { transform: translateX(0); }
+.cart-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cart-header h3 { font-size: 18px; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+.cart-header button { width: 36px; height: 36px; border-radius: 50%; background: var(--lighter); color: var(--gray); font-size: 16px; }
+.cart-items { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.cart-empty { text-align: center; padding: 60px 20px; color: var(--gray); }
+.cart-empty i { font-size: 60px; margin-bottom: 16px; opacity: .3; }
+.cart-item { display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: var(--lighter); margin-bottom: 12px; align-items: center; }
+.cart-item .item-img { width: 50px; height: 50px; border-radius: 12px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.cart-item .item-info { flex: 1; }
+.cart-item h4 { font-size: 14px; color: var(--dark); margin-bottom: 2px; }
+.cart-item p { font-size: 13px; color: var(--primary); font-weight: 700; }
+.cart-item .qty-controls { display: flex; gap: 6px; align-items: center; }
+.cart-item .qty-controls button { width: 26px; height: 26px; border-radius: 6px; background: var(--card-bg); color: var(--primary); font-size: 13px; }
+.cart-item .remove-btn { color: var(--danger); font-size: 14px; padding: 6px; }
+.cart-footer { padding: 24px; border-top: 1px solid var(--border); }
+.cart-total { display: flex; justify-content: space-between; margin-bottom: 16px; }
+.cart-total span:first-child { color: var(--gray); font-size: 14px; }
+.cart-total span:last-child { color: var(--dark); font-weight: 800; font-size: 20px; }
+
+/* SCROLL TOP */
+#scrollTop { position: fixed; bottom: 30px; left: 30px; z-index: 999; width: 50px; height: 50px; border-radius: 50%; background: var(--grad-main); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: .3s; cursor: pointer; }
+#scrollTop.show { opacity: 1; visibility: visible; }
+#scrollTop:hover { transform: translateY(-5px) scale(1.1); }
+
+/* TOAST */
+#toast { position: fixed; bottom: 30px; right: 30px; z-index: 9999; background: var(--card-bg); border-radius: 16px; padding: 18px 24px; box-shadow: var(--shadow-xl); display: flex; align-items: center; gap: 14px; transform: translateX(150%); transition: .4s; max-width: 380px; border-left: 4px solid var(--success); }
+#toast.show { transform: translateX(0); }
+#toast i { font-size: 22px; color: var(--success); }
+#toast p { font-size: 14px; color: var(--dark); font-weight: 500; }
+#toast.error { border-left-color: var(--danger); }
+#toast.error i { color: var(--danger); }
+
+/* FADE ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(50px); transition: .9s cubic-bezier(.2,.8,.2,1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.zoom-in { opacity: 0; transform: scale(.9); transition: .8s cubic-bezier(.2,.8,.2,1); }
+.zoom-in.visible { opacity: 1; transform: scale(1); }
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .nav-links { gap: 2px; }
+  .nav-links > li > a { padding: 10px 10px; font-size: 13px; }
+  .logo { font-size: 20px; }
+}
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 44px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { height: 420px; }
+  .hero-circle { width: 300px; height: 300px; font-size: 120px; }
+  .features-grid, .gps-wrap, .booking-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .dash-preview-grid { grid-template-columns: 1fr; }
+  .dash-content-preview { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 4px; padding: 20px 0; order: 10; }
+  .nav-links.mobile-open {
+    display: flex; position: absolute; top: 76px; left: 0; right: 0;
+    background: var(--card-bg); padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border-top: 1px solid var(--border);
+  }
+  .nav-links > li > a { width: 100%; padding: 14px 16px; justify-content: flex-start; }
+  .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; border: none; background: rgba(0,119,182,.05); margin: 4px 0 4px 12px; padding: 4px; min-width: auto; display: none; }
+  .dropdown.open .dropdown-menu { display: block; }
+  .nav-actions .btn-outline { display: none; }
+  .menu-toggle { display: block; }
+  .hero h1 { font-size: 34px; }
+  .section-head h2 { font-size: 30px; }
+  .hero-circle { width: 240px; height: 240px; font-size: 100px; }
+  .floating-card { display: none; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .cta-box h2 { font-size: 26px; }
+  .hero-stats { gap: 24px; }
+  .hero-stats > div:not(:last-child)::after { display: none; }
+  .dashboard-preview { padding: 30px; }
+  .booking-form { padding: 30px 24px; }
+  .cart-panel { width: 100%; max-width: 100%; }
+  .notif-panel { width: calc(100% - 30px); right: 15px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 28px; }
+  .btn-lg { padding: 13px 24px; font-size: 14px; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { width: 100%; }
+  .booking-form .form-row-2 { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  .section-head h2 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-paw"><i class="fa-solid fa-paw"></i></div>
+  <div class="loader-text">SMART PETCARE</div>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<!-- BG ANIMATION -->
+<div class="bg-animation">
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-paw"></i>
+      <span class="smart-text">Smart</span>
+      <span class="petcare-text">PetCare</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-heart-pulse"></i> Pet Care <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="pet-profile.html"><i class="fa-solid fa-paw"></i> Pet Profile</a></li>
+            <li><a href="ai-assistant.html"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+            <li><a href="gps-tracking.html"><i class="fa-solid fa-location-dot"></i> GPS Tracking</a></li>
+            <li><a href="dog-breeds.html"><i class="fa-solid fa-book"></i> Dog Breeds</a></li>
+            <li><a href="medical-support.html"><i class="fa-solid fa-stethoscope"></i> Medical Support</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-cart-shopping"></i> Shop <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="marketplace.html"><i class="fa-solid fa-shop"></i> Marketplace</a></li>
+            <li><a href="food-nutrition.html"><i class="fa-solid fa-bowl-food"></i> Food & Nutrition</a></li>
+            <li><a href="pet-listing-portal.html"><i class="fa-solid fa-tag"></i> Pet Listing</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-users"></i> Community <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="community-forum.html"><i class="fa-solid fa-comments"></i> Forum</a></li>
+            <li><a href="events.html"><i class="fa-solid fa-calendar-check"></i> Events</a></li>
+            <li><a href="adoption.html"><i class="fa-solid fa-house-chimney"></i> Adoption Hub</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"><i class="fa-solid fa-gauge"></i> Dashboards <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-speedometer"></i> Admin</a></li>
+            <li><a href="vet-portal.html"><i class="fa-solid fa-user-doctor"></i> Vet Portal</a></li>
+            <li><a href="seller.html"><i class="fa-solid fa-shop"></i> Seller</a></li>
+            <li><a href="adoption-portal.html"><i class="fa-solid fa-house-heart"></i> Shelter</a></li>
+            <li><a href="organizer.html"><i class="fa-solid fa-trophy"></i> Event Organizer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="cart-btn" onclick="toggleCart()" title="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span></button>
+      <button class="cart-btn" onclick="toggleNotif()" title="Notifications"><i class="fa-solid fa-bell"></i><span class="cart-count">3</span></button>
+      <a href="#" class="btn btn-outline" onclick="openAuth('login'); return false;">Login</a>
+      <a href="#" class="btn btn-primary" onclick="openAuth('register'); return false;">Get Started</a>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-header">
+    <h3><i class="fa-solid fa-bell"></i> Notifications</h3>
+    <button style="background:transparent; color:var(--gray);" onclick="toggleNotif()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="notif-list">
+    <div class="notif-item"><i class="fa-solid fa-syringe"></i><div><h5>Vaccination Due</h5><p>Snowy needs a vaccine booster this week.</p><div class="notif-time">2 hours ago</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-calendar-check"></i><div><h5>Appointment Reminder</h5><p>Bruno's vet visit tomorrow at 10:30 AM.</p><div class="notif-time">5 hours ago</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-truck-fast"></i><div><h5>Order Shipped</h5><p>Your Premium Dog Food is on the way!</p><div class="notif-time">Yesterday</div></div></div>
+    <div class="notif-item"><i class="fa-solid fa-location-dot"></i><div><h5>GPS Alert</h5><p>Luna entered the garden zone safely.</p><div class="notif-time">2 days ago</div></div></div>
+  </div>
+</div>
+
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3><i class="fa-solid fa-cart-shopping"></i> Your Cart</h3>
+    <button onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i><p>Your cart is empty</p><p style="font-size:13px; margin-top:8px;">Add products to get started</p></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="btn btn-primary btn-block" onclick="checkout()">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text fade-up">
+      <span class="badge"><i class="fa-solid fa-bolt"></i> Ultra Pro Max Platform</span>
+      <h1>Every Pet Need,<br><span class="gradient-text">One Smart Ecosystem.</span></h1>
+      <p>Healthcare, marketplace, GPS tracking, adoption & AI-powered guidance — integrated for pet owners, vets & vendors worldwide.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-primary btn-lg" onclick="openAuth('register'); return false;">Start Free <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#modules" class="btn btn-ghost btn-lg"><i class="fa-solid fa-play"></i> Explore Modules</a>
+      </div>
+      <div class="hero-stats">
+        <div><h3 data-count="12500">0</h3><p>Happy Pets</p></div>
+        <div><h3 data-count="340">0</h3><p>Vet Clinics</p></div>
+        <div><h3 data-count="8900">0</h3><p>Adoptions</p></div>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="floating-card card1"><i class="fa-solid fa-heart-pulse"></i><div><h4>Health Score</h4><p>98% Healthy</p></div></div>
+      <div class="hero-circle"><i class="fa-solid fa-dog"></i></div>
+      <div class="floating-card card2"><i class="fa-solid fa-location-dot"></i><div><h4>Live Tracking</h4><p>Active Now</p></div></div>
+      <div class="floating-card card3"><i class="fa-solid fa-robot"></i><div><h4>AI Assistant</h4><p>24/7 Online</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="section" id="modules">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-cubes"></i> Our Modules</span>
+      <h2>Everything Your Pet Needs</h2>
+      <p>Nine powerful modules integrated into one seamless platform for owners, vets and vendors.</p>
+    </div>
+    <div class="modules-grid">
+      <a href="pet-profile.html" class="module-card fade-up"><div class="icon-wrap grad1"><i class="fa-solid fa-paw"></i></div><h3>Pet Profile Engine</h3><p>Complete profiles with breed, vaccination & medical history tracking.</p></a>
+      <a href="medical-support.html" class="module-card fade-up"><div class="icon-wrap grad2"><i class="fa-solid fa-stethoscope"></i></div><h3>Medical Support</h3><p>Vet booking, digital prescriptions & online medicine ordering.</p></a>
+      <a href="marketplace.html" class="module-card fade-up"><div class="icon-wrap grad3"><i class="fa-solid fa-cart-shopping"></i></div><h3>Pet Marketplace</h3><p>Accessories, grooming products, cart & order tracking.</p></a>
+      <a href="food-nutrition.html" class="module-card fade-up"><div class="icon-wrap grad4"><i class="fa-solid fa-bowl-food"></i></div><h3>Food & Nutrition</h3><p>Nutrition recommendations with smart dietary filtering.</p></a>
+      <a href="gps-tracking.html" class="module-card fade-up"><div class="icon-wrap grad5"><i class="fa-solid fa-satellite-dish"></i></div><h3>GPS Tracking</h3><p>Real-time location, geofencing & lost pet alerts.</p></a>
+      <a href="events.html" class="module-card fade-up"><div class="icon-wrap grad6"><i class="fa-solid fa-calendar-check"></i></div><h3>Events & Activities</h3><p>Publish events, ticketing & pet meetups.</p></a>
+      <a href="community-forum.html" class="module-card fade-up"><div class="icon-wrap grad7"><i class="fa-solid fa-comments"></i></div><h3>Community Forum</h3><p>Discussion boards, Q&A & owner messaging.</p></a>
+      <a href="adoption.html" class="module-card fade-up"><div class="icon-wrap grad8"><i class="fa-solid fa-house-chimney"></i></div><h3>Adoption Hub</h3><p>Listings, applications & status tracking.</p></a>
+      <a href="ai-assistant.html" class="module-card fade-up"><div class="icon-wrap grad9"><i class="fa-solid fa-robot"></i></div><h3>AI Assistant</h3><p>24/7 guidance on nutrition, vaccination & care.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-gauge"></i> Live Preview</span>
+      <h2>Your Personal Dashboard</h2>
+      <p>Manage pets, appointments, orders & tracking from one beautiful dashboard.</p>
+    </div>
+    <div class="dashboard-preview zoom-in">
+      <div class="dash-preview-grid">
+        <div class="dash-sidebar-preview">
+          <h4><i class="fa-solid fa-paw"></i> Smart PetCare</h4>
+          <ul>
+            <li class="active"><i class="fa-solid fa-gauge"></i> Dashboard</li>
+            <li><i class="fa-solid fa-paw"></i> My Pets</li>
+            <li><i class="fa-solid fa-stethoscope"></i> Appointments</li>
+            <li><i class="fa-solid fa-cart-shopping"></i> Orders</li>
+            <li><i class="fa-solid fa-satellite-dish"></i> GPS Tracking</li>
+            <li><i class="fa-solid fa-robot"></i> AI Assistant</li>
+          </ul>
+        </div>
+        <div class="dash-content-preview">
+          <div class="dash-widget">
+            <h4><i class="fa-solid fa-paw"></i> My Pets</h4>
+            <div class="mini-stat"><i class="grad1 fa-solid fa-dog"></i><div><h5>Bruno</h5><p>Golden · Healthy</p></div></div>
+            <div class="mini-stat"><i class="grad4 fa-solid fa-cat"></i><div><h5>Luna</h5><p>Persian · Healthy</p></div></div>
+            <div class="mini-stat"><i class="grad2 fa-solid fa-rabbit"></i><div><h5>Snowy</h5><p>Vaccine Due</p></div></div>
+          </div>
+          <div class="dash-widget">
+            <h4><i class="fa-solid fa-chart-line"></i> Weekly Activity</h4>
+            <div style="display:flex; align-items:flex-end; gap:8px; height:120px; margin-top:20px;">
+              <div style="flex:1; background:var(--grad1); border-radius:8px 8px 0 0; height:40%;"></div>
+              <div style="flex:1; background:var(--grad2); border-radius:8px 8px 0 0; height:70%;"></div>
+              <div style="flex:1; background:var(--grad3); border-radius:8px 8px 0 0; height:55%;"></div>
+              <div style="flex:1; background:var(--grad4); border-radius:8px 8px 0 0; height:90%;"></div>
+              <div style="flex:1; background:var(--grad5); border-radius:8px 8px 0 0; height:65%;"></div>
+              <div style="flex:1; background:var(--grad6); border-radius:8px 8px 0 0; height:80%;"></div>
+              <div style="flex:1; background:var(--grad7); border-radius:8px 8px 0 0; height:45%;"></div>
+            </div>
+          </div>
+          <div class="dash-widget">
+            <h4><i class="fa-solid fa-calendar-check"></i> Next Appointment</h4>
+            <p style="color:#fff; font-size:15px; font-weight:700; margin-top:10px;">Vaccination — Bruno</p>
+            <p style="color:rgba(255,255,255,.6); font-size:13px;">Oct 12 · 10:30 AM · Dr. Perera</p>
+          </div>
+          <div class="dash-widget">
+            <h4><i class="fa-solid fa-location-dot"></i> Live Location</h4>
+            <p style="color:#fff; font-size:15px; font-weight:700; margin-top:10px;">Bruno — Home Zone</p>
+            <p style="color:rgba(255,255,255,.6); font-size:13px;">6.9271° N, 79.8612° E</p>
+            <p style="color:#43e97b; font-size:12px; margin-top:8px;">● Active Now</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GPS -->
+<section class="section gps-section" id="gps">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-satellite-dish"></i> Live GPS</span>
+      <h2>Real-Time Pet Tracking</h2>
+      <p>Never lose your pet again with live GPS tracking, geofencing & instant alerts.</p>
+    </div>
+    <div class="gps-wrap">
+      <div class="gps-info fade-up">
+        <h3>Track Every Paw Step 🐾</h3>
+        <p>Attach a Smart GPS Collar and monitor your pet's live location from anywhere.</p>
+        <div class="gps-list">
+          <div class="gps-pet"><div class="avatar">🐶</div><div><h4>Bruno</h4><p>Home Zone · 0.5 km away</p></div><span class="status-live">● Live</span></div>
+          <div class="gps-pet"><div class="avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">🐱</div><div><h4>Luna</h4><p>Garden Zone · 0.2 km away</p></div><span class="status-live">● Live</span></div>
+          <div class="gps-pet"><div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">🐰</div><div><h4>Snowy</h4><p>Home Zone · Idle</p></div><span class="status-live" style="background:rgba(245,158,11,.15); color:var(--warning);">● Idle</span></div>
+        </div>
+      </div>
+      <div class="gps-map-container fade-up">
+        <div class="map-grid-bg"></div>
+        <svg class="map-roads" viewBox="0 0 600 460" preserveAspectRatio="none">
+          <path d="M 0 150 Q 150 200 300 150 T 600 180"/>
+          <path d="M 0 300 Q 200 280 400 320 T 600 290"/>
+          <path d="M 150 0 Q 200 150 180 300 T 200 460"/>
+          <path d="M 400 0 Q 420 150 380 300 T 420 460"/>
+        </svg>
+        <div class="map-pulse" style="top:40%; left:50%;"></div>
+        <div class="map-pulse delay" style="top:65%; left:30%;"></div>
+        <div class="map-pulse delay2" style="top:55%; left:75%;"></div>
+        <div class="map-pet-marker" style="top:40%; left:50%;" id="petMarker1">🐶</div>
+        <div class="map-pet-marker" style="top:65%; left:30%; animation-delay:.8s;" id="petMarker2">🐱</div>
+        <div class="map-pet-marker" style="top:55%; left:75%; animation-delay:1.6s;" id="petMarker3">🐰</div>
+        <div class="map-tooltip" style="top:calc(40% - 70px); left:calc(50% - 60px);">
+          <h5>🐶 Bruno</h5>
+          <p>Home Zone · Active Now</p>
+        </div>
+        <div class="map-controls">
+          <button><i class="fa-solid fa-plus"></i></button>
+          <button><i class="fa-solid fa-minus"></i></button>
+          <button><i class="fa-solid fa-crosshairs"></i></button>
+          <button onclick="refreshMap()"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features-section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-star"></i> Why Choose Us</span>
+      <h2>Built for Modern Pet Care</h2>
+      <p>Everything you need to keep your pets healthy, safe and happy.</p>
+    </div>
+    <div class="features-grid">
+      <div class="features-list">
+        <div class="feature-item fade-up"><i class="fa-solid fa-shield-heart"></i><div><h4>Complete Health Records</h4><p>All vaccination, medical & treatment history in one secure place.</p></div></div>
+        <div class="feature-item fade-up"><i class="fa-solid fa-clock"></i><div><h4>24/7 AI Assistance</h4><p>Instant pet care guidance anytime, anywhere from our AI chatbot.</p></div></div>
+        <div class="feature-item fade-up"><i class="fa-solid fa-truck-fast"></i><div><h4>Fast Pet Product Delivery</h4><p>Order food, medicine & accessories with same-day delivery options.</p></div></div>
+        <div class="feature-item fade-up"><i class="fa-solid fa-users"></i><div><h4>Vibrant Community</h4><p>Connect with 12,500+ pet owners, vets & trainers in our forum.</p></div></div>
+        <div class="feature-item fade-up"><i class="fa-solid fa-lock"></i><div><h4>Bank-Level Security</h4><p>Your pet's data is encrypted with 256-bit AES encryption.</p></div></div>
+      </div>
+      <div class="features-visual fade-up"><i class="fa-solid fa-shield-dog"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section stats-section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge" style="background:rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.2);"><i class="fa-solid fa-chart-line"></i> Our Impact</span>
+      <h2>Trusted by Thousands</h2>
+      <p>Real numbers from real pet lovers using Smart PetCare every day.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box fade-up"><i class="fa-solid fa-paw"></i><h3 data-count="12500">0</h3><p>Registered Pets</p></div>
+      <div class="stat-box fade-up"><i class="fa-solid fa-user-doctor"></i><h3 data-count="340">0</h3><p>Partner Vets</p></div>
+      <div class="stat-box fade-up"><i class="fa-solid fa-house-chimney"></i><h3 data-count="8900">0</h3><p>Successful Adoptions</p></div>
+      <div class="stat-box fade-up"><i class="fa-solid fa-star"></i><h3 data-count="98">0</h3><p>% Satisfaction</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="shop">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-cart-shopping"></i> Marketplace</span>
+      <h2>Popular Pet Products</h2>
+      <p>Top-rated food, accessories & healthcare products for your furry friends.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section booking-section" id="booking">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-calendar-check"></i> Book Now</span>
+      <h2>Book a Vet Appointment</h2>
+      <p>Instant confirmation with digital prescriptions after your visit.</p>
+    </div>
+    <div class="booking-wrap">
+      <div class="booking-info fade-up">
+        <h3>Quick & Easy Booking 🩺</h3>
+        <p>Choose your preferred vet, date and time. Get instant confirmation via email & SMS.</p>
+        <ul class="booking-features">
+          <li><i class="fa-solid fa-check"></i> 340+ verified veterinary clinics</li>
+          <li><i class="fa-solid fa-check"></i> Instant digital prescriptions</li>
+          <li><i class="fa-solid fa-check"></i> Video consultations available</li>
+          <li><i class="fa-solid fa-check"></i> Free rescheduling up to 24h before</li>
+          <li><i class="fa-solid fa-check"></i> Medicine delivery to your doorstep</li>
+        </ul>
+      </div>
+      <form class="booking-form fade-up" onsubmit="handleBooking(event)">
+        <h3>Book Appointment</h3>
+        <p>Fill in the details below to book instantly.</p>
+        <div class="input-group"><i class="fa-solid fa-paw"></i>
+          <select required>
+            <option value="">Select your pet</option>
+            <option>🐶 Bruno (Golden Retriever)</option>
+            <option>🐱 Luna (Persian Cat)</option>
+            <option>🐰 Snowy (Rabbit)</option>
+          </select>
+        </div>
+        <div class="input-group"><i class="fa-solid fa-user-doctor"></i>
+          <select required>
+            <option value="">Select veterinarian</option>
+            <option>Dr. Anjali Perera — General Vet</option>
+            <option>Dr. Michael Chen — Surgeon</option>
+            <option>Dr. Sarah Johnson — Dentist</option>
+          </select>
+        </div>
+        <div class="form-row-2">
+          <div class="input-group"><i class="fa-solid fa-calendar"></i><input type="date" required></div>
+          <div class="input-group"><i class="fa-solid fa-clock"></i><input type="time" required></div>
+        </div>
+        <div class="input-group"><i class="fa-solid fa-notes-medical"></i><input type="text" placeholder="Reason for visit (optional)"></div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Confirm Booking <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CHATBOT -->
+<section class="section chatbot-section" id="assistant">
+  <div class="container chat-container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-robot"></i> AI Powered</span>
+      <h2>Meet Your AI Pet Assistant</h2>
+      <p>Ask anything — from nutrition to vaccination schedules. Available 24/7.</p>
+    </div>
+    <div class="chatbox fade-up">
+      <div class="chat-header">
+        <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <h4>PetBot AI</h4>
+          <p><span class="dot"></span> Online — Instant Replies</p>
+        </div>
+        <div class="chat-status"><span></span><span></span><span></span></div>
+      </div>
+      <div class="chat-window" id="chatWindow">
+        <div class="msg bot">Hi! I'm PetBot 🐾 Ask me about vaccination, food, grooming, GPS tracking or adoption!</div>
+      </div>
+      <div class="quick-replies">
+        <button onclick="quickAsk('vaccination schedule')">💉 Vaccination</button>
+        <button onclick="quickAsk('best food for my pet')">🍖 Food</button>
+        <button onclick="quickAsk('grooming tips')">✂️ Grooming</button>
+        <button onclick="quickAsk('how to track lost pet')">📍 Tracking</button>
+        <button onclick="quickAsk('adoption process')">🏠 Adoption</button>
+        <button onclick="quickAsk('book appointment')">📅 Booking</button>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter') sendMsg()">
+        <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="badge"><i class="fa-solid fa-quote-left"></i> Testimonials</span>
+      <h2>Loved by Pet Owners</h2>
+      <p>Here's what our community says about Smart PetCare.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Smart PetCare completely changed how I manage my dog's health. Booking vet appointments and tracking his vaccinations is now effortless!"</p><div class="testimonial-user"><div class="avatar-circle">S</div><div><h4>Sarah Johnson</h4><p>Dog Owner · Colombo</p></div></div></div>
+      <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"The GPS tracking saved my cat when she got lost! Got the alert instantly and found her within 20 minutes. Absolute lifesaver."</p><div class="testimonial-user"><div class="avatar-circle">M</div><div><h4>Michael Chen</h4><p>Cat Owner · Kandy</p></div></div></div>
+      <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"As a veterinarian, this platform helps me manage patients better. Digital prescriptions and appointment scheduling are seamless."</p><div class="testimonial-user"><div class="avatar-circle">D</div><div><h4>Dr. Anjali Perera</h4><p>Veterinarian · Galle</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box zoom-in">
+      <h2>Ready to give your pet the care they deserve?</h2>
+      <p>Join 12,500+ pet owners already using Smart PetCare.</p>
+      <a href="#" class="btn btn-white btn-lg" onclick="openAuth('register'); return false;">Get Started Free <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container footer-grid">
+    <div>
+      <h3><i class="fa-solid fa-paw"></i> Smart PetCare</h3>
+      <p>An integrated pet healthcare, marketplace and community platform for pet owners, veterinarians and vendors.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Modules</h4>
+      <a href="pet-profile.html">Healthcare</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="gps-tracking.html">GPS Tracking</a>
+      <a href="adoption.html">Adoption Hub</a>
+      <a href="ai-assistant.html">AI Assistant</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Press Kit</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Report Issue</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Smart PetCare. All rights reserved. Made with <i class="fa-solid fa-heart" style="color:#ef4444"></i> for pets everywhere.</div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,.75); backdrop-filter:blur(10px); z-index:5000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--card-bg); border-radius:24px; max-width:460px; width:100%; padding:42px; position:relative; animation:fadeIn .3s; max-height:90vh; overflow-y:auto; box-shadow:var(--shadow-xl);">
+    <button onclick="closeAuth()" style="position:absolute; top:18px; right:18px; width:38px; height:38px; border-radius:50%; background:var(--lighter); color:var(--gray); font-size:16px;"><i class="fa-solid fa-xmark"></i></button>
+    <div style="display:flex; background:var(--lighter); border-radius:50px; padding:5px; margin-bottom:34px;">
+      <button class="tab active" id="tabLogin" onclick="switchAuth('login')" style="flex:1; padding:12px; border-radius:50px; background:var(--grad-main); color:#fff; font-weight:600; font-size:14px;">Login</button>
+      <button class="tab" id="tabRegister" onclick="switchAuth('register')" style="flex:1; padding:12px; border-radius:50px; background:transparent; color:var(--gray); font-weight:600; font-size:14px;">Register</button>
+    </div>
+    <form id="modalLoginForm" onsubmit="handleLogin(event)">
+      <h2 style="font-size:24px; color:var(--dark); margin-bottom:6px; font-weight:800;">Sign In</h2>
+      <p style="font-size:13px; color:var(--gray); margin-bottom:24px;">Welcome back!</p>
+      <div style="position:relative; margin-bottom:16px;"><i class="fa-solid fa-envelope" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="email" id="loginEmail" placeholder="Email address" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:16px;"><i class="fa-solid fa-lock" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="password" id="loginPassword" placeholder="Password" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+    <form id="modalRegisterForm" style="display:none;" onsubmit="handleRegister(event)">
+      <h2 style="font-size:24px; color:var(--dark); margin-bottom:6px; font-weight:800;">Create Account</h2>
+      <p style="font-size:13px; color:var(--gray); margin-bottom:24px;">Join us today.</p>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-user" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="text" id="regName" placeholder="Full name" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-envelope" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="email" id="regEmail" placeholder="Email" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <div style="position:relative; margin-bottom:14px;"><i class="fa-solid fa-lock" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gray-light);"></i><input type="password" id="regPassword" placeholder="Password" required style="width:100%; padding:14px 48px 14px 46px; border:1px solid var(--border); border-radius:14px; outline:none; font-size:14px; background:var(--card-bg); color:var(--text);"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"><i class="fa-solid fa-circle-check"></i><p id="toastMsg">Success!</p></div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+// LOADER
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+});
+
+// THEME
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  localStorage.setItem('petcare-theme', next);
+  showToast(next === 'dark' ? '🌙 Dark mode activated' : '☀️ Light mode activated');
+}
+const savedTheme = localStorage.getItem('petcare-theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (savedTheme === 'dark') document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+}
+
+// NAVBAR SCROLL
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  const top = document.getElementById('scrollTop');
+  if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  if (window.scrollY > 400) top.classList.add('show'); else top.classList.remove('show');
+});
+
+// MOBILE MENU
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('mobile-open');
+}
+
+// Mobile dropdown toggle
+document.querySelectorAll('.dropdown-toggle').forEach(t => {
+  t.addEventListener('click', e => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      t.parentElement.classList.toggle('open');
+    }
+  });
+});
+
+// SCROLL ANIMATIONS
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up, .zoom-in').forEach(el => observer.observe(el));
+
+// COUNTER
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          el.textContent = target.toLocaleString() + (target === 98 ? '' : '+');
+          clearInterval(timer);
+        } else el.textContent = Math.floor(current).toLocaleString();
+      }, 20);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// TOAST
+function showToast(msg, error = false) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.toggle('error', error);
+  toast.querySelector('i').className = error ? 'fa-solid fa-circle-exclamation' : 'fa-solid fa-circle-check';
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+// PRODUCTS
+const products = [
+  { id: 1, name: 'Premium Dog Food', emoji: '🍖', price: 29.99, old: 39.99, rating: 5, badge: 'SALE' },
+  { id: 2, name: 'Cat Nutrition Mix', emoji: '🐱', price: 24.50, old: 32.00, rating: 5, badge: 'HOT' },
+  { id: 3, name: 'Interactive Toy Ball', emoji: '🎾', price: 14.99, old: 19.99, rating: 4, badge: null },
+  { id: 4, name: 'Dental Chew Bones', emoji: '🦴', price: 12.99, old: 16.99, rating: 5, badge: 'NEW' },
+  { id: 5, name: 'Smart GPS Collar', emoji: '📿', price: 79.99, old: 99.99, rating: 5, badge: 'BEST' },
+  { id: 6, name: 'Pet Grooming Kit', emoji: '🧴', price: 34.99, old: 44.99, rating: 4, badge: null },
+  { id: 7, name: 'Vet-Approved Vitamins', emoji: '💊', price: 18.99, old: 24.99, rating: 5, badge: 'SALE' },
+  { id: 8, name: 'Comfort Pet Bed', emoji: '🏠', price: 49.99, old: 64.99, rating: 5, badge: 'HOT' }
+];
+
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = products.map(p => `
+    <div class="product-card fade-up">
+      ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-body">
+        <h4>${p.name}</h4>
+        <div class="product-rating">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)} <span style="color:var(--gray); margin-left:4px;">(${p.rating}.0)</span></div>
+        <div class="price">$${p.price.toFixed(2)} <span>$${p.old.toFixed(2)}</span></div>
+        <button onclick="addCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.product-card.fade-up').forEach(el => observer.observe(el));
+}
+renderProducts();
+
+// CART
+let cart = [];
+
+function addCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(item => item.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ ...product, qty: 1 });
+  updateCart();
+  showToast(`${product.emoji} ${product.name} added to cart!`);
+}
+function removeCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  updateCart();
+}
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeCart(id);
+  else updateCart();
+}
+function updateCart() {
+  const count = cart.reduce((sum, i) => sum + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = `<div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i><p>Your cart is empty</p><p style="font-size:13px; margin-top:8px;">Add products to get started</p></div>`;
+  } else {
+    itemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="item-img">${item.emoji}</div>
+        <div class="item-info"><h4>${item.name}</h4><p>$${item.price.toFixed(2)}</p></div>
+        <div class="qty-controls">
+          <button onclick="changeQty(${item.id},-1)">−</button>
+          <span style="font-weight:700; font-size:14px; color:var(--dark);">${item.qty}</span>
+          <button onclick="changeQty(${item.id},1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeCart(${item.id})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `).join('');
+  }
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+}
+function toggleCart() { document.getElementById('cartPanel').classList.toggle('show'); }
+function toggleNotif() { document.getElementById('notifPanel').classList.toggle('show'); }
+function checkout() {
+  if (cart.length === 0) { showToast('Your cart is empty!', true); return; }
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  showToast(`Order placed! Total: $${total.toFixed(2)} 🎉`);
+  cart = [];
+  updateCart();
+  toggleCart();
+}
+
+// BOOKING
+function handleBooking(e) {
+  e.preventDefault();
+  showToast('Appointment booked successfully! Confirmation sent. 🩺');
+  e.target.reset();
+}
+
+// GPS MOVEMENT
+function movePetsRandomly() {
+  ['petMarker1', 'petMarker2', 'petMarker3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.top = (30 + Math.random() * 40) + '%';
+    el.style.left = (20 + Math.random() * 60) + '%';
+  });
+}
+setInterval(movePetsRandomly, 4000);
+function refreshMap() {
+  movePetsRandomly();
+  showToast('Map refreshed 📍');
+}
+
+// CHATBOT
+const replies = {
+  vaccination: "Puppies should be vaccinated starting at 6-8 weeks, with boosters every 3-4 weeks until 16 weeks old. 💉",
+  food: "Balanced diet rich in protein, healthy fats, fiber. Avoid chocolate, grapes, onions! 🍖",
+  grooming: "Brush 2-3x/week, bathe every 4-6 weeks, trim nails monthly. ✂️",
+  lost: "Enable GPS tracking immediately. Lost Pet Alert notifies nearby users & vets. 📍",
+  adoption: "Visit Adoption Hub to browse, apply, and track status. 🏠",
+  appointment: "Book via Medical Support — choose vet, slot, instant confirmation. 🩺",
+  tracking: "GPS module provides real-time location & lost pet recovery. 📍",
+  event: "Check Events module for meetups, training, adoption drives. 🎉",
+  community: "Join our Forum — 12,500+ owners & vets. 💬",
+  health: "Regular checkups, vaccinations, nutrition, exercise, dental care. ❤️",
+  default: "Great question! 🐾 Explore our modules or consult a vet."
+};
+
+function sendMsg() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const win = document.getElementById('chatWindow');
+  win.innerHTML += `<div class="msg user">${escapeHtml(text)}</div>`;
+  input.value = '';
+  win.scrollTop = win.scrollHeight;
+  win.innerHTML += `<div class="msg bot typing" id="typing"><span></span><span></span><span></span></div>`;
+  win.scrollTop = win.scrollHeight;
+  setTimeout(() => {
+    document.getElementById('typing')?.remove();
+    const key = Object.keys(replies).find(k => text.toLowerCase().includes(k));
+    const reply = replies[key] || replies.default;
+    win.innerHTML += `<div class="msg bot">${reply}</div>`;
+    win.scrollTop = win.scrollHeight;
+  }, 900);
+}
+function quickAsk(text) {
+  document.getElementById('userInput').value = text;
+  sendMsg();
+}
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// AUTH
+function openAuth(type) {
+  document.getElementById('authModal').style.display = 'flex';
+  switchAuth(type || 'login');
+}
+function closeAuth() { document.getElementById('authModal').style.display = 'none'; }
+function switchAuth(type) {
+  const loginForm = document.getElementById('modalLoginForm');
+  const regForm = document.getElementById('modalRegisterForm');
+  const tabLogin = document.getElementById('tabLogin');
+  const tabReg = document.getElementById('tabRegister');
+  if (type === 'login') {
+    loginForm.style.display = 'block'; regForm.style.display = 'none';
+    tabLogin.classList.add('active'); tabReg.classList.remove('active');
+    tabLogin.style.background = 'var(--grad-main)'; tabLogin.style.color = '#fff';
+    tabReg.style.background = 'transparent'; tabReg.style.color = 'var(--gray)';
+  } else {
+    loginForm.style.display = 'none'; regForm.style.display = 'block';
+    tabLogin.classList.remove('active'); tabReg.classList.add('active');
+    tabReg.style.background = 'var(--grad-main)'; tabReg.style.color = '#fff';
+    tabLogin.style.background = 'transparent'; tabLogin.style.color = 'var(--gray)';
+  }
+}
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  showToast('Welcome back, ' + email.split('@')[0] + '! 🐾');
+  closeAuth();
+}
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value;
+  showToast('Account created for ' + name + '! 🎉');
+  closeAuth();
+}
+document.getElementById('authModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'authModal') closeAuth();
+});
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAuth();
+    document.getElementById('cartPanel').classList.remove('show');
+    document.getElementById('notifPanel').classList.remove('show');
+  }
+});
+
+setTimeout(() => {
+  showToast('🔔 You have 3 new notifications!');
+}, 5000);
+
+console.log('%c🐾 Smart PetCare — Ultra Pro Max', 'font-size:26px; font-weight:bold; color:#0077b6;');
+</script>
+</body>
+</html>
